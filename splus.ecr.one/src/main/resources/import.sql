@@ -1,4 +1,4 @@
-insert into  PRODUCT(id,NAME , PRICE, WEIGHT) values (1,'Pen',10.10 , 12.00)
+--insert into  PRODUCT(id,NAME , PRICE, WEIGHT) values (1,'Pen',10.10 , 12.00)
 
  insert into  REGION(REGION_ID,NAME, REGION_CODE) values(1,'ASIA', 'AS');
  insert into  REGION(REGION_ID,NAME, REGION_CODE) values(2,'Europe', 'EU');
