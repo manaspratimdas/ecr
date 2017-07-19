@@ -26,6 +26,7 @@ public class EcrCompanyController {
 	@Autowired
 	EcrCompanyService ecrCompanyService;
 	
+	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testEcrApp() {
 		return "Company test succssfull- you can proceed";
