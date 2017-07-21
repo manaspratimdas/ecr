@@ -53,11 +53,16 @@ public class EcrContainerController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/company/{id}/containers", method = RequestMethod.GET)
-	public List<Container> getContainersByCompany() {
+	@RequestMapping(value = "/company/{companyId}/containers", method = RequestMethod.GET)
+	public ResponseEntity getContainersByCompany(@PathVariable("companyId") Long companyId) {
 
 		System.out.println("in list container controller");
-		return ecrContainerService.getContainers();
+
+		List<Container> containers = ecrContainerService.getContainersByCompanyId(companyId);
+		if (containers == null) {
+			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(containers, HttpStatus.OK);
 
 	}
 

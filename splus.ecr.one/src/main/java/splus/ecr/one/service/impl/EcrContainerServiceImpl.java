@@ -39,6 +39,12 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		return ecrContainerRepository.findById(id);
 	}
 
+	public List<Container> getContainersByCompanyId(Long companyId) {
+		
+		
+		return ecrContainerRepository.findByCompanyId(companyId);
+	}
+
 	
 	
 }
