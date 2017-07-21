@@ -12,5 +12,7 @@ public interface EcrContainerRepository extends JpaRepository<Container, Long>{
 	
 	List<Container> findAll();
 	
+	Container findById(Long id);
 	
+	Container findOne(Long id);
 }

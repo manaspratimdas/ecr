@@ -31,7 +31,6 @@ public class ContainerType {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@OneToMany(mappedBy="containerType")
-	private List<Container> containers;
+
 
 }

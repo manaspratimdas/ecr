@@ -29,6 +29,14 @@ public class EcrUserController {
 		return "User test succssfull- you can proceed";
 
 	}
+	
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public String getUser() {
+		
+		
+		return "User test succssfull- you can proceed";
+
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
 	public User createUser(InputStream userJson) throws IOException{
