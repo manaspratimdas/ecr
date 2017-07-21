@@ -45,6 +45,13 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		return ecrContainerRepository.findByCompanyId(companyId);
 	}
 
+	public List<Container> saveOrUpdateContainers(List<Container> containers) {
+		
+	
+		
+		return ecrContainerRepository.save(containers);
+	}
+
 	
 	
 }

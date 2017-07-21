@@ -6,6 +6,7 @@
  insert into  REGION(REGION_ID,NAME, REGION_CODE) values(4,'South America', 'SA');
  
  
+ 
  insert into country(COUNTRY_ID,ISO_COUNTRY_CODE,ISO_LOCAL_NAME,ISO_COUNTRY_NAME,REGION_ID) values(1,'IN','INDIA','INDIA',1);
  insert into country(COUNTRY_ID,ISO_COUNTRY_CODE,ISO_LOCAL_NAME,ISO_COUNTRY_NAME,REGION_ID) values(2,'US','USA','USA',3);
  
