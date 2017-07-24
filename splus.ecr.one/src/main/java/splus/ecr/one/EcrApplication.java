@@ -14,6 +14,7 @@ import splus.ecr.one.configuration.EcrJpaConfiguration;
 @SpringBootApplication
 public class EcrApplication {
 	
+	
 	public static void main(String[] args){
 		SpringApplication.run(EcrApplication.class, args);
 	}

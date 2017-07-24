@@ -1,0 +1,22 @@
+<div class="widgets">
+
+  <div class="row">
+    <ba-card cardTitle="Basic Example" baCardClass="with-scroll" class="smart-table-container">
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+      				(createConfirm)="onCreateConfirm($event)"
+      				 (editConfirm)="onSaveConfirm($event)">
+      				 <input type="checkbox" [ngModel]="isAllSelected"></ng2-smart-table>
+      				 
+      				 
+      				 
+    </ba-card>
+  </div>
+<!-- 
+	  <input #newHero
+      (keyup.enter)="addHero(newHero.value)"
+      (blur)="addHero(newHero.value); newHero.value='' ">
+-->
+   <!--  <button (click)="test($event)">Test</button> -->
+
+   <!-- <ul><li *ngFor="let hero of heroes">{{hero}}</li></ul> -->
+</div>
