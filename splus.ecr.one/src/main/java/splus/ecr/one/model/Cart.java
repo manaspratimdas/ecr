@@ -27,7 +27,12 @@ public class Cart {
 	@Column(name = "CART_ID")
 	private Long id;
 	
+	@Column(name = "PORT_SOURCE")
+	private String PortSource;
 	
+	@Column(name = "PORT_DESTINATION")
+	private String PortDestination;
+
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
 	private Company borrower;
@@ -57,11 +62,6 @@ public class Cart {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CART_CONTAINER", joinColumns = { @JoinColumn(name = "CART_ID") }, inverseJoinColumns = { @JoinColumn(name = "CONTAINER_ID") })
 	private List<Container> containers;
-	
-
-
-	
-	
 	
 
 }
