@@ -1,45 +1,46 @@
-import { Component } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, AbstractControl,FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { LoginService } from './login.service';
+import { Http ,RequestOptions, Response, Headers } from '@angular/http';
 
 @Component({
   selector: 'login',
   templateUrl: './login.html',
   styleUrls: ['./login.scss']
 })
-export class Login {
+export class Login implements OnInit{
 
-  public form:FormGroup;
-  public email:AbstractControl;
-  public password:AbstractControl;
-  public submitted:boolean = false;
-  public router: Router;
-
-//  constructor(fb:FormBuilder) {
-//    this.form = fb.group({
-//      'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-//      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
-//    });
-//
-//    this.email = this.form.controls['email'];
-//    this.password = this.form.controls['password'];
-//  }
-constructor(fb:FormBuilder , router: Router) { 
+  form:FormGroup;
+  title: String = '';
+  isSubmitting: boolean = false;
+  router: ActivatedRoute;
+  authType: String = '';
+  
+constructor(private fb:FormBuilder ,private route: ActivatedRoute ,private service: LoginService,private http: Http) { 
    
-   this.form = fb.group({
+   this.form = this.fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
     });
-
-    this.email = this.form.controls['email'];
-    this.password = this.form.controls['password'];
-  
 }
+    ngOnInit() {
+   this.title = "Login";
+  }
   
-  public onSubmit(values:Object):void {
-    // this.submitted = true;
+onSubmit(){
+      this.isSubmitting = true;
+
+    let credentials = this.form.value;
+    window.alert("username : " + credentials['email']);
     
-   //  this.router.navigate(['./dashboard.html']);
-    console.log("hello im here");
+    this.service.test(credentials).subscribe(
+          data => {
+            if(data != null){
+            }
+          },
+          error => {
+          });
+
   }
 }
