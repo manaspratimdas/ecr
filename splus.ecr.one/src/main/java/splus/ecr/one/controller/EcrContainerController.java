@@ -84,7 +84,7 @@ public class EcrContainerController {
 	@RequestMapping(value = "/containers/update", method = RequestMethod.POST)
 	public ResponseEntity saveOrUpdateContainers(@RequestBody List<Container> containers) {
 
-		System.out.println("in list container controller");
+		System.out.println("in list container controller"+containers);
 		
 		System.out.println("json "+containers);
 

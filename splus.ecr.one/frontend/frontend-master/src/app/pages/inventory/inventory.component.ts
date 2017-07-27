@@ -32,42 +32,51 @@ export class Inventory {
       confirmDelete: true
     },
     columns: {
-      c_srno: {
-        title: 'Sr No.',
+      id: {
+        title: 'Container No.',
         type: 'number'
       },
-      c_contno: {
-        title: 'Container No.',
+      containerType: {
+        title: 'Size/Type',
+        type: 'string',
+         valuePrepareFunction: (containerType) => {
+                         return containerType.size+" "+containerType.type;
+                     }
+      },
+      status: {
+        title: 'Status  ',
         type: 'string'
       },
-      c_size: {
-        title: 'Size',
-        type: 'string'
+      containerType1: {
+        title: 'Condition',
+        type: 'string',
+          valuePrepareFunction: (containerType) => {
+                          return containerType.description;
+                      }
       },
-      c_status: {
-        title: 'Status',
-        type: 'string'
-      },
-      c_condition: {
-        title: 'condition',
-        type: 'string'
-      },
-      c_port: {
+      port: {
         title: 'Port',
-        type: 'string'
+        type: 'string',
+         valuePrepareFunction: (port) => {
+                          return port.id;
+                      }
       },
-      c_dept: {
+      depot: {
         title: 'Depot',
         type: 'string'
-      },
-      c_date: {
-        title: 'Date',
-        type: 'string'
-      },
-      c_time: {
-        title: 'Time',
-        type: 'string'
-      }
+       }
+      // c_dept: {
+      //   title: 'Depot',
+      //   type: 'string'
+      // },
+      // c_date: {
+      //   title: 'Date',
+      //   type: 'string'
+      // },
+      // c_time: {
+      //   title: 'Time',
+      //   type: 'string'
+      // }
     }
   };
 
@@ -94,8 +103,17 @@ export class Inventory {
   
   onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to edit record?')) {
+     
+    let myParams = new URLSearchParams(); 
+
+     myParams.append("id",event.newData['id']);
+     myParams.append("containerType",event.newData['containerType']);
+     myParams.append("status",event.newData['status']);
+     myParams.append("description",event.newData['description']);
+     myParams.append("port",event.newData['port']);
+     myParams.append("depot",event.newData['depot']);
     
-    this.service.test(event)
+     this.service.update(myParams)
       .subscribe(
           data => {
              console.log(data);
