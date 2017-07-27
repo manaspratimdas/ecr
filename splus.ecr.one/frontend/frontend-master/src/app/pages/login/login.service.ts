@@ -1,24 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Http, Response, Headers } from '@angular/http';
+
 import 'rxjs/add/operator/map'
 
 @Injectable()
 export class LoginService {
-  
-    constructor(private http: Http) { }
  
- login(username: string, password: string) {
-   
-        return this.http.post('localhost:8080/login', JSON.stringify({ username: username, password: password }))
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
+    email: string; 
+    username: string;
+    companyid: string;
+
+    constructor(private http: Http) { 
+      
+    }
+    userData(){
+        console.log("get user data from db..");
+           return this.http.get('http://localhost:8080/login')
+             .map((response: Response) => {
                 let user = response.json();
+                console.log("application user is : "+user['username']);
                 if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
                 }
+                return user;
             });
     }
+      test(credentials){
+        console.log("insert user in db..");
+        this.email = credentials['email'];
+        return this.http.get('http://localhost:8080/login')
+            .map((response: Response) => {
+                let user = response.json();
+                this.username = user['email'];
+                
+            });
+ 
+    }
+        
   
  }

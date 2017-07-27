@@ -15,7 +15,7 @@ export class InventoryService {
   getData() {
   console.log("GET");
     
-    return this.http.get('http://localhost:8080/containers/test')
+    return this.http.get('http://localhost:8080/inventory')
             .map((response: Response) => {
                 let user = response.json();
                 console.log("http - result : "+user);
