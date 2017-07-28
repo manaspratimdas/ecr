@@ -3,7 +3,6 @@ package splus.ecr.one.model;
 
 import java.io.Serializable;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,6 +57,32 @@ public class Container implements Serializable{
 	@Column(name="STATUS")	
 	private String status;
 
+
+	@Column(name="UPDATED_DATE")
+	private String updatedDate;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Container [id=" + id + ", code=" + code + ", company=" + company + ", port=" + port + ", containerType="
+				+ containerType + ", containerCondition=" + containerCondition + ", status=" + status + ", updatedDate="
+				+ updatedDate + "]";
+	}
+
+	/**
+	 * @return the updatedDate
+	 */
+	public String getUpdatedDate() {
+		return updatedDate;
+	}
+
+	/**
+	 * @param updatedDate the updatedDate to set
+	 */
+	public void setUpdatedDate(String updatedDate) {
+		this.updatedDate = updatedDate;
+	}
 
 	/**
 	 * @return the id

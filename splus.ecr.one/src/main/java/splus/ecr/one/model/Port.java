@@ -44,9 +44,9 @@ public class Port {
 	private String latitude;
 	
 
-	/*@OneToMany
+/*	@OneToMany
 	@JoinColumn(name="DEPOT_ID")
-	private String depotID;
+	private long depotID;
 	*/
 	/*@OneToMany(mappedBy="port")
 	private List<Container> containers;*/
@@ -66,6 +66,20 @@ public class Port {
 	}*/
 
 	
+
+	/**
+	 * @return the depotID
+	 */
+/*	public long getDepotID() {
+		return depotID;
+	}
+
+	/**
+	 * @param depotID the depotID to set
+	 */
+	/*public void setDepotID(long depotID) {
+		this.depotID = depotID;
+	}*/
 
 	/**
 	 * @return the id
@@ -156,8 +170,8 @@ public class Port {
 	 */
 	@Override
 	public String toString() {
-		return "Port [ id=" + id + ", isoPortName=" + isoPortName + ", isoPortCode="
-				+ isoPortCode + ", country=" + country + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+		return "Port [id=" + id + ", isoPortName=" + isoPortName + ", isoPortCode=" + isoPortCode + ", country="
+				+ country + ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
 	
 
