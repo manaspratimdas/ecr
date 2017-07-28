@@ -13,11 +13,10 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
+//@Data
 @Table(name="REGION")
 public class Region {
 
-	
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="REGION_ID")
@@ -33,6 +32,61 @@ public class Region {
 	
 	/*@OneToMany(mappedBy="region")
 	private List<Country> contries;*/
-	
-	
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	/**
+	 * @return the regionCode
+	 */
+	public String getRegionCode() {
+		return regionCode;
+	}
+
+
+	/**
+	 * @param regionCode the regionCode to set
+	 */
+	public void setRegionCode(String regionCode) {
+		this.regionCode = regionCode;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Region [id=" + id + ", name=" + name + ", regionCode=" + regionCode + "]";
+	}
+
 }
