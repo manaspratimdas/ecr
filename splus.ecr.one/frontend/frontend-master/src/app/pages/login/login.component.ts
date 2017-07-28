@@ -16,6 +16,7 @@ export class Login implements OnInit{
   isSubmitting: boolean = false;
   router: ActivatedRoute;
   authType: String = '';
+  username: String = '';
   
 constructor(private fb:FormBuilder ,private route: ActivatedRoute ,private service: LoginService,private http: Http) { 
    
@@ -37,6 +38,8 @@ onSubmit(){
     this.service.test(credentials).subscribe(
           data => {
             if(data != null){
+              this.username = data['email'];
+              
             }
           },
           error => {

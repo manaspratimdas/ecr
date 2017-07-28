@@ -115,23 +115,27 @@
   top: 26px;
   @include scrollbars(.4em, rgba(0,0,0,0.5), #fff);
   .header {
+
     padding: 10px 12px;
     border-bottom: 1px solid $default;
     font-size: 12px;
     strong {
       float: left;
       color: $dropdown-text;
+
     }
     & > a {
       float: right;
       margin-left: 12px;
       text-decoration: none;
+
       &:hover {
         color: $dropdown-text;
       }
     }
   }
   .msg-list {
+
     max-height: 296px;
     overflow: scroll;
     overflow-x: hidden;
@@ -141,6 +145,7 @@
       display: block;
       text-decoration: none;
       color: $dropdown-text;
+
       font-size: 12px;
       &:first-child {
         border-top: none;
@@ -209,6 +214,7 @@
     width: 145px;
     top: 55px;
     right: -25px;
+
     a {
       text-align: left;
       border: none;

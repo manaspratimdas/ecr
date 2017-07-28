@@ -25,7 +25,7 @@ export class BaPageTop {
       });
       this.login.userData().subscribe(
           data => {
-             this.username = data['username'];
+              this.username = data['name'];
               this.companyid = data['companyid'];
             if(data != null){
             }
