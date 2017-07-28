@@ -1,5 +1,10 @@
 package splus.ecr.one.model;
 
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+
+>>>>>>> branch 'master' of https://github.com/manaspratimdas/ecr.git
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +17,12 @@ import javax.persistence.Table;
 @Entity
 //@Data
 @Table(name="CONTAINER")
+<<<<<<< HEAD
 public class Container {
+=======
+public class Container implements Serializable{
+
+>>>>>>> branch 'master' of https://github.com/manaspratimdas/ecr.git
 	
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)

@@ -15,7 +15,7 @@ export class LoginService {
     }
     userData(){
         console.log("get user data from db..");
-           return this.http.get('http://localhost:8080/login')
+           return this.http.get('http://localhost:8080/user/getUser')
              .map((response: Response) => {
                 let user = response.json();
                 console.log("application user is : "+user['username']);
@@ -27,7 +27,7 @@ export class LoginService {
       test(credentials){
         console.log("insert user in db..");
         this.email = credentials['email'];
-        return this.http.get('http://localhost:8080/login')
+        return this.http.get('http://localhost:8080/ecr/user/getUser?name="admin"')
             .map((response: Response) => {
                 let user = response.json();
                 this.username = user['email'];

@@ -44,38 +44,34 @@ export class Search {
     selectMode: 'multi',
     actions: false,
     columns: {
-//      id: {
-//        title: 'Select',
-//        type: 'custom',
-//        renderComponent: CheckboxViewComponent
-//      },
-      id: {
-        title: 'ID',
-        filer: false,
-        type: 'number'
-      },
-      firstName: {
-        title: 'First Name',
+
+      companyName: {
+        title: 'Company Name',
         filer: false,
         type: 'string'
       },
-      lastName: {
-        title: 'Last Name',
+      containerNo: {
+        title: 'Container No.',
         filer: false,
         type: 'string'
       },
-      username: {
-        title: 'Username',
+      sizeType: {
+        title: 'Size/Type',
         filer: false,
         type: 'string'
       },
-      email: {
-        title: 'E-mail',
+      condition: {
+        title: 'Condition',
         filer: false,
         type: 'string'
       },
-      age: {
-        title: 'Age',
+      port: {
+        title: 'Port',
+        filer: false,
+        type: 'string'
+      },
+      depot: {
+        title: 'Depot',
         filer: false,
         type: 'number'
       }
@@ -86,11 +82,7 @@ settings1 = {
    
     actions: false,
     columns: {
-//      id: {
-//        title: 'Select',
-//        type: 'custom',
-//        renderComponent: CheckboxViewComponent
-//      },//Company Name	
+
       id: {
         title: 'sr.no',
         filer: false,
@@ -140,24 +132,20 @@ settings1 = {
 
   source: LocalDataSource = new LocalDataSource();
   source1: LocalDataSource = new LocalDataSource();
-//  constructor(protected service: SearchService) {
-//    this.service.getData().then((data) => {
-//      this.source.load(data);
-//    });
-//  }
-  
+
   constructor(protected service: SearchService,private http: Http) {
-//    this.source.setFilter([],false);
-    this.service.getData()
-      .then(
-          data => {
-             this.source.load(data);
-          },
-          error => {
+  //code for data which we want show in search suggession list 
+    this.service.getSearchData().subscribe(
+           data => {
+           this.source.load(data);
           });
-  }
-        onSearch(){
+      }
+        onSearch() {
           window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
+           this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
+           data => {
+           this.source.load(data);
+          });
         }
             
     onSubmit(){
