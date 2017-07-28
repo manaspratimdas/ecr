@@ -11,7 +11,7 @@ import splus.ecr.one.model.Region;
 @Repository
 public interface EcrRegionRepository  extends JpaRepository<Region, Long>{
 
-	Region save(Region region);
+	/*Region save(Region region);
   
 	List<Region> findAll();
 	
@@ -19,5 +19,5 @@ public interface EcrRegionRepository  extends JpaRepository<Region, Long>{
 	
 	Region findOne(Long id);
 
-	List<Region> findByCompanyId(Long companyId);
+	List<Region> findByCompanyId(Long companyId);*/
 }

@@ -22,7 +22,7 @@ public class EcrRegionController {
 	@Autowired
 	EcrRegionService ecrRegionService;
 	
-	
+	/*
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public Region createRegion(){
 		
@@ -88,6 +88,6 @@ public class EcrRegionController {
 	}
 		return new ResponseEntity(updatedRegions, HttpStatus.OK);
 
-	}
+	}*/
 }
 

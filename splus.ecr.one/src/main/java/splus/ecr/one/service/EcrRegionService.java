@@ -7,7 +7,7 @@ import splus.ecr.one.model.Region;
 
 public interface EcrRegionService {
 	
-	public Region create(Region region);
+	/*public Region create(Region region);
 
 	List<Region> getRegions();
 	
@@ -17,6 +17,6 @@ public interface EcrRegionService {
 
 	List<Region> getRegionsByCompanyId(Long companyId);
 
-	List<Region> saveOrUpdateRegions(List<Region> regions);
+	List<Region> saveOrUpdateRegions(List<Region> regions);*/
 
 }

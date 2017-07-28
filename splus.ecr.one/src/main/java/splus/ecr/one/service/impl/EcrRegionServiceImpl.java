@@ -11,46 +11,47 @@ import splus.ecr.one.repository.EcrRegionRepository;
 import splus.ecr.one.service.EcrRegionService;
 
 @Service
-public class EcrRegionServiceImpl implements EcrRegionService{
+public class EcrRegionServiceImpl implements EcrRegionService {
 
 	@Autowired
 	EcrRegionRepository ecrRegionRepository;
-	
-	public Region create(Region region) {
-		
+
+	/*public Region create(Region region) {
+
 		return ecrRegionRepository.save(region);
 	}
-public List<Region> getRegions() {
-		
+
+	public List<Region> getRegions() {
+
 		System.out.println("in region service");
-		List<Region> lstRegion=ecrRegionRepository.findAll();
-		
-		for(int i=0;i<lstRegion.size();i++){
-			System.out.println("region  ->>>"+lstRegion.get(i));
+		List<Region> lstRegion = ecrRegionRepository.findAll();
+
+		for (int i = 0; i < lstRegion.size(); i++) {
+			System.out.println("region  ->>>" + lstRegion.get(i));
 		}
-		
+
 		return lstRegion;
 	}
 
-public Region getRegionById(Long id) {
-	
-	System.out.println("in service  getRegionById");
-	return ecrRegionRepository.findOne(id);
-}
+	public Region getRegionById(Long id) {
 
-public Region getRegion(Long id) {
-	
-	return ecrRegionRepository.findById(id);
-}	
+		System.out.println("in service  getRegionById");
+		return ecrRegionRepository.findOne(id);
+	}
 
-public List<Region> getRegionsByCompanyId(Long companyId) {
-	
-	return ecrRegionRepository.findByCompanyId(companyId);
-}
+	public Region getRegion(Long id) {
 
-public List<Region> saveOrUpdateRegions(List<Region> regions) {
+		return ecrRegionRepository.findById(id);
+	}
 
-	return ecrRegionRepository.save(regions);
-}
+	public List<Region> getRegionsByCompanyId(Long companyId) {
 
+		return ecrRegionRepository.findByCompanyId(companyId);
+	}
+
+	public List<Region> saveOrUpdateRegions(List<Region> regions) {
+
+		return ecrRegionRepository.save(regions);
+	}
+*/
 }
