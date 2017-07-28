@@ -48,12 +48,13 @@ public class Container implements Serializable{
 	/*@Column(name="SIZE_ID")
 	private long sizeID;*/
 	
-//	@Column(name="CONTAINER_CONDITION")
-//	 private String containerCondition;
+	@Column(name="CONTAINER_CONDITION")
+	 private String containerCondition;
 	
 //	@Column(name="CONDITION")
 //	private String condition;
 	
+
 	@Column(name="STATUS")	
 	private String status;
 
@@ -156,6 +157,19 @@ public class Container implements Serializable{
 		this.status = status;
 	}
 
+	/**
+	 * @return the containerCondition
+	 */
+	public String getContainerCondition() {
+		return containerCondition;
+	}
+
+	/**
+	 * @param containerCondition the containerCondition to set
+	 */
+	public void setContainerCondition(String containerCondition) {
+		this.containerCondition = containerCondition;
+	}
 
 	
 	//@ManyToOne
