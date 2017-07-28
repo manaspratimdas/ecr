@@ -15,4 +15,6 @@ public interface EcrContainerService {
 	List<Container> getContainersByCompanyId(Long companyId);
 
 	List<Container> saveOrUpdateContainers(List<Container> containers);
+
+	void delete(Container container);
 }

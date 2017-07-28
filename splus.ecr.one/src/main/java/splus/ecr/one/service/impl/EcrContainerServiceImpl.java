@@ -52,6 +52,12 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		return ecrContainerRepository.save(containers);
 	}
 
+	public void delete(Container container) {
+		
+		ecrContainerRepository.delete(container);
+		
+	}
+
 	
 	
 }

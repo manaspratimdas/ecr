@@ -96,6 +96,20 @@ public class EcrContainerController {
 
 	}
 	
+	
+	@RequestMapping(value = "/containers/delete", method = RequestMethod.POST)
+	public ResponseEntity saveOrUpdateContainers(@RequestBody Container container) {
+
+		System.out.println("in list container controller"+container);
+		
+		System.out.println("json "+container);
+
+		 ecrContainerService.delete(container);
+	
+		return new ResponseEntity("Deleted", HttpStatus.OK);
+
+	}
+	
 
 	
 }
