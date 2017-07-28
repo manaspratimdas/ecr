@@ -22,15 +22,15 @@ public class Container implements Serializable{
 	
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)
-     @Column(name="id")
+     @Column(name="CONTAINER_ID")
     private Long id;
 	
 	
-	@Column(name="NAME")
-	private String name;
+	/*@Column(name="NAME")
+	private String name;*/
 	
-	/*@Column(name="Code")
-	private String code;*/
+	@Column(name="Code")
+	private String code;
 	
 
 	@ManyToOne
@@ -76,30 +76,30 @@ public class Container implements Serializable{
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	/*public String getName() {
 		return name;
 	}
 
-	/**
+	*//**
 	 * @param name the name to set
-	 */
+	 *//*
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 
 	/**
 	 * @return the code
 	 */
-	/*public String getCode() {
+	public String getCode() {
 		return code;
-	}*/
+	}
 
 	/**
 	 * @param code the code to set
 	 */
-	/*public void setCode(String code) {
+	public void setCode(String code) {
 		this.code = code;
-	}*/
+	}
 
 	/**
 	 * @return the company
