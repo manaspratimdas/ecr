@@ -33,6 +33,11 @@ export class Inventory {
     },
     columns: {
       id: {
+        title: 'Sr. No.',
+        type: 'number'
+      
+      },
+      code: {
         title: 'Container No.',
         type: 'number'
       },
@@ -47,18 +52,15 @@ export class Inventory {
         title: 'Status  ',
         type: 'string'
       },
-      containerType1: {
+      containerCondition: {
         title: 'Condition',
-        type: 'string',
-          valuePrepareFunction: (containerType) => {
-                          return containerType.description;
-                      }
+        type: 'string'
       },
       port: {
         title: 'Port',
         type: 'string',
          valuePrepareFunction: (port) => {
-                          return port.id;
+                          return port.isoPortCode;
                       }
       },
       depot: {
@@ -68,7 +70,7 @@ export class Inventory {
       // c_dept: {
       //   title: 'Depot',
       //   type: 'string'
-      // },
+      // }
       // c_date: {
       //   title: 'Date',
       //   type: 'string'
@@ -103,17 +105,14 @@ export class Inventory {
   
   onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to edit record?')) {
-     
-    let myParams = new URLSearchParams(); 
 
-     myParams.append("id",event.newData['id']);
-     myParams.append("containerType",event.newData['containerType']);
-     myParams.append("status",event.newData['status']);
-     myParams.append("description",event.newData['description']);
-     myParams.append("port",event.newData['port']);
-     myParams.append("depot",event.newData['depot']);
-    
-     this.service.update(myParams)
+     var jsonData = JSON.stringify({ "id":event.newData['id'],"code":event.newData['code'],"containerType":event.newData['containerType'],"status":event.newData['status'],
+     "containerCondition":event.newData['containerCondition'],"port":event.newData['port']});
+
+     var json1 = JSON.stringify(jsonData);
+     var jsonW = JSON.parse(json1);
+     
+     this.service.update(jsonW)
       .subscribe(
           data => {
              console.log(data);
@@ -131,7 +130,26 @@ export class Inventory {
   }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+     console.log("in delete call : "+event.data['id']);
+      var jsonData = JSON.stringify({ "id":event.data['id'],"code":event.data['code'],"containerType":event.data['containerType'],"status":event.data['status'],
+     "containerCondition":event.data['containerCondition'],"port":event.data['port']});
+    
+     console.log("requested data : "+jsonData);
+     var json1 = JSON.stringify(jsonData);
+     var jsonW = JSON.parse(json1);
+
+     this.service.delete(jsonW)
+      .subscribe(
+          data => {
+             console.log(data);
+       //      this.router.navigate(['/inventory']);
+            if(data != null){
+               this.source.load(data);
+              event.confirm.resolve();
+            }
+          },
+          error => {
+          });
     } else {
       event.confirm.reject();
     }
