@@ -20,4 +20,7 @@ public interface EcrUserService {
 	List<User> getUsersByCompanyId(Long companyId);
 
 	List<User> saveOrUpdateUsers(List<User> users);
+	
+	
+	User findByUsername(String username);
 }

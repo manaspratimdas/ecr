@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import splus.ecr.one.model.Container;
 import splus.ecr.one.model.User;
+import splus.ecr.one.service.EcrSecurityService;
 import splus.ecr.one.service.EcrUserService;
 
 @RestController
@@ -29,6 +29,13 @@ public class EcrUserController {
 	
 	@Autowired
 	EcrUserService ecrUserService;
+	
+	@Autowired
+    private EcrUserService userService;
+
+    @Autowired
+    private EcrSecurityService securityService;
+
 	
 	@RequestMapping(value = "/testuserapi", method = RequestMethod.GET)
 	public String testEcrApp() {
