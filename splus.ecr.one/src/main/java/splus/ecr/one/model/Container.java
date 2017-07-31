@@ -1,7 +1,7 @@
 package splus.ecr.one.model;
 
-
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,58 +9,57 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-//@Data
-@Table(name="CONTAINER")
-public class Container implements Serializable{
+// @Data
+@Table(name = "CONTAINER")
+public class Container implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CONTAINER_ID")
+	private Long id;
 
-	
-	 @Id
-	 @GeneratedValue(strategy= GenerationType.IDENTITY)
-     @Column(name="CONTAINER_ID")
-    private Long id;
-	
-	
-	/*@Column(name="NAME")
-	private String name;*/
-	
-	@Column(name="Code")
+	@Column(name = "Code")
 	private String code;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
 	private Company company;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "PORT_ID")
 	private Port port;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "CONTAINERTYPE_ID")
 	private ContainerType containerType;
 	
-	/*@Column(name="SIZE_ID")
-	private long sizeID;*/
-	
-	@Column(name="CONTAINER_CONDITION")
-	 private String containerCondition;
-	
-//	@Column(name="CONDITION")
-//	private String condition;
-	
+	 @ManyToMany(mappedBy = "containers")
+	 private Set<Cart> carts;
 
-	@Column(name="STATUS")	
+	/*
+	 * @Column(name="SIZE_ID") private long sizeID;
+	 */
+
+	@Column(name = "CONTAINER_CONDITION")
+	private String containerCondition;
+
+	// @Column(name="CONDITION")
+	// private String condition;
+
+	@Column(name = "STATUS")
 	private String status;
 
-
-	@Column(name="UPDATED_DATE")
+	@Column(name = "UPDATED_DATE")
 	private String updatedDate;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -78,7 +77,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param updatedDate the updatedDate to set
+	 * @param updatedDate
+	 *            the updatedDate to set
 	 */
 	public void setUpdatedDate(String updatedDate) {
 		this.updatedDate = updatedDate;
@@ -92,7 +92,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -101,16 +102,15 @@ public class Container implements Serializable{
 	/**
 	 * @return the name
 	 */
-	/*public String getName() {
-		return name;
-	}
-
-	*//**
-	 * @param name the name to set
-	 *//*
-	public void setName(String name) {
-		this.name = name;
-	}*/
+	/*
+	 * public String getName() { return name; }
+	 * 
+	 *//**
+		 * @param name
+		 *            the name to set
+		 *//*
+		 * public void setName(String name) { this.name = name; }
+		 */
 
 	/**
 	 * @return the code
@@ -120,7 +120,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param code the code to set
+	 * @param code
+	 *            the code to set
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -134,7 +135,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param company the company to set
+	 * @param company
+	 *            the company to set
 	 */
 	public void setCompany(Company company) {
 		this.company = company;
@@ -148,7 +150,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param port the port to set
+	 * @param port
+	 *            the port to set
 	 */
 	public void setPort(Port port) {
 		this.port = port;
@@ -162,7 +165,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param containerType the containerType to set
+	 * @param containerType
+	 *            the containerType to set
 	 */
 	public void setContainerType(ContainerType containerType) {
 		this.containerType = containerType;
@@ -176,7 +180,8 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
@@ -190,25 +195,23 @@ public class Container implements Serializable{
 	}
 
 	/**
-	 * @param containerCondition the containerCondition to set
+	 * @param containerCondition
+	 *            the containerCondition to set
 	 */
 	public void setContainerCondition(String containerCondition) {
 		this.containerCondition = containerCondition;
 	}
 
 	
-	//@ManyToOne
-   // @JoinColumn(name = "CART_ID")
-	//private Cart cart;
 	
-	/*@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "CONTAINER_CART", joinColumns = { @JoinColumn(name = "CONTAINER_ID") }, inverseJoinColumns = { @JoinColumn(name = "CART_ID") })
-	private List<Cart> carts;*/
+	public Set<Cart> getCarts() {
+		return carts;
+	}
 
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
+	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	 
 	
+
 }

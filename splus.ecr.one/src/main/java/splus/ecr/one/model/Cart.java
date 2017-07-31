@@ -1,7 +1,7 @@
 package splus.ecr.one.model;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,15 +37,7 @@ public class Cart {
 	@JoinColumn(name = "COMPANY_ID")
 	private Company borrower;
 	
-//	@OneToMany(mappedBy="cart")
-//	private L/st<Container> containers;
 
-/*	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "cart_container", catalog = "ecrone", joinColumns = {
-			@JoinColumn(name = "CART_ID", nullable = false, updatable = false) },
-			inverseJoinColumns = { @JoinColumn(name = "CONTAINER_ID",
-					nullable = false, updatable = false) })
-	private List<Container> containers;*/
 	
 	@Column(name = "REQUEST_DATE")
 	private Date requestDate;
@@ -61,7 +53,7 @@ public class Cart {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CART_CONTAINER", joinColumns = { @JoinColumn(name = "CART_ID") }, inverseJoinColumns = { @JoinColumn(name = "CONTAINER_ID") })
-	private List<Container> containers;
+	private Set<Container> containers;
 	
 
 }
