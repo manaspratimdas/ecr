@@ -15,6 +15,13 @@ export class Inventory {
   query: string = '';
   dee: string;
   settings = {
+   actions:{
+      position : 'right',
+      add:true,
+      edit:true,
+      delete:true,
+      editable:true
+    }, 
     add: {
       addButtonContent: '<i class="ion-ios-plus-outline"></i>',
       createButtonContent: '<i class="ion-checkmark"></i>',
