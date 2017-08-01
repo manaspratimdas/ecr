@@ -2,7 +2,7 @@
   <div class="auth-block">
    <h1 class="md-display-4" translate><font color="white">Empty Container Repositioning</font></h1>
     <a routerLink="/" class="auth-link" translate><font color="black">New to ECR? Sign up!</font></a><!-- <a routerLink="/register" class="auth-link" translate>{{'login.signup_link'}}</a>-->
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <form [formGroup]="form"  method="POST" (ngSubmit)="onSubmit()" class="form-horizontal">
         <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
               <input

@@ -99,6 +99,7 @@ public class EcrUserServiceImpl implements EcrUserService, UserDetailsService {
 
 	public User save(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		//user.setPassword(bCryptPasswordEncoder.encode("manas"));
         user.setRoles(new HashSet<Role>(roleRepository.findAll()));
         return ecrUserRepository.save(user);
 		

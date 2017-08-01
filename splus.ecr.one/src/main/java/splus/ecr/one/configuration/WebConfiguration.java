@@ -11,14 +11,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
-public class WebConfiguration extends WebMvcConfigurerAdapter   {
+public class WebConfiguration extends WebSecurityConfigurerAdapter   {
 //WebSecurityConfigurerAdapter
+	//WebMvcConfigurerAdapter 
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -36,35 +37,62 @@ public class WebConfiguration extends WebMvcConfigurerAdapter   {
 		return registrationBean;
 
 	}
-
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**");
-			}
-		};
-	}
-
-	//@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:4200")
-				.allowedMethods("PUT", "DELETE", "GET", "POST").allowedHeaders("header1", "header2", "header3")
-				.exposedHeaders("header1", "header2").allowCredentials(false).maxAge(3600);
-	}
+	
+	
+	/* @Bean
+	    public CorsFilter corsFilter() {
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowCredentials(true);
+	        config.addAllowedOrigin("*");
+	        config.addAllowedHeader("*");
+	        config.addAllowedMethod("OPTIONS");
+	        config.addAllowedMethod("GET");
+	        config.addAllowedMethod("POST");
+	        config.addAllowedMethod("PUT");
+	        config.addAllowedMethod("DELETE");
+	        source.registerCorsConfiguration("/**", config);
+	        return new CorsFilter(source);
+	    }
+*/
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**");
+//			}
+//		};
+//	}
+//
+//	//@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//		registry.addMapping("/**").allowedOrigins("http://localhost:4200")
+//				.allowedMethods("PUT", "DELETE", "GET", "POST").allowedHeaders("header1", "header2", "header3")
+//				.exposedHeaders("header1", "header2").allowCredentials(false).maxAge(3600);
+//	}
 
 	
-	/*@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/resources/**", "/registration").permitAll().anyRequest().authenticated()
-				.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
-	}
+	 @Override
+	    protected void configure(HttpSecurity http) throws Exception {
+		 http.csrf().disable();
+	        http
+	                .authorizeRequests()
+	                    .antMatchers("/resources/**", "/registration").permitAll()
+	                    .anyRequest().authenticated()
+	                    .and()
+	                .formLogin()
+	                    .loginPage("/login")
+	                    .permitAll()
+	                    .and()
+	                .logout()
+	                    .permitAll();
+	    }
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
-*/
+
 }

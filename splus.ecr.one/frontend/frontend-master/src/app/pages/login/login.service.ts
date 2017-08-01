@@ -33,8 +33,8 @@ export class LoginService {
       //  console.log("application email is :");
      //   console.log("application email is : " + credentials['email']);
       let myJSON = JSON.stringify({ "email":credentials['email'],"pass":credentials['password'] } );
-        
-      return this.http.post('http://localhost:8080/ecr/user/login',myJSON)
+        console.log(myJSON);
+      return this.http.post('http://localhost:8080/ecr/login',myJSON)
             .map((response: Response) => {
              
             });

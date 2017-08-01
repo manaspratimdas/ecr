@@ -16,11 +16,11 @@ import splus.ecr.one.configuration.EcrJpaConfiguration;
 @SpringBootApplication
 public class EcrApplication extends SpringBootServletInitializer{
 	
-//	@Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(EcrApplication.class);
-//    }
-//	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(EcrApplication.class);
+    }
+	
 	public static void main(String[] args){
 		SpringApplication.run(EcrApplication.class, args);
 	}
