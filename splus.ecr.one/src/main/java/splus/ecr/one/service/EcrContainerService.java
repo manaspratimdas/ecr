@@ -17,4 +17,6 @@ public interface EcrContainerService {
 	List<Container> saveOrUpdateContainers(List<Container> containers);
 
 	void delete(Container container);
+
+	List<Container> getAvailableContainers(String type, String country, String port, String company);
 }

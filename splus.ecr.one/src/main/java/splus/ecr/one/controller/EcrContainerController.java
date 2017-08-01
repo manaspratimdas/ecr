@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import splus.ecr.one.model.Container;
@@ -107,6 +107,27 @@ public class EcrContainerController {
 		 ecrContainerService.delete(container);
 	
 		return new ResponseEntity("Deleted", HttpStatus.OK);
+
+	}
+	
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ResponseEntity searchContainersByAvailability(
+					@RequestParam(required = false) String type,
+					@RequestParam(required = false) String country,
+					@RequestParam(required = false) String port,
+					@RequestParam(required = false) String company) {
+
+		System.out.println("containers"+type+",  "+country+" ,  "+port+", "+company);
+		
+		List<Container> availableContainer=ecrContainerService.getAvailableContainers(type,country,port,company);
+		
+		if (availableContainer == null) {
+			return new ResponseEntity("No Available Containers found", HttpStatus.NOT_FOUND);
+	}
+		return new ResponseEntity(availableContainer, HttpStatus.OK);
+		
+		
 
 	}
 	

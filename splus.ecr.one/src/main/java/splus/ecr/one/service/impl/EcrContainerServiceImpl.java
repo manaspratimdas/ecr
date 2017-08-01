@@ -3,11 +3,16 @@ package splus.ecr.one.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 
 import splus.ecr.one.model.Container;
 import splus.ecr.one.repository.EcrContainerRepository;
 import splus.ecr.one.service.EcrContainerService;
+import splus.ecr.one.specification.ContainerSpecification;
+import splus.ecr.one.specification.ContainerSpecificationBuilder;
+import splus.ecr.one.specification.SearchCriteria;
 
 @Service
 public class EcrContainerServiceImpl implements EcrContainerService{
@@ -55,6 +60,32 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 	public void delete(Container container) {
 		
 		ecrContainerRepository.delete(container);
+		
+	}
+
+	public List<Container>  getAvailableContainers(String type, String country, String port, String company) {
+		
+		System.out.println("containers"+type+",  "+country+" ,  "+port+", "+company);
+		
+		ContainerSpecificationBuilder builder=new ContainerSpecificationBuilder();
+		builder.with("status", ":", "A");
+		if(port!=null){
+			builder.with("port", ":", 3);
+		}
+		if(type!=null){
+			builder.with("containerType", ":", 3);
+		}
+		if(company!=null){
+			builder.with("company", ":", 1);
+		}
+		
+				
+		Specification<Container> spec = builder.build();
+		
+		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
+		
+		System.out.println("result "+results);
+		return results;
 		
 	}
 
