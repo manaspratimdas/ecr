@@ -7,7 +7,7 @@
         <label for="size">Size & Type</label>
         <select class="form-control" id="size" (change)="onTypeChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let type of types"  [ngValue]="type.id">{{type.name}}</option>
+		  	<option *ngFor="let type of types">{{type}}</option>
 		</select>
       </div>
     </div>
@@ -16,7 +16,7 @@
         <label for="country">Country</label>
         <select class="form-control" id="size" (change)="onCountryChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+		  	<option *ngFor="let country of countries">{{country}}</option>
 		</select>
       </div>
     </div>
@@ -25,7 +25,7 @@
         <label for="port">Port</label>
         <select class="form-control" id="size" (change)="onPortChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let port of ports" [ngValue]="port.id">{{port.name}}</option>
+		  	<option *ngFor="let port of ports" >{{port}}</option>
 		</select>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <label for="company">Company</label>
         <select class="form-control" id="size" (change)="onCompanyChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let company of companies" [ngValue]="company.id">{{company.name}}</option>
+		  	<option *ngFor="let company of companies">{{company}}</option>
 		</select>
       </div>
     </div>
@@ -56,6 +56,23 @@
     </div>
 </div>
 </form>
-  <ba-card cardTitle="Booking Content">
+  <!-- <ba-card cardTitle="Booking Content">
     <ng2-smart-table [settings]="settings1" [source]="source1" ></ng2-smart-table>
+  </ba-card> -->
+
+  <ba-card cardTitle="Booking Content"> 
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <ba-card cardTitle="Block Form" baCardClass="with-scroll">
+          <block-form></block-form>
+        </ba-card>
+      </div>
+    </div>
+  </div>
+    <ng2-smart-table [settings]="settings1" [source]="source1" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table>
+     <div align="right"  class="">
+      <button style="width:10%" onclick="onDelete()" class="w3-button w3-white w3-border w3-border-blue w3-round-large">confirm</button>
+      </div> 
+  
   </ba-card>

@@ -8,7 +8,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Search } from './search.component';
 import { SearchService } from './search.service';
 import { routing }       from './search.routing';
-
+import { BlockForm } from '../../pages/forms/components/layouts/components/blockForm';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { routing }       from './search.routing';
     Ng2SmartTableModule
   ],
   declarations: [
-    Search
+    Search,BlockForm
   ],
   providers: [
     SearchService

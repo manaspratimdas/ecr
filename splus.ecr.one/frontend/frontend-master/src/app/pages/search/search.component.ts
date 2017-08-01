@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component,ChangeDetectorRef,OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { SearchService } from './search.service';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { Http ,RequestOptions, Response, Headers } from '@angular/http';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'search-table',
@@ -12,27 +13,13 @@ import { Http ,RequestOptions, Response, Headers } from '@angular/http';
   
 export class Search {
 
-  types: any[]=[
-                {id:1,name:'10'},
-                {id:2,name:'20'}
-    ];
-  
-  countries: any[]=[
-                {id:1,name:'india'},
-                {id:2,name:'china'}
-    ];
-  
-  ports: any[]=[
-                {id:1,name:'port1'},
-                {id:2,name:'port2'}
-    ];
-  
-  companies: any[]=[
-                {id:1,name:'shipco'},
-                {id:2,name:'scan-shipping'}
-    ];
-  
+  private types = [];
+  private countries = [];
+  private ports = [];
+  private companies = [];
+
   query: string = '';
+  code: string = '';
   selectedRows: number[]=[];
   
   selectedType: string ;
@@ -45,22 +32,28 @@ export class Search {
     actions: false,
     columns: {
 
-      companyName: {
+      company: {
         title: 'Company Name',
         filer: false,
-        type: 'string'
+        type: 'string',
+         valuePrepareFunction: (company) => {
+                         return company.name;
+                     }
       },
-      containerNo: {
+      code: {
         title: 'Container No.',
         filer: false,
         type: 'string'
       },
-      sizeType: {
+      containerType: {
         title: 'Size/Type',
         filer: false,
-        type: 'string'
+        type: 'string',
+          valuePrepareFunction: (containerType) => {
+                         return containerType.size+" "+containerType.type;
+                     }
       },
-      condition: {
+      containerCondition: {
         title: 'Condition',
         filer: false,
         type: 'string'
@@ -68,7 +61,10 @@ export class Search {
       port: {
         title: 'Port',
         filer: false,
-        type: 'string'
+        type: 'string',
+         valuePrepareFunction: (port) => {
+                         return port.isoPortCode;
+                     }
       },
       depot: {
         title: 'Depot',
@@ -79,8 +75,19 @@ export class Search {
   };
 
 settings1 = {
-   
-    actions: false,
+  
+    delete: {
+      deleteButtonContent: '<i class="ion-trash-a"></i>',
+      confirmDelete: true
+    },
+    actions:{
+      position : 'right',
+      add:false,
+      edit:false,
+      delete:true,
+      editable:false
+    }, 
+//    actions: false,
     columns: {
 
       id: {
@@ -133,14 +140,45 @@ settings1 = {
   source: LocalDataSource = new LocalDataSource();
   source1: LocalDataSource = new LocalDataSource();
 
-  constructor(protected service: SearchService,private http: Http) {
+  constructor(protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
   //code for data which we want show in search suggession list 
-    this.service.getSearchData().subscribe(
-           data => {
-           this.source.load(data);
-          });
+    http.get('http://localhost:8080/ecr/containers')
+        .flatMap((data) => data.json())
+        .map((value) => value['containerType'].size + " " + value['containerType'].type)
+        .subscribe((data) => {
+          this.types.push(data);
+          
+          cd.detectChanges();
+        });
+        
+         http.get('http://localhost:8080/ecr/containers')
+        .flatMap((data) => data.json())
+        .map((value) => value['port'].country.isoLocalName)
+        .subscribe((data) => {
+          this.countries.push(data);
+          
+          cd.detectChanges();
+        });
+        
+         http.get('http://localhost:8080/ecr/containers')
+        .flatMap((data) => data.json())
+        .map((value) => value['port'].isoPortCode)
+        .subscribe((data) => {
+          this.ports.push(data);
+          
+          cd.detectChanges();
+        });
+        
+        http.get('http://localhost:8080/ecr/containers')
+        .flatMap((data) => data.json())
+        .map((value) => value['company'].name)
+        .subscribe((data) => {
+          this.companies.push(data);
+          
+          cd.detectChanges();
+        });
       }
-        onSearch() {
+      onSearch() {
           window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
@@ -168,13 +206,15 @@ settings1 = {
     debugger;
     
     let id = event.data['id'];
-    var index = this.selectedRows.indexOf(id);
-    console.log("selected index :" + index);
-    if(index != -1) {
-      this.selectedRows.splice(index, id);
-    } else {
-      this.selectedRows.push(id);
-    }
+    this.code = event.data['code'];
+    
+  //  var index = this.selectedRows.values;
+    console.log("selected index :" + this.code);
+    // if(index != -1) {
+    //   this.selectedRows.splice(index, id);
+    // } else {
+    //   this.selectedRows.push(id);
+    // }
     console.log(this.selectedRows);
     
   }
