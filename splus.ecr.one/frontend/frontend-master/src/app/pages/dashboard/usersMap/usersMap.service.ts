@@ -77,12 +77,12 @@ export class UsersMapService {
 
   getDataFromServer(layoutColors){
     console.log("in UsersMapService -> getDataFromServer..");
-    return this.http.get('http://localhost:8080/ecr/containers/getContainersByCountry/1')
-            .map((response: Response) => {
-                let json = response.json();
-                console.log("http - result : "+json);
-                if (json && json.token) {
-                }
+    // return this.http.get('http://localhost:8080/ecr/containers/getContainersByCountry/1')
+    //         .map((response: Response) => {
+    //             let json = response.json();
+    //             console.log("http - result : "+json);
+    //             if (json && json.token) {
+    //             }
                 return [
           { title: 'Austria', id: 'AT', color: layoutColors.primary, customData: '1 244', groupId: '1'},
           { title: 'Ireland', id: 'IE', color: layoutColors.primary, customData: '1 342', groupId: '1'},
@@ -113,6 +113,6 @@ export class UsersMapService {
           { title: 'Slovenia', id: 'SI', color: layoutColors.danger, customData: '23', groupId: '4'},
           { title: 'Croatia', id: 'HR', color: layoutColors.danger, customData: '96', groupId: '4'}
         ];
-				}); 
+			//	}); 
   }
 }
