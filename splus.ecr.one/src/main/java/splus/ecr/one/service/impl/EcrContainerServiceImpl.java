@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.repository.EcrContainerRepository;
 import splus.ecr.one.service.EcrContainerService;
@@ -56,6 +57,10 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		
 		ecrContainerRepository.delete(container);
 		
+	}
+
+	public CommunicationObject getContainersByCountry(String id) {
+		return  ecrContainerRepository.getContainersByCountry(id);
 	}
 
 	

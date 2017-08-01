@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.service.EcrContainerService;
+
+import com.google.gson.Gson;
 //@CrossOrigin
 @RestController
 public class EcrContainerController {
@@ -107,6 +109,24 @@ public class EcrContainerController {
 		 ecrContainerService.delete(container);
 	
 		return new ResponseEntity("Deleted", HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/containers/getContainersByCountry/{id}", method = RequestMethod.GET)
+	public ResponseEntity getContainersByCountry(@PathVariable String id) {
+
+		System.out.println("in list container controller"+id);
+		
+		System.out.println("json "+id);
+
+		CommunicationObject communicationObject = ecrContainerService.getContainersByCountry(id);
+		
+		String json = new Gson().toJson(communicationObject);
+		
+		
+		System.out.println(json);
+	
+		return new ResponseEntity(json, HttpStatus.OK);
 
 	}
 	
