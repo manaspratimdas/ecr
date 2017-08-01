@@ -75,11 +75,15 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		}
 		
 		// Repeat the above block for type and cmpany
-		
-		
-		
-		
 		builder.with("containerType", ":",Long.parseLong(type));
+		
+		// For country
+		//create a method to fetch all the ports for a country(this can be done in service/repository related to port)
+		  
+		//iterate through the list of ports  and for each port id
+		// builder.with("port", ":",port_id);
+		
+		
 		Specification<Container> spec = builder.build();
 		
 		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
