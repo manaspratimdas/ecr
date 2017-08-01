@@ -6,7 +6,7 @@ spring:
   profiles: local,default
 datasource:
   ecrone:
-    url: jdbc:mysql://localhost:3306/ecr_db
+    url: jdbc:mysql://localhost:3306/ecr_r1
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver

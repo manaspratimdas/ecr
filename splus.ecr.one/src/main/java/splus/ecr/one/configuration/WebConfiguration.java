@@ -17,8 +17,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebSecurity
-public class WebConfiguration extends WebSecurityConfigurerAdapter  {
-
+public class WebConfiguration extends WebMvcConfigurerAdapter   {
+//WebSecurityConfigurerAdapter
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -47,16 +47,17 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter  {
 		};
 	}
 
-	/*@Override
+	//@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("http://localhost:4200")
 				.allowedMethods("PUT", "DELETE", "GET", "POST").allowedHeaders("header1", "header2", "header3")
 				.exposedHeaders("header1", "header2").allowCredentials(false).maxAge(3600);
-	}*/
+	}
 
 	
-	@Override
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/resources/**", "/registration").permitAll().anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 	}
@@ -65,5 +66,5 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter  {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
-
+*/
 }

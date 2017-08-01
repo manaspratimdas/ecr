@@ -10,10 +10,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import splus.ecr.one.model.Role;
 import splus.ecr.one.model.User;
+import splus.ecr.one.repository.EcrRoleRepository;
 import splus.ecr.one.repository.EcrUserRepository;
 import splus.ecr.one.service.EcrUserService;
 
@@ -22,6 +24,12 @@ public class EcrUserServiceImpl implements EcrUserService, UserDetailsService {
 
 	@Autowired
 	EcrUserRepository ecrUserRepository;
+	
+	@Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+    private EcrRoleRepository roleRepository;
 
 	public User findByName(String name) {
 
@@ -67,22 +75,33 @@ public class EcrUserServiceImpl implements EcrUserService, UserDetailsService {
 		return ecrUserRepository.save(users);
 	}
 
-	public User findByUsername(String loginId) {
+	public User findByUsername(String username) {
 
-		return ecrUserRepository.findByLoginId(loginId);
+		
+		return ecrUserRepository.findUserByUsername(username);
 	}
 
-	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = ecrUserRepository.findByLoginId(loginId);
+		String username1="manas";
+		User user = ecrUserRepository.findUserByUsername(username1);
+		
+		System.out.println("MPD  user is >>>>>>>>>>>> "+user);
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
 
 		for (Role role : user.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 
-		return new org.springframework.security.core.userdetails.User(user.getLoginId(), user.getPassword(),
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				grantedAuthorities);
+	}
+
+	public User save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoles(new HashSet<Role>(roleRepository.findAll()));
+        return ecrUserRepository.save(user);
+		
 	}
 
 }

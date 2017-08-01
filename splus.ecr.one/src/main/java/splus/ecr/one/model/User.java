@@ -1,11 +1,11 @@
 package splus.ecr.one.model;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,13 +28,13 @@ public class User {
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "LOGIN_ID")
-	private String loginId;
+	@Column(name = "USERNAME")
+	private String username;
 
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles;
 
@@ -72,19 +72,14 @@ public class User {
 		this.name = name;
 	}
 
-	/**
-	 * @return the loginId
-	 */
-	public String getLoginId() {
-		return loginId;
+	
+
+	public String getUsername() {
+		return username;
 	}
 
-	/**
-	 * @param loginId
-	 *            the loginId to set
-	 */
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -126,4 +121,12 @@ public class User {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", roles="
+				+ roles + ", company=" + company + "]";
+	}
+
+	
+	
 }

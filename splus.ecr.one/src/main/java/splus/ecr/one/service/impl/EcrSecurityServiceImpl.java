@@ -28,16 +28,16 @@ public class EcrSecurityServiceImpl implements EcrSecurityService {
 	        return null;
 	}
 
-	public void autologin(String loginId, String password) {
+	public void autologin(String username, String password) {
 		
-		UserDetails userDetails = userDetailsService.loadUserByUsername(loginId);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            System.out.println("Auto login %s successfully!  "+loginId);
+            System.out.println("Auto login %s successfully!  "+username);
             
             
         }

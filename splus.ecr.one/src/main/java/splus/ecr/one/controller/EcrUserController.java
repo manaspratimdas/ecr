@@ -30,10 +30,7 @@ public class EcrUserController {
 	@Autowired
 	EcrUserService ecrUserService;
 	
-	@Autowired
-    private EcrUserService userService;
-
-    @Autowired
+	   @Autowired
     private EcrSecurityService securityService;
 
 	
@@ -129,5 +126,26 @@ public class EcrUserController {
 		return new ResponseEntity(updatedUsers, HttpStatus.OK);
 
 	}
+	
+	
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ResponseEntity registration(@RequestBody User user) {
+       /* userValidator.validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+*/
+       
+
+      //  securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+
+        User newUser =  ecrUserService.save(user);
+		if (newUser == null) {
+			return new ResponseEntity("No Users Created", HttpStatus.NOT_FOUND);
+	}
+		return new ResponseEntity(newUser, HttpStatus.OK);
+    }
+
 
 }

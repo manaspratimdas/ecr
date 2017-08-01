@@ -25,5 +25,7 @@ public interface EcrUserRepository extends JpaRepository<User, Long> {
 
 	List<User> findByCompanyId(Long companyId);
 	
-	User findByLoginId(String loginId);
+	//User findUserByLoginId(String loginId);
+	
+	User findUserByUsername(String username);
 }
