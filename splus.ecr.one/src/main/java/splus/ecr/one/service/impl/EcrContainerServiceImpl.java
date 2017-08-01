@@ -65,21 +65,21 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 
 	public List<Container>  getAvailableContainers(String type, String country, String port, String company) {
 		
-		System.out.println("containers"+type+",  "+country+" ,  "+port+", "+company);
+		System.out.println("containers in service "+type+",  "+country+" ,  "+port+", "+company);
 		
 		ContainerSpecificationBuilder builder=new ContainerSpecificationBuilder();
 		builder.with("status", ":", "A");
-		if(port!=null){
-			builder.with("port", ":", 3);
-		}
-		if(type!=null){
-			builder.with("containerType", ":", 3);
-		}
-		if(company!=null){
-			builder.with("company", ":", 1);
+		
+		if(port!=null && !port.equals("null")){
+			builder.with("port", ":",Long.parseLong(port));
 		}
 		
-				
+		// Repeat the above block for type and cmpany
+		
+		
+		
+		
+		builder.with("containerType", ":",Long.parseLong(type));
 		Specification<Container> spec = builder.build();
 		
 		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
