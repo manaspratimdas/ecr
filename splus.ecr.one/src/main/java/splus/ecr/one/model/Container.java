@@ -1,6 +1,7 @@
 package splus.ecr.one.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -38,8 +39,8 @@ public class Container implements Serializable {
 	@JoinColumn(name = "CONTAINERTYPE_ID")
 	private ContainerType containerType;
 	
-	 @ManyToMany(mappedBy = "containers")
-	 private Set<Cart> carts;
+	// @ManyToMany(mappedBy = "containers")
+	// private Set<Cart> carts;
 
 	/*
 	 * @Column(name="SIZE_ID") private long sizeID;
@@ -56,6 +57,9 @@ public class Container implements Serializable {
 
 	@Column(name = "UPDATED_DATE")
 	private String updatedDate;
+	
+	@Column(name = "LAST_UPDATED_DATE")
+	private Timestamp lastUpdateDate;
 
 	/*
 	 * (non-Javadoc)
@@ -202,16 +206,26 @@ public class Container implements Serializable {
 		this.containerCondition = containerCondition;
 	}
 
+	public Timestamp getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Timestamp lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
 	
 	
-	public Set<Cart> getCarts() {
+	
+	
+	/*public Set<Cart> getCarts() {
 		return carts;
 	}
 
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
 	}
-
+*/
 	
 
 }
