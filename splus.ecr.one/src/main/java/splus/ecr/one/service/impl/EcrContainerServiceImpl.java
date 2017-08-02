@@ -73,7 +73,7 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 	}
 
 	public CommunicationObject getContainersByCountry(String id) {
-	return  ecrContainerRepository.getContainersByCountry(id);
+	return  null;//ecrContainerRepository.getContainersByCountry(id);
 }
 
 public List<Container>  getAvailableContainers(String type, String country, String port, String company) {
