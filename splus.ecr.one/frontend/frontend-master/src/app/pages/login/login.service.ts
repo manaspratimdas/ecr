@@ -12,8 +12,7 @@ export class LoginService {
     companyid: string;
   pass: string;
 
-    constructor(private http: Http, private _baseUrl:  string ) { 
-       _baseUrl = "http://localhost:8080/ecr/user/login";
+    constructor(private http: Http){
     }
    userData(){
      console.log("get user data from db..");
@@ -38,11 +37,11 @@ export class LoginService {
       let myJSON = JSON.stringify({ "email":credentials['email'],"pass":credentials['password'] } );
         let cached: any;
         
-    if (cached = sessionStorage.getItem(this._baseUrl)) {
+    if (cached = sessionStorage.getItem("http://localhost:8080/ecr/user/login")) {
         return Observable.of(JSON.parse(cached));
     } else {
-        return this.http.post(this._baseUrl,myJSON).map((response: Response) => {
-            sessionStorage.setItem(this._baseUrl, response.text());
+        return this.http.post("http://localhost:8080/ecr/user/login",myJSON).map((response: Response) => {
+            sessionStorage.setItem("http://localhost:8080/ecr/user/login", response.text());
             return response.json();
         });
     }
