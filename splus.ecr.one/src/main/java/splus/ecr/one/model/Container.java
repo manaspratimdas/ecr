@@ -216,7 +216,14 @@ public class Container implements Serializable {
 				+ status + ", updatedDate=" + updatedDate + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 
-	
+	public Depot getDepot() {
+		return depot;
+	}
+
+	public void setDepot(Depot depot) {
+		this.depot = depot;
+	}
+
 	
 	
 	

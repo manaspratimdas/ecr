@@ -69,19 +69,15 @@ public class Depot {
 	}
 
 
-	/**
-	 * @return the depotID
-	 */
-	public long getDepotID() {
+
+
+	public long getId() {
 		return id;
 	}
 
 
-	/**
-	 * @param depotID the depotID to set
-	 */
-	public void setDepotID(long depotID) {
-		this.id = depotID;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 
@@ -99,17 +95,16 @@ public class Depot {
 	public void setPort(Port port) {
 		this.port = port;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Depot [id=" + id + ", depotName=" + depotName + ", depotCode=" + depotCode + ", port=" + port + "]";
+	}
 	
 
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Depot [depotID=" + id + ", depotName=" + depotName + ", depotCode=" + depotCode + ", port=" + port
-				+ "]";
-	}
+	
 
 	
 }
