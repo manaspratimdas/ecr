@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.Port;
 import splus.ecr.one.service.EcrContainerService;
 import splus.ecr.one.service.EcrPortService;
+
+import com.google.gson.Gson;
 //@CrossOrigin
 @RestController
 public class EcrContainerController {
@@ -115,6 +118,22 @@ public class EcrContainerController {
 
 	}
 	
+	@RequestMapping(value = "/containers/getContainersByCountry/{id}", method = RequestMethod.GET)
+	public ResponseEntity getContainersByCountry(@PathVariable String id) {
+
+		System.out.println("in list container controller"+id);
+		
+		System.out.println("json "+id);
+
+		CommunicationObject communicationObject = ecrContainerService.getContainersByCountry(id);
+		
+		String json = new Gson().toJson(communicationObject);
+		
+		
+		System.out.println(json);
+	
+		return new ResponseEntity(json, HttpStatus.OK);
+}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ResponseEntity searchContainersByAvailability(

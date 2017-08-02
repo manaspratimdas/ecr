@@ -1,6 +1,7 @@
 package splus.ecr.one.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,11 +28,11 @@ public class Cart {
 	@Column(name = "CART_ID")
 	private Long id;
 	
-	@Column(name = "PORT_SOURCE")
+	/*@Column(name = "PORT_SOURCE")
 	private String PortSource;
 	
 	@Column(name = "PORT_DESTINATION")
-	private String PortDestination;
+	private String PortDestination;*/
 
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
@@ -40,10 +41,10 @@ public class Cart {
 
 	
 	@Column(name = "REQUEST_DATE")
-	private Date requestDate;
+	private Timestamp requestDate;
 	
 	@Column(name = "RELEASE_DATE")
-	private Date releaseDate;
+	private Timestamp releaseDate;
 	
 
 	@ManyToOne
@@ -56,4 +57,6 @@ public class Cart {
 	private Set<Container> containers;
 	
 
+	
+	
 }

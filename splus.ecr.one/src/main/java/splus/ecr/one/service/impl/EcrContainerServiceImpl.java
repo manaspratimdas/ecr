@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 
+import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.Port;
 import splus.ecr.one.repository.EcrContainerRepository;
@@ -71,7 +72,11 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		
 	}
 
-	public List<Container>  getAvailableContainers(String type, String country, String port, String company) {
+	public CommunicationObject getContainersByCountry(String id) {
+	return  ecrContainerRepository.getContainersByCountry(id);
+}
+
+public List<Container>  getAvailableContainers(String type, String country, String port, String company) {
 		
 		System.out.println("containers in service "+type+",  "+country+" ,  "+port+", "+company);
 		

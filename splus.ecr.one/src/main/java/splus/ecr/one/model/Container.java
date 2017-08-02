@@ -1,6 +1,7 @@
 package splus.ecr.one.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,13 +34,17 @@ public class Container implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "PORT_ID")
 	private Port port;
+	
+	@ManyToOne
+	@JoinColumn(name = "DEPOT_ID")
+	private Depot depot;
 
 	@ManyToOne
 	@JoinColumn(name = "CONTAINERTYPE_ID")
 	private ContainerType containerType;
 	
-	 @ManyToMany(mappedBy = "containers")
-	 private Set<Cart> carts;
+	// @ManyToMany(mappedBy = "containers")
+	// private Set<Cart> carts;
 
 	/*
 	 * @Column(name="SIZE_ID") private long sizeID;
@@ -56,18 +61,12 @@ public class Container implements Serializable {
 
 	@Column(name = "UPDATED_DATE")
 	private String updatedDate;
+	
+	@Column(name = "LAST_UPDATED_DATE")
+	private Timestamp lastUpdateDate;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Container [id=" + id + ", code=" + code + ", company=" + company + ", port=" + port + ", containerType="
-				+ containerType + ", containerCondition=" + containerCondition + ", status=" + status + ", updatedDate="
-				+ updatedDate + "]";
-	}
+	
+	
 
 	/**
 	 * @return the updatedDate
@@ -202,16 +201,40 @@ public class Container implements Serializable {
 		this.containerCondition = containerCondition;
 	}
 
+	public Timestamp getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Timestamp lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Container [id=" + id + ", code=" + code + ", company=" + company + ", port=" + port + ", depot=" + depot
+				+ ", containerType=" + containerType + ", containerCondition=" + containerCondition + ", status="
+				+ status + ", updatedDate=" + updatedDate + ", lastUpdateDate=" + lastUpdateDate + "]";
+	}
+
+	public Depot getDepot() {
+		return depot;
+	}
+
+	public void setDepot(Depot depot) {
+		this.depot = depot;
+	}
+
 	
 	
-	public Set<Cart> getCarts() {
+	
+	/*public Set<Cart> getCarts() {
 		return carts;
 	}
 
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
 	}
-
+*/
 	
 
 }

@@ -29,7 +29,7 @@ public class User {
 	private String name;
 
 	@Column(name = "USERNAME")
-	private String username;
+	private String userName;
 
 	@Column(name = "PASSWORD")
 	private String password;
@@ -75,11 +75,11 @@ public class User {
 	
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", roles="
+		return "User [id=" + id + ", name=" + name + ", username=" + userName + ", password=" + password + ", roles="
 				+ roles + ", company=" + company + "]";
 	}
 

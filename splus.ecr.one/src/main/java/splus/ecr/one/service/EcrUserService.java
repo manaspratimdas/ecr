@@ -1,6 +1,7 @@
 package splus.ecr.one.service;
 
 import java.util.List;
+import java.util.Map;
 
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.User;
@@ -25,4 +26,6 @@ public interface EcrUserService {
 	User findByUsername(String username);
 	
 	 User save(User user);
+
+	Map<String, String> login(String email, String password);
 }

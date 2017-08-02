@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 
 @Repository
@@ -20,4 +21,6 @@ public interface EcrContainerRepository extends JpaRepository<Container, Long>, 
 	List<Container> findByCompanyId(Long companyId);
 	
 	void delete(Container container);
+
+	public CommunicationObject getContainersByCountry(String id);
 }
