@@ -1,4 +1,5 @@
 import { Component,ChangeDetectorRef,OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { FormGroup, AbstractControl,FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { SearchService } from './search.service';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
@@ -18,6 +19,9 @@ export class Search {
   private ports = [];
   private companies = [];
 
+  str: string;  
+  RowIndex: number = 0;
+  TotalRows: number = 0;
   query: string = '';
   code: string = '';
   selectedRows: number[]=[];
@@ -92,89 +96,79 @@ settings1 = {
 
       id: {
         title: 'sr.no',
-        filer: false,
+        filter: false,
         type: 'number'
       },
       condition: {
         title: 'condition',
-        filer: false,
+        filter: false,
         type: 'string'
       },
       contno: {
         title: 'Container No.',
-        filer: false,
+        filter: false,
         type: 'string'
       },
       containerType :{
         title: 'Size/Type',
-        filer: false,
+        filter: false,
         valuePrepareFunction: (containerType) => {
                          return containerType.Size+containerType.type;
                      }
       },
       port: {
         title: 'Port',
-        filer: false,
+        filter: false,
         valuePrepareFunction: (port) => {
                          return port.isoPortCode;
                      }
       },
       company: {
         title: 'Depot',
-        filer: false,
+        filter: false,
         valuePrepareFunction: (company) => {
                          return company.name;
                      }
-      },
-     delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    test: {
-                          title: 'fire',
-                          type: 'html'
-    }                
+       }//,
+    //  delete: {
+    //   deleteButtonContent: '<i class="ion-trash-a"></i>',
+    //   confirmDelete: true
+    // }               
     }
   };
 
   source: LocalDataSource = new LocalDataSource();
   source1: LocalDataSource = new LocalDataSource();
+  form:FormGroup;
+  isSubmitting: boolean = false;
+ 
+  constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
 
-  constructor(protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
-  //code for data which we want show in search suggession list 
     http.get('http://localhost:8080/ecr/containers')
         .flatMap((data) => data.json())
-        .map((value) => value['containerType'].size + " " + value['containerType'].type)
         .subscribe((data) => {
           this.types.push(data);
-          
           cd.detectChanges();
         });
         
          http.get('http://localhost:8080/ecr/containers')
         .flatMap((data) => data.json())
-        .map((value) => value['port'].country.isoLocalName)
         .subscribe((data) => {
           this.countries.push(data);
-          
           cd.detectChanges();
         });
         
          http.get('http://localhost:8080/ecr/containers')
         .flatMap((data) => data.json())
-        .map((value) => value['port'].isoPortCode)
         .subscribe((data) => {
           this.ports.push(data);
-          
           cd.detectChanges();
         });
         
         http.get('http://localhost:8080/ecr/containers')
         .flatMap((data) => data.json())
-        .map((value) => value['company'].name)
         .subscribe((data) => {
           this.companies.push(data);
-          
           cd.detectChanges();
         });
       }
@@ -184,6 +178,11 @@ settings1 = {
            data => {
            this.source.load(data);
           });
+        }
+        name: string;
+        onConfirm(){
+          this.name = "";
+         // window.alert("in booking screen.."+this.bookForm.value);    
         }
             
     onSubmit(){
@@ -203,18 +202,11 @@ settings1 = {
   }
   
   onRowSelect(event): void {
-    debugger;
+    //debugger;
     
-    let id = event.data['id'];
     this.code = event.data['code'];
-    
-  //  var index = this.selectedRows.values;
     console.log("selected index :" + this.code);
-    // if(index != -1) {
-    //   this.selectedRows.splice(index, id);
-    // } else {
-    //   this.selectedRows.push(id);
-    // }
+
     console.log(this.selectedRows);
     
   }

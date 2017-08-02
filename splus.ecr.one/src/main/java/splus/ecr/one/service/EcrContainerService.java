@@ -20,4 +20,6 @@ public interface EcrContainerService {
 	void delete(Container container);
 	
 	public CommunicationObject getContainersByCountry(String id);
+
+	List<Container> getAvailableContainers(String type, String country, String port, String company);
 }
