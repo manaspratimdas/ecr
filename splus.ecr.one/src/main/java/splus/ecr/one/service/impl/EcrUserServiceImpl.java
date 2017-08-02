@@ -1,7 +1,9 @@
 package splus.ecr.one.service.impl;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +104,30 @@ public class EcrUserServiceImpl implements EcrUserService, UserDetailsService {
         user.setRoles(new HashSet<Role>(roleRepository.findAll()));
         return ecrUserRepository.save(user);
 		
+	}
+
+	public Map<String, String> login(String email, String password) {
+		User user = new User();
+		user.setUsername(email);
+		user.setPassword(password);
+		user = ecrUserRepository.login(user);
+		
+		Map<String, String> result = new HashMap<String, String>();
+		if(user!=null){
+			result.put("username", user.getUsername());
+			result.put("companyId", String.valueOf(user.getCompany().getId()));
+			result.put("companyName", String.valueOf(user.getCompany().getName()));
+			result.put("userIP", "127.0.0.1");
+			StringBuilder roles = new StringBuilder();
+			for (Role role  : user.getRoles()) {
+				roles.append(role.getId()).append("~~").append(role.getName()).append(",");
+			}			
+			result.put("roles", roles.substring(0,roles.length()>0?roles.length()-1:0));
+			result.put("status", "1");
+		}else{
+			result.put("status", "0");
+		}
+		return result;
 	}
 
 }
