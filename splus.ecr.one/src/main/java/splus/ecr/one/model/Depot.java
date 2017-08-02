@@ -23,7 +23,7 @@ public class Depot {
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="DEPOT_ID")
-	private long depotID;
+	private long id;
 	
 	@Column(name="DEPOT_NAME")
 	private String depotName;
@@ -73,7 +73,7 @@ public class Depot {
 	 * @return the depotID
 	 */
 	public long getDepotID() {
-		return depotID;
+		return id;
 	}
 
 
@@ -81,7 +81,7 @@ public class Depot {
 	 * @param depotID the depotID to set
 	 */
 	public void setDepotID(long depotID) {
-		this.depotID = depotID;
+		this.id = depotID;
 	}
 
 
@@ -107,7 +107,7 @@ public class Depot {
 	 */
 	@Override
 	public String toString() {
-		return "Depot [depotID=" + depotID + ", depotName=" + depotName + ", depotCode=" + depotCode + ", port=" + port
+		return "Depot [depotID=" + id + ", depotName=" + depotName + ", depotCode=" + depotCode + ", port=" + port
 				+ "]";
 	}
 

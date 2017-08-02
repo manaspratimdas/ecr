@@ -34,6 +34,10 @@ public class Container implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "PORT_ID")
 	private Port port;
+	
+	@ManyToOne
+	@JoinColumn(name = "DEPOT_ID")
+	private Port depot;
 
 	@ManyToOne
 	@JoinColumn(name = "CONTAINERTYPE_ID")
@@ -61,17 +65,8 @@ public class Container implements Serializable {
 	@Column(name = "LAST_UPDATED_DATE")
 	private Timestamp lastUpdateDate;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Container [id=" + id + ", code=" + code + ", company=" + company + ", port=" + port + ", containerType="
-				+ containerType + ", containerCondition=" + containerCondition + ", status=" + status + ", updatedDate="
-				+ updatedDate + "]";
-	}
+	
+	
 
 	/**
 	 * @return the updatedDate
@@ -212,6 +207,13 @@ public class Container implements Serializable {
 
 	public void setLastUpdateDate(Timestamp lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Container [id=" + id + ", code=" + code + ", company=" + company + ", port=" + port + ", depot=" + depot
+				+ ", containerType=" + containerType + ", containerCondition=" + containerCondition + ", status="
+				+ status + ", updatedDate=" + updatedDate + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 
 	
