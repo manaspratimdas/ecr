@@ -37,7 +37,7 @@ public class Container implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "DEPOT_ID")
-	private Port depot;
+	private Depot depot;
 
 	@ManyToOne
 	@JoinColumn(name = "CONTAINERTYPE_ID")
