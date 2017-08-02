@@ -8,17 +8,25 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 
 import splus.ecr.one.model.Container;
+import splus.ecr.one.model.Port;
 import splus.ecr.one.repository.EcrContainerRepository;
+import splus.ecr.one.repository.EcrPortRepository;
 import splus.ecr.one.service.EcrContainerService;
-import splus.ecr.one.specification.ContainerSpecification;
+import splus.ecr.one.service.EcrPortService;
 import splus.ecr.one.specification.ContainerSpecificationBuilder;
-import splus.ecr.one.specification.SearchCriteria;
 
 @Service
 public class EcrContainerServiceImpl implements EcrContainerService{
 
 	@Autowired
 	EcrContainerRepository ecrContainerRepository;
+	
+	
+	@Autowired
+	EcrPortRepository ecrPortRepository;
+	
+	@Autowired
+	EcrPortService ecrPortService;
 	
 	public List<Container> getContainers() {
 		
@@ -73,16 +81,34 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		if(port!=null && !port.equals("null")){
 			builder.with("port", ":",Long.parseLong(port));
 		}
+		if(type!=null &&! type.equals("null")){
+			builder.with("containerType", ":",Long.parseLong(type));
+			}
+		if(company!=null &&! company.equals("null")){
+			builder.with("company", ":",Long.parseLong(company));
+			}
+	/*	if(country!=null &&! country.equals("null")){
+			builder.with("country", ":",Long.parseLong(country));
+			}*/
+		
+	//	List<Port> ports = getAllPorts(Long.parseLong(company));
 		
 		// Repeat the above block for type and cmpany
-		builder.with("containerType", ":",Long.parseLong(type));
+		//builder.with("containerType", ":",Long.parseLong(type));
 		
 		// For country
 		//create a method to fetch all the ports for a country(this can be done in service/repository related to port)
 		  
 		//iterate through the list of ports  and for each port id
-		// builder.with("port", ":",port_id);
+	
+		if(country!=null &&! country.equals("null")){
+			List<Port> portsByCountry=ecrPortRepository.findByCountryId(Long.parseLong(country));
+			System.out.println(portsByCountry);
 		
+				for(Port p : portsByCountry){
+					builder.with("port", ":",p.getId());
+				}
+			}
 		
 		Specification<Container> spec = builder.build();
 		
@@ -92,7 +118,17 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		return results;
 		
 	}
-
 	
+	public List<Port> getAllPorts(long countryid){
+		List<Port> availablePort=null;
+		if(!"".equals(countryid)){
+		System.out.println("in port service");
+		 availablePort=ecrPortService.getAvailablePorts(countryid);
+	     return availablePort;
+		}else{
+			System.out.println("no ports available with country id:"+countryid);
+		}
+		 return availablePort;
+	}
 	
 }
