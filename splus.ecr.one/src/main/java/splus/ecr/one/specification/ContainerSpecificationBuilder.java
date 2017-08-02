@@ -22,6 +22,8 @@ public class ContainerSpecificationBuilder {
         return this;
     }
 	
+	
+	
 	public Specification<Container> build() {
         if (params.size() == 0) {
             return null;
@@ -35,6 +37,24 @@ public class ContainerSpecificationBuilder {
         Specification<Container> result = specs.get(0);
         for (int i = 1; i < specs.size(); i++) {
             result = Specifications.where(result).and(specs.get(i));
+        }
+        return result;
+    }
+	
+	
+	public Specification<Container> buildOr() {
+        if (params.size() == 0) {
+            return null;
+        }
+        
+        List<Specification<Container>> specs = new ArrayList<Specification<Container>>();
+        for (SearchCriteria param : params) {
+            specs.add(new ContainerSpecification(param));
+        }
+ 
+        Specification<Container> result = specs.get(0);
+        for (int i = 1; i < specs.size(); i++) {
+            result = Specifications.where(result).or(specs.get(i));
         }
         return result;
     }
