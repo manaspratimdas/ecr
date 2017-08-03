@@ -17,6 +17,7 @@ export class Login implements OnInit{
   router: ActivatedRoute;
   authType: String = '';
   username: String = '';
+  companyId : String = null;
   
 constructor(private fb:FormBuilder ,private route: ActivatedRoute ,private service: LoginService,private http: Http) { 
    
@@ -33,17 +34,26 @@ onSubmit(){
       this.isSubmitting = true;
 
     let credentials = this.form.value;
-    //window.alert("username : " + credentials['email']);
+    window.alert("username : " + credentials['email']);
     
-     this.service.test(credentials).subscribe(
-           data => {
-             if(data != null){
-               this.username = data['email'];
+    this.service.test(credentials).subscribe(
+          data => {
+            if(data != null){
+              this.username = data['username'];
+              this.companyId = data['companyId'];
+              if(this.companyId!=null){
+                
+                window.location.href = "http://localhost:4200/#/pages/dashboard";
+
+              }else{
+                window.location.href = "/login.html";
+
+              }
               
-             }
-           },
-           error => {
-           });
+            }
+          },
+          error => {
+          });
 
   }
 }

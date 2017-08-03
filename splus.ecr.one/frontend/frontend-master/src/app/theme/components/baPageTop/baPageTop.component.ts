@@ -23,12 +23,11 @@ export class BaPageTop {
    
       this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
+      
       });
-      this.username = login.username;
-      this.companyid = login.companyid;
-
-      console.log("--------->"+login.user);
-      console.log("user/companyid : "+this.username+","+this.companyid);
+     
+     this.username = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))['username'];
+       this.companyid = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))['companyId'];
     
       }
 
@@ -40,7 +39,7 @@ export class BaPageTop {
 
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
-
+    
   }
 
   signOut(){
