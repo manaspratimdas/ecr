@@ -38,4 +38,10 @@ public class EcrPortServiceImpl implements EcrPortService{
 				return (filteredPort);
 		  }
 
+
+	public List<Port> getPorts() {
+		
+		return ecrPortRepository.findAll();
+	}
+
 }

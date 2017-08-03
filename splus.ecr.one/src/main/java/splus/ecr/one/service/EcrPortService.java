@@ -7,5 +7,7 @@ import splus.ecr.one.model.Port;
 
 public interface EcrPortService {
 	List<Port> getAvailablePorts(long countryid);
+	
+	List<Port> getPorts();
 
 }
