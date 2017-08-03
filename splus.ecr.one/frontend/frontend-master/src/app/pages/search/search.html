@@ -67,7 +67,9 @@
     <div class="col-md-12">
       <div>
         <ba-card cardTitle="Block Form" baCardClass="with-scroll">
-          <block-form (searchSelectedRequisitionNo)="selectedRequisitionNo = $event" 
+          <block-form [fromSearchRequisitionNumber]="requisitionNumber"
+          [fromSearchRequestQuantity]="requestQuantity" 
+          (searchSelectedRequisitionNo)="selectedRequisitionNo = $event" 
           (searchSelectedRequestedQuantity) = "selectedRequestedQuantity=$event"
           (searchSelectedPickupDate) = "selectedPickupDate=$event"
           (searchSelectedSource) = "selectedSource=$event"

@@ -19,6 +19,8 @@ import 'rxjs/Rx';
   
 export class Search {
 
+  requisitionNumber:string = "";
+  requestQuantity:String = "0";
   msg:boolean = false;
   userName: string;
   selectedRequisitionNo: string;
@@ -269,6 +271,11 @@ settings1 = {
           data => {
            this.source1.load(data);
            this.bookedData = data;
+           
+            
+           this.requisitionNumber = (String)(new Date().getMilliseconds());
+           console.log("booked size" + Object.keys(this.bookedData).length);
+           this.requestQuantity = (String)(Object.keys(this.bookedData).length);
           });
     }
   onDeleteConfirm(event): void {

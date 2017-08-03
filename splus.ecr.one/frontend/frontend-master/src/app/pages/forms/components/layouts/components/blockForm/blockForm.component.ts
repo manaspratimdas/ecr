@@ -1,4 +1,4 @@
-import {Component,Output, EventEmitter  } from '@angular/core';
+import {Component,Output, EventEmitter, Input  } from '@angular/core';
 import { Search } from '../../../../../search/search.component';
 
 
@@ -22,7 +22,8 @@ data: any;
     this.destinations = search.bookedData;
     console.log("data:"+this.data);
   }
-
+  @Input() fromSearchRequisitionNumber : string;
+  @Input() fromSearchRequestQuantity : string;
   @Output() searchSelectedRequisitionNo: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedRequestedQuantity: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedPickupDate: EventEmitter<string> = new EventEmitter<string>()
@@ -30,7 +31,7 @@ data: any;
   @Output() searchSelectedDestination: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedNote: EventEmitter<string> = new EventEmitter<string>()
 
-  //@Input('testt') incomingData: string;
+  @Input('testt') incomingData: string;
   parentValue:string;
   //@Input('parentData') incomingData: string;
   
