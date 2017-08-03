@@ -180,14 +180,7 @@ settings1 = {
     this.testt = 'Heraj1';
     console.log(this.testt);
    
-    var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
-    console.log("sessionData" + sessionData);
-    
-    this.companyId = JSON.parse(sessionData)['companyId'];
-    this.userName = JSON.parse(sessionData)[''];
-    console.log("http://localhost:8080/ecr/company/"+this.companyId+"/containers") 
-        
-    http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
+    http.get("http://localhost:8080/ecr/comntainertypes")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.types.push(data);
@@ -201,7 +194,7 @@ settings1 = {
           cd.detectChanges();
         });
         
-         http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
+         http.get("http://localhost:8080/ecr/ports")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.ports.push(data);
