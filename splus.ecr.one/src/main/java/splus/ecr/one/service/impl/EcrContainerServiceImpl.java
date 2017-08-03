@@ -81,6 +81,7 @@ public List<Container>  getAvailableContainers(String type, String country, Stri
 		System.out.println("containers in service "+type+",  "+country+" ,  "+port+", "+company);
 		
 		ContainerSpecificationBuilder builder=new ContainerSpecificationBuilder();
+		
 		builder.with("status", ":", "A");
 		
 		if(port!=null && !port.equals("null")){
@@ -92,7 +93,9 @@ public List<Container>  getAvailableContainers(String type, String country, Stri
 		if(company!=null &&! company.equals("null")){
 			builder.with("company", ":",Long.parseLong(company));
 			}
-	
+		
+		
+		
 		Specification<Container> spec = builder.build();
 		
 		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
