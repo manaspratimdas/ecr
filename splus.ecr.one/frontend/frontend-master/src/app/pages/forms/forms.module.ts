@@ -4,7 +4,7 @@ import { FormsModule as AngularFormsModule } from '@angular/forms';
 import { AppTranslationModule } from '../../app.translation.module';
 import { NgaModule } from '../../theme/nga.module';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { DatepickerModule } from 'angular2-material-datepicker';
+
 import { routing }       from './forms.routing';
 
 import { Forms } from './forms.component';
@@ -26,7 +26,7 @@ import { WithoutLabelsForm } from './components/layouts/components/withoutLabels
 
 @NgModule({
   imports: [
-    CommonModule,DatepickerModule,
+    CommonModule,
     AngularFormsModule,
     AppTranslationModule,
     NgaModule,
