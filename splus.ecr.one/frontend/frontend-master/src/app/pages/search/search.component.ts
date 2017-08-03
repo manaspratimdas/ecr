@@ -19,6 +19,7 @@ import 'rxjs/Rx';
   
 export class Search {
 
+  msg:boolean = false;
   userName: string;
   selectedRequisitionNo: string;
   selectedRequestedQuantity: string;
@@ -180,7 +181,7 @@ settings1 = {
     this.testt = 'Heraj1';
     console.log(this.testt);
    
-    http.get("http://localhost:8080/ecr/comntainertypes")
+    http.get("http://localhost:8080/ecr/containertypes")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.types.push(data);
@@ -209,15 +210,16 @@ settings1 = {
         });
       }
       onSearch() {
-          window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
+         // window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
            this.source.load(data);
           });
+         
         }
-      
+     
         onConfirm(event:Event): void{
-
+          
             console.log("selectedRequisitionNo     : " + this.selectedRequisitionNo)
             console.log("selectedRequestedQuantity : " + this.selectedRequestedQuantity)
             console.log("selectedNote              : " + this.selectedNote)
@@ -226,7 +228,10 @@ settings1 = {
             console.log("selectedPickupDate        : " + this.selectedPickupDate)
             console.log("Booked json : "+this.bookedData);    
           
-            this.dataTransfer = this.bookedData;
+           var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
+           console.log("sessionData" + sessionData);
+    
+          this.companyId = JSON.parse(sessionData)['companyId'];
 
           var borrower = JSON.stringify({ "id":this.companyId,"name":"this.userName"});
           var jsona = JSON.parse(borrower);
@@ -236,24 +241,29 @@ settings1 = {
           var jsonb = JSON.parse(destinationPort);
           console.log(destinationPort);
           console.log(jsonb);
-          
+          console.log("issueResolve---->"+this.selectedPickupDate);
           var jsonData = JSON.stringify({ "id":null,"requestDate":this.selectedPickupDate,
         "releaseDate":this.selectedPickupDate,"containers":this.bookedData,"borrower":jsona,"destinationPort":jsonb});
           console.log("object : "+jsonData);
           
-     var json1 = JSON.stringify(jsonData);
-     var jsonW = JSON.parse(json1);
+          var json1 = JSON.stringify(jsonData);
+          var jsonW = JSON.parse(json1);
 
           this.service.saveToCart(jsonW).subscribe(
            data => {
                 console.log("Data saved..!");
           });
-           
+
+          // this.msg = true
+          // setTimeout(function() {
+          
+          // this.msg = false;
+          // }.bind(this), 2000); 
         }
             
     onSubmit(){
 
-      window.alert("book click.."+this.selectedRows); 
+     // window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {
            this.source1.load(data);

@@ -33,17 +33,17 @@ onSubmit(){
       this.isSubmitting = true;
 
     let credentials = this.form.value;
-    window.alert("username : " + credentials['email']);
+    //window.alert("username : " + credentials['email']);
     
-    this.service.test(credentials).subscribe(
-          data => {
-            if(data != null){
-              this.username = data['email'];
+     this.service.test(credentials).subscribe(
+           data => {
+             if(data != null){
+               this.username = data['email'];
               
-            }
-          },
-          error => {
-          });
+             }
+           },
+           error => {
+           });
 
   }
 }

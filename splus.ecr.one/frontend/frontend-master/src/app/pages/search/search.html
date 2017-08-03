@@ -1,6 +1,7 @@
 <div class="widgets">
   <form (ngSubmit)="onSearch()">
   <ba-card cardTitle="Search Form" baCardClass="with-scroll">
+   
   <div class="row">
     <div class="col-sm-3">
       <div class="form-group">
@@ -40,7 +41,7 @@
     </div>
   </div>
   <div class="" align="right">
-      <button style="width:15%" onclick="onSearch()" class="w3-button w3-white w3-border w3-border-blue w3-round-large" >Search</button>
+      <button style="width:15%" onclick="onSearch()" class="btn btn-primary" >Search</button>
       </div>
   </ba-card>
   </form>
@@ -50,7 +51,7 @@
     <ba-card cardTitle="Search Content" baCardClass="with-scroll" class="smart-table-container">
       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table><br>
       <div class="" align="right">
-      <button style="width:15%" onclick="onSubmit()" class="w3-button w3-white w3-border w3-border-blue w3-round-large" >Book Selected Item</button>
+      <button style="width:15%" onclick="onSubmit()" class="btn btn-primary" >Book Selected Item</button>
       </div>
     </ba-card>
     </div>
@@ -60,7 +61,8 @@
     <ng2-smart-table [settings]="settings1" [source]="source1" ></ng2-smart-table>
   </ba-card> -->
 <form (ngSubmit)="onConfirm($event)">
-  <ba-card cardTitle="Booking Content"> 
+  <ba-card cardTitle="Booking Content">
+    <p *ngIf="msg" class="autoHideAlert">Container Booked successfully..!</p> 
   <div class="row">
     <div class="col-md-12">
       <div>
@@ -79,7 +81,7 @@
   </div>
     <ng2-smart-table [settings]="settings1" [source]="source1" (ngSubmit)="onConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table><br>
      <div align="right"  class="">
-      <button style="width:10%" class="w3-button w3-white w3-border w3-border-blue w3-round-large">confirm</button>
+      <button style="width:10%" class="btn btn-primary">confirm</button>
       </div>
     
        

@@ -133,12 +133,29 @@ export class Inventory {
      this.service.update(jsonW)
       .subscribe(
           data => {
+            
+
+             this.service.getData()
+      .subscribe(
+          data => {
+            
+            
             console.log(data);
             // console.log("response : "+JSON.parse(data)['id']);
             if(data != null){
-               this.source.load(data);
-               this.source.update;
-            //  event.confirm.resolve();
+              this.source.load(data);
+              
+            //  window.alert("your data is updated successfully..!");
+            }
+          },
+          error => {
+          });
+            
+            console.log(data);
+            // console.log("response : "+JSON.parse(data)['id']);
+            if(data != null){
+              this.source.load(data);
+              
             //  window.alert("your data is updated successfully..!");
             }
           },
@@ -164,7 +181,8 @@ export class Inventory {
             console.log(data);
             if(data != null){
                this.source.load(data);
-           //   event.confirm.resolve();
+               
+            event.confirm.resolve();
            //   window.alert("your data is deleted successfully..!");
             }
           },
