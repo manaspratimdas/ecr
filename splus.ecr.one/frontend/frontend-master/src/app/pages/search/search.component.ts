@@ -254,11 +254,12 @@ settings1 = {
                 console.log("Data saved..!");
           });
 
-          // this.msg = true
-          // setTimeout(function() {
+           this.msg = true
+           setTimeout(function() {
           
-          // this.msg = false;
-          // }.bind(this), 2000); 
+           this.msg = false;
+           }.bind(this), 2000); 
+          
         }
             
     onSubmit(){
