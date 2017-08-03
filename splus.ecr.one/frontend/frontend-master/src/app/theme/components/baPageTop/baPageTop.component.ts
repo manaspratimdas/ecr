@@ -17,6 +17,7 @@ export class BaPageTop {
   
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
+  //signOutElement= document.getElementById('signOut').addEventListener('click',()=>this.signOut());
  
   constructor(private _state:GlobalState,private login: LoginService,private http: Http) {
    
@@ -45,4 +46,12 @@ export class BaPageTop {
     this.isScrolled = isScrolled;
 
   }
+
+  signOut(){
+    console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
+    sessionStorage.removeItem("http://localhost:8080/ecr/user/login");
+    console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
+  }
+
+  
 }
