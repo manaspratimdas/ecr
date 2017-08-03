@@ -124,7 +124,7 @@ export class Inventory {
   }
   
   onSaveConfirm(event): void {
-  if (window.confirm('Are you sure you want to edit record?')) {
+  //if (window.confirm('Are you sure you want to edit record?')) {
 
    // window.alert("port : "+event.newData['port']);
      var jsonData = JSON.stringify({ "id":event.newData['id'],"code":event.newData['code'],"containerType":event.newData['containerType'],"status":event.newData['status'],
@@ -154,22 +154,16 @@ export class Inventory {
           error => {
           });
             
-            console.log(data);
-            // console.log("response : "+JSON.parse(data)['id']);
-            if(data != null){
-              this.source.load(data);
-              
-            //  window.alert("your data is updated successfully..!");
-            }
+           
           },
           error => {
           });
-    } else {
-      event.confirm.reject();
-    }  
+    // } else {
+    //   event.confirm.reject();
+    // }  
   }
   onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
+   // if (window.confirm('Are you sure you want to delete?')) {
      console.log("in delete call : "+event.data['id']);
       var jsonData = JSON.stringify({ "id":event.data['id'],"code":event.data['code'],"depot":event.data['depot'],"containerType":event.data['containerType'],"status":event.data['status'],
      "containerCondition":event.data['containerCondition'],"port":event.data['port'],"company":event.data['company']});
@@ -181,18 +175,33 @@ export class Inventory {
      this.service.delete(jsonW)
       .subscribe(
           data => {
+                 this.service.getData()
+      .subscribe(
+          data => {
+            
+            
             console.log(data);
+            // console.log("response : "+JSON.parse(data)['id']);
             if(data != null){
-               this.source.load(data);
-               
-            event.confirm.resolve();
-           //   window.alert("your data is deleted successfully..!");
+              this.source.load(data);
+              
+            //  window.alert("your data is updated successfully..!");
             }
           },
           error => {
           });
-    } else {
-      event.confirm.reject();
-    }
+            
+           
+            // console.log("response : "+JSON.parse(data)['id']);
+           
+              
+            //  window.alert("your data is updated successfully..!");
+            
+          },
+          error => {
+          });
+    // } else {
+    //   event.confirm.reject();
+    // }
   }
 }
