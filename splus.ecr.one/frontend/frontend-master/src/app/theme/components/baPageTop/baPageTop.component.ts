@@ -24,16 +24,12 @@ export class BaPageTop {
       this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
       });
-      this.login.userData().subscribe(
-          data => {
-              this.username = data['name'];
-              this.companyid = data['companyid'];
-            if(data != null){
-            }
-          },
-          error => {
-          });
+      this.username = login.username;
+      this.companyid = login.companyid;
 
+      console.log("--------->"+login.user);
+      console.log("user/companyid : "+this.username+","+this.companyid);
+    
       }
 
   public toggleMenu() {

@@ -32,6 +32,7 @@ export class Search {
   private companies = [];
 
   bookedData: any;
+  dataTransfer: any;
   companyId: string;
   id: string;
   str: string;  
@@ -177,7 +178,7 @@ settings1 = {
  
   constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
     this.testt = 'Heraj1';
-   // console.log(this.testt);
+    console.log(this.testt);
    
     var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
     console.log("sessionData" + sessionData);
@@ -193,7 +194,7 @@ settings1 = {
           cd.detectChanges();
         });
         
-         http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
+         http.get("http://localhost:8080/ecr/countries")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.countries.push(data);
@@ -207,7 +208,7 @@ settings1 = {
           cd.detectChanges();
         });
         
-        http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
+        http.get("http://localhost:8080/ecr/companies")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.companies.push(data);
@@ -232,6 +233,7 @@ settings1 = {
             console.log("selectedPickupDate        : " + this.selectedPickupDate)
             console.log("Booked json : "+this.bookedData);    
           
+            this.dataTransfer = this.bookedData;
 
           var borrower = JSON.stringify({ "id":this.companyId,"name":"this.userName"});
           var jsona = JSON.parse(borrower);

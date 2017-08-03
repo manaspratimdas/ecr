@@ -14,9 +14,13 @@ import { Search } from '../../../../../search/search.component';
 export class BlockForm {
 test : string;
 searchfinal : Search;
+data: any;
   constructor(search : Search) {
     this.test = "Heraj";
     this.searchfinal = search;
+    this.data = search.dataTransfer;
+    this.destinations = search.bookedData;
+    console.log("data:"+this.data);
   }
 
   @Output() searchSelectedRequisitionNo: EventEmitter<string> = new EventEmitter<string>()
@@ -33,9 +37,11 @@ searchfinal : Search;
   selectedRequisitionNo: string;
   selectedRequestedQuantity: string;
   selectedPickupDate: string;
-selectedSource: string;
+  selectedSource: string;
   selectedDestination: string ;
   selectedNote: string ;
+  private sources = [];
+  private destinations = [];
   
   
   onSubmission() {

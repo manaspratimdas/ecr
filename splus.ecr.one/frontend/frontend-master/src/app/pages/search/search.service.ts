@@ -25,12 +25,6 @@ export class SearchService {
   }
   getData(selectedType,selectedCountry,selectedPort,selectedCompany) {
     
-    var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
-    console.log("sessionData" + sessionData);
-    
-    this.companyId = JSON.parse(sessionData)['companyId'];
-    
-    console.log("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
     console.log("in serach service.."+'http://localhost:8080/ecr/search'+'?type='+selectedType
              +'&country='+selectedCountry+'&port='+selectedPort+'&company='+selectedCompany);
 

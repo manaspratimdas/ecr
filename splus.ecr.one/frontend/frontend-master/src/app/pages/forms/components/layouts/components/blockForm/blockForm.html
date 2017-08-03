@@ -25,21 +25,21 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="source">Source</label>
-      <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source"> -->
-       <select class="form-control" id="source" (change)="onSourceChange($event)">
+       <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source"> 
+       <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let type of types" [value]="type.containerType.id">{{type.containerType.size+" "+type.containerType.type}}</option>
-		</select>
+		  	<option *ngFor="let source of sources" [value]="source.port.isoPortCode">{{source.port.isoPortCode}}</option>
+		</select> -->
     </div>
   </div>
   <div class="col-sm-4">
     <div class="form-group">
       <label for="destination">Destination</label>
-      <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination"> -->
-      <select class="form-control" id="destination" (change)="onDestinationChange($event)">
+       <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination"> 
+      <!-- <select class="form-control" id="destination" (change)="onDestinationChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-        <option *ngFor="let type of types" [value]="type.containerType.id">{{type.containerType.size+" "+type.containerType.type}}</option>
-      </select>       
+        <option *ngFor="let destination of destinations" [value]="destination.port.isoPortCode">{{destination.port.isoPortCode}}</option>
+      </select>        -->
     </div>
   </div>
   <div class="col-sm-4">
@@ -49,5 +49,5 @@
     </div>
   </div>
 </div>
-<button type="submit" class="btn btn-primary" onclick="onSubmission()" >Submit</button> <br> <br>
+<!-- <button type="submit" class="btn btn-primary" onclick="onSubmission()" >Submit</button> <br> <br> -->
 </form>

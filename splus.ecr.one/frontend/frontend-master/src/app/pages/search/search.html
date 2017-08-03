@@ -16,7 +16,7 @@
         <label for="country">Country</label>
         <select class="form-control" id="size" (change)="onCountryChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let country of countries" [value]="country.port.country.id">{{country.port.country.isoLocalName}}</option>
+		  	<option *ngFor="let country of countries" [value]="country.id">{{country.isoLocalName}}</option>
 		</select>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <label for="company">Company</label>
         <select class="form-control" id="size" (change)="onCompanyChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
-		  	<option *ngFor="let company of companies" [value]="company.company.id">{{company.company.name}}</option>
+		  	<option *ngFor="let company of companies" [value]="company.id">{{company.name}}</option>
 		</select>
       </div>
     </div>
