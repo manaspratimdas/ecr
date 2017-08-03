@@ -92,34 +92,37 @@ public List<Container>  getAvailableContainers(String type, String country, Stri
 		if(company!=null &&! company.equals("null")){
 			builder.with("company", ":",Long.parseLong(company));
 			}
-	/*	if(country!=null &&! country.equals("null")){
-			builder.with("country", ":",Long.parseLong(country));
-			}*/
-		
-	//	List<Port> ports = getAllPorts(Long.parseLong(company));
-		
-		// Repeat the above block for type and cmpany
-		//builder.with("containerType", ":",Long.parseLong(type));
-		
-		// For country
-		//create a method to fetch all the ports for a country(this can be done in service/repository related to port)
-		  
-		//iterate through the list of ports  and for each port id
 	
+		Specification<Container> spec = builder.build();
+		
+		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
+		
+		/*builder=new ContainerSpecificationBuilder();
+		
 		if(country!=null &&! country.equals("null")){
 			List<Port> portsByCountry=ecrPortRepository.findByCountryId(Long.parseLong(country));
 			System.out.println(portsByCountry);
 		
 				for(Port p : portsByCountry){
-					builder.with("port", ":",p.getId());
+					//builder.with("port", ":",p.getId());
+					
+					System.out.println("Port >>>>> "+port);
+						builder.with("port", ":",p.getId());
+					
 				}
+				Specification<Container> spec1 = builder.buildOr();
+				List<Container> results1 =ecrContainerRepository.findAll(Specifications.where(spec1));
+				results.addAll(results1);
 			}
 		
-		Specification<Container> spec = builder.build();
+		*/
 		
-		List<Container> results =ecrContainerRepository.findAll(Specifications.where(spec));
+		
+		
+		
 		
 		System.out.println("result "+results);
+		
 		return results;
 		
 	}
