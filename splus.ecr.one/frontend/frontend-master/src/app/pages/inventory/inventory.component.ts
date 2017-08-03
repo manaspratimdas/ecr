@@ -42,7 +42,9 @@ export class Inventory {
       id: {
         title: 'Sr. No.',
         type: 'number',
-        width: '60% '
+        width: '60% ',
+        editable:true,
+        edit:true
       },
       code: {
         title: 'Container No.',
@@ -124,6 +126,7 @@ export class Inventory {
   onSaveConfirm(event): void {
   if (window.confirm('Are you sure you want to edit record?')) {
 
+   // window.alert("port : "+event.newData['port']);
      var jsonData = JSON.stringify({ "id":event.newData['id'],"code":event.newData['code'],"containerType":event.newData['containerType'],"status":event.newData['status'],
      "containerCondition":event.newData['containerCondition'],"port":event.newData['port'],"company":event.data['company']});
 
