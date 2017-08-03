@@ -1,4 +1,4 @@
-import { Component,ChangeDetectorRef,OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component,ChangeDetectorRef,OnInit, Input, EventEmitter, Output,Injectable } from '@angular/core';
 import { FormGroup, AbstractControl,FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { SearchService } from './search.service';
@@ -6,14 +6,25 @@ import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { Http ,RequestOptions, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
+
+@Injectable()
 @Component({
   selector: 'search-table',
   templateUrl: './search.html',
-  styleUrls: ['./search.scss']
+  styleUrls: ['./search.scss'],
+  
 })
+
+
   
 export class Search {
 
+  selectedRequisitionNo: string;
+  selectedRequestedQuantity: string;
+  selectedPickupDate: string;
+selectedSource: string;
+  selectedDestination: string ;
+  selectedNote: string ;
   private types = [];
   private countries = [];
   private ports = [];
@@ -141,9 +152,17 @@ settings1 = {
   source1: LocalDataSource = new LocalDataSource();
   form:FormGroup;
   isSubmitting: boolean = false;
+  testt:string;
+  
+  
  
   constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
-
+    this.testt = 'Heraj1';
+    console.log(this.testt);
+   
+    
+    
+    
     http.get('http://localhost:8080/ecr/containers')
         .flatMap((data) => data.json())
         .subscribe((data) => {
@@ -186,8 +205,15 @@ settings1 = {
         }
             
     onSubmit(){
-
+  
+console.log("submiiiiiitttt   " + this.selectedRequisitionNo)
+console.log("submiiiiiitttt   " + this.selectedRequestedQuantity)
+console.log("submiiiiiitttt   " + this.selectedNote)
+console.log("submiiiiiitttt   " + this.selectedDestination)
+console.log("submiiiiiitttt   " + this.selectedSource)
+console.log("submiiiiiitttt   " + this.selectedPickupDate)
       window.alert("book click.."+this.selectedRows);
+    //   
        this.service.test(this.selectedRows).subscribe(
           data => {
            this.source1.load(data);

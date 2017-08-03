@@ -65,7 +65,14 @@
     <div class="col-md-12">
       <div>
         <ba-card cardTitle="Block Form" baCardClass="with-scroll">
-          <block-form></block-form>
+          <block-form (searchSelectedRequisitionNo)   = "selectedRequisitionNo = $event" 
+          (searchSelectedRequestedQuantity) = "selectedRequestedQuantity=$event"
+          (searchSelectedPickupDate) = "selectedPickupDate=$event"
+          (searchSelectedSource) = "selectedSource=$event"
+          (searchSelectedDestination) = "selectedDestination=$event"
+          (searchSelectedNote) = "selectedNote=$event"
+
+          ></block-form>
         </ba-card>
       </div>
     </div>
@@ -73,6 +80,7 @@
     <ng2-smart-table [settings]="settings1" [source]="source1" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table>
      <div align="right"  class="">
       <button style="width:10%" onclick="onDelete()" class="w3-button w3-white w3-border w3-border-blue w3-round-large">confirm</button>
-      </div> 
-  
+      </div>
+    
+       
   </ba-card>
