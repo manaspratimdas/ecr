@@ -34,7 +34,6 @@ onSubmit(){
       this.isSubmitting = true;
 
     let credentials = this.form.value;
-    window.alert("username : " + credentials['email']);
     
     this.service.test(credentials).subscribe(
           data => {
