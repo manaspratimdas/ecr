@@ -2,11 +2,14 @@ package splus.ecr.one.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +18,12 @@ import com.google.gson.Gson;
 
 import splus.ecr.one.model.Address;
 import splus.ecr.one.model.Company;
+import splus.ecr.one.model.Container;
 import splus.ecr.one.model.Country;
 import splus.ecr.one.model.Region;
 import splus.ecr.one.service.EcrCompanyService;
 
 @RestController
-@RequestMapping("/company")
 public class EcrCompanyController {
 
 	@Autowired
@@ -88,5 +91,20 @@ public class EcrCompanyController {
 		return company;
 
 	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/companies", method = RequestMethod.GET)
+	public ResponseEntity getCompanies() {
+
+		System.out.println("in companies");
+
+		List<Company> companies = ecrCompanyService.getCompanies();
+		if (companies == null) {
+			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(companies, HttpStatus.OK);
+
+	}
+	
 
 }

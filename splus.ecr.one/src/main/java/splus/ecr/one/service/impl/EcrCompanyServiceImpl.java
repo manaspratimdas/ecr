@@ -1,5 +1,7 @@
 package splus.ecr.one.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class EcrCompanyServiceImpl implements EcrCompanyService {
 	public Company saveCompany(Company company) {
 		
 		return ecrCompanyRepository.save(company);
+	}
+
+	public List<Company> getCompanies() {
+		
+		return ecrCompanyRepository.findAll();
 	}
 
 }
