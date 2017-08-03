@@ -20,7 +20,7 @@ public class EcrContainerTypeController {
 	EcrContainerTypeService  ecrContainerTypeService;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/comntainertypes", method = RequestMethod.GET)
+	@RequestMapping(value = "/containertypes", method = RequestMethod.GET)
 	public ResponseEntity getContainerTypes() {
 
 		System.out.println("in containerTypes");
