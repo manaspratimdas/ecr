@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div class="w3-container" >
+  <div class="" align="right">
       <button style="width:15%" onclick="onSearch()" class="w3-button w3-white w3-border w3-border-blue w3-round-large" >Search</button>
       </div>
   </ba-card>
@@ -49,7 +49,7 @@
     <div class="col-md-12">
     <ba-card cardTitle="Search Content" baCardClass="with-scroll" class="smart-table-container">
       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table>
-      <div class="w3-container" >
+      <div class="" align="right">
       <button style="width:15%" onclick="onSubmit()" class="w3-button w3-white w3-border w3-border-blue w3-round-large" >Book Selected Item</button>
       </div>
     </ba-card>
@@ -59,13 +59,13 @@
   <!-- <ba-card cardTitle="Booking Content">
     <ng2-smart-table [settings]="settings1" [source]="source1" ></ng2-smart-table>
   </ba-card> -->
-
+<form (ngSubmit)="onConfirm($event)">
   <ba-card cardTitle="Booking Content"> 
   <div class="row">
     <div class="col-md-12">
       <div>
         <ba-card cardTitle="Block Form" baCardClass="with-scroll">
-          <block-form (searchSelectedRequisitionNo)   = "selectedRequisitionNo = $event" 
+          <block-form (searchSelectedRequisitionNo)="selectedRequisitionNo = $event" 
           (searchSelectedRequestedQuantity) = "selectedRequestedQuantity=$event"
           (searchSelectedPickupDate) = "selectedPickupDate=$event"
           (searchSelectedSource) = "selectedSource=$event"
@@ -77,10 +77,10 @@
       </div>
     </div>
   </div>
-    <ng2-smart-table [settings]="settings1" [source]="source1" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table>
+    <ng2-smart-table [settings]="settings1" [source]="source1" (ngSubmit)="onConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table><br>
      <div align="right"  class="">
-      <button style="width:10%" onclick="onDelete()" class="w3-button w3-white w3-border w3-border-blue w3-round-large">confirm</button>
+      <button style="width:10%" class="w3-button w3-white w3-border w3-border-blue w3-round-large">confirm</button>
       </div>
     
        
-  </ba-card>
+  </ba-card></form>

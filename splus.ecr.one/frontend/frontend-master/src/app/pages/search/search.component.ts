@@ -19,10 +19,11 @@ import 'rxjs/Rx';
   
 export class Search {
 
+  userName: string;
   selectedRequisitionNo: string;
   selectedRequestedQuantity: string;
   selectedPickupDate: string;
-selectedSource: string;
+  selectedSource: string;
   selectedDestination: string ;
   selectedNote: string ;
   private types = [];
@@ -30,12 +31,15 @@ selectedSource: string;
   private ports = [];
   private companies = [];
 
+  bookedData: any;
+  companyId: string;
+  id: string;
   str: string;  
   RowIndex: number = 0;
   TotalRows: number = 0;
   query: string = '';
   code: string = '';
-  selectedRows: number[]=[];
+  selectedRows = [];
   
   selectedType: string ;
   selectedCountry: string;
@@ -80,12 +84,13 @@ selectedSource: string;
          valuePrepareFunction: (port) => {
                          return port.isoPortCode;
                      }
-      },
-      depot: {
-        title: 'Depot',
-        filer: false,
-        type: 'number'
       }
+      //               ,
+      // depot: {
+      //   title: 'Depot',
+      //   filer: false,
+      //   type: 'number'
+      // }
     }
   };
 
@@ -110,12 +115,14 @@ settings1 = {
         filter: false,
         type: 'number'
       },
-      condition: {
-        title: 'condition',
+     company: {
+        title: 'Company Name',
         filter: false,
-        type: 'string'
+         valuePrepareFunction: (company) => {
+                         return company.name;
+                     }
       },
-      contno: {
+      code: {
         title: 'Container No.',
         filter: false,
         type: 'string'
@@ -124,8 +131,13 @@ settings1 = {
         title: 'Size/Type',
         filter: false,
         valuePrepareFunction: (containerType) => {
-                         return containerType.Size+containerType.type;
+                         return containerType.size+containerType.type;
                      }
+      },
+      containerCondition: {
+        title: 'Condition',
+        filter: false,
+        type: 'string'
       },
       port: {
         title: 'Port',
@@ -134,17 +146,24 @@ settings1 = {
                          return port.isoPortCode;
                      }
       },
-      company: {
-        title: 'Depot',
+      lastUpdateDate: {
+        
+        title: 'Last Update Date',
         filter: false,
-        valuePrepareFunction: (company) => {
-                         return company.name;
-                     }
-       }//,
-    //  delete: {
-    //   deleteButtonContent: '<i class="ion-trash-a"></i>',
-    //   confirmDelete: true
-    // }               
+        valuePrepareFunction: (lastUpdateDate) => { 
+       
+        var userDate = new Date(lastUpdateDate);
+        
+        var day = userDate.getDate();
+        var month = userDate.getMonth() + 1;
+        var year = userDate.getFullYear();
+        var hr = userDate.getHours();
+        var min = userDate.getMinutes();
+        var sec = userDate.getSeconds();
+    
+        return year+"-"+month + "-" + day+" "+hr+":"+min+":"+sec;
+      }   
+     }                  
     }
   };
 
@@ -158,33 +177,37 @@ settings1 = {
  
   constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
     this.testt = 'Heraj1';
-    console.log(this.testt);
+   // console.log(this.testt);
    
+    var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
+    console.log("sessionData" + sessionData);
     
-    
-    
-    http.get('http://localhost:8080/ecr/containers')
+    this.companyId = JSON.parse(sessionData)['companyId'];
+    this.userName = JSON.parse(sessionData)[''];
+    console.log("http://localhost:8080/ecr/company/"+this.companyId+"/containers") 
+        
+    http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.types.push(data);
           cd.detectChanges();
         });
         
-         http.get('http://localhost:8080/ecr/containers')
+         http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.countries.push(data);
           cd.detectChanges();
         });
         
-         http.get('http://localhost:8080/ecr/containers')
+         http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.ports.push(data);
           cd.detectChanges();
         });
         
-        http.get('http://localhost:8080/ecr/containers')
+        http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.companies.push(data);
@@ -198,25 +221,48 @@ settings1 = {
            this.source.load(data);
           });
         }
-        name: string;
-        onConfirm(){
-          this.name = "";
-         // window.alert("in booking screen.."+this.bookForm.value);    
+      
+        onConfirm(event:Event): void{
+
+            console.log("selectedRequisitionNo     : " + this.selectedRequisitionNo)
+            console.log("selectedRequestedQuantity : " + this.selectedRequestedQuantity)
+            console.log("selectedNote              : " + this.selectedNote)
+            console.log("selectedDestination       : " + this.selectedDestination)
+            console.log("selectedSource            : " + this.selectedSource)
+            console.log("selectedPickupDate        : " + this.selectedPickupDate)
+            console.log("Booked json : "+this.bookedData);    
+          
+
+          var borrower = JSON.stringify({ "id":this.companyId,"name":"this.userName"});
+          var jsona = JSON.parse(borrower);
+          console.log(borrower);
+          console.log(jsona);
+          var destinationPort = JSON.stringify({ "id":this.companyId,"isoPortName":"this.userName"});
+          var jsonb = JSON.parse(destinationPort);
+          console.log(destinationPort);
+          console.log(jsonb);
+          
+          var jsonData = JSON.stringify({ "id":null,"requestDate":this.selectedPickupDate,
+        "releaseDate":this.selectedPickupDate,"containers":this.bookedData,"borrower":jsona,"destinationPort":jsonb});
+          console.log("object : "+jsonData);
+          
+     var json1 = JSON.stringify(jsonData);
+     var jsonW = JSON.parse(json1);
+
+          this.service.saveToCart(jsonW).subscribe(
+           data => {
+                console.log("Data saved..!");
+          });
+           
         }
             
     onSubmit(){
-  
-console.log("submiiiiiitttt   " + this.selectedRequisitionNo)
-console.log("submiiiiiitttt   " + this.selectedRequestedQuantity)
-console.log("submiiiiiitttt   " + this.selectedNote)
-console.log("submiiiiiitttt   " + this.selectedDestination)
-console.log("submiiiiiitttt   " + this.selectedSource)
-console.log("submiiiiiitttt   " + this.selectedPickupDate)
-      window.alert("book click.."+this.selectedRows);
-    //   
+
+      window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {
            this.source1.load(data);
+           this.bookedData = data;
           });
     }
   onDeleteConfirm(event): void {
@@ -231,9 +277,10 @@ console.log("submiiiiiitttt   " + this.selectedPickupDate)
     //debugger;
     
     this.code = event.data['code'];
-    console.log("selected index :" + this.code);
-
-    console.log(this.selectedRows);
+    this.id = event.data['id'];
+    console.log("selected index :" + this.id);
+    this.selectedRows.push(this.id);
+    console.log("on select : "+this.selectedRows);
     
   }
   

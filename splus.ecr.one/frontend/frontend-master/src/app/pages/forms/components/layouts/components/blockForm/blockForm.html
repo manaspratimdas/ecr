@@ -14,23 +14,32 @@
     </div>
   </div>
   <div class="col-sm-4">
-    <div class="form-group">
+     <div class="form-group">
       <label for="pickupDate">Pickup Date</label>
-      <input type="text" class="form-control" id="pickupDate"  (change)=  "onPickupDateChange($event)" placeholder="Pickup Date">
+      <!-- <input type="text" class="form-control" id="pickupDate"  (change)=  "onPickupDateChange($event)" placeholder="Pickup Date"> -->
+      <input type="date"  class="form-control" id="pickupDate"  (change)="onPickupDateChange($event)"/>
+    </div> 
     </div>
-  </div>
 </div>
 <div class="row">
   <div class="col-sm-4">
     <div class="form-group">
       <label for="source">Source</label>
-      <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">
+      <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source"> -->
+       <select class="form-control" id="source" (change)="onSourceChange($event)">
+		  	<option value="-1" disabled>--Select--</option>
+		  	<option *ngFor="let type of types" [value]="type.containerType.id">{{type.containerType.size+" "+type.containerType.type}}</option>
+		</select>
     </div>
   </div>
   <div class="col-sm-4">
     <div class="form-group">
       <label for="destination">Destination</label>
-      <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination">
+      <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination"> -->
+      <select class="form-control" id="destination" (change)="onDestinationChange($event)">
+		  	<option value="-1" disabled>--Select--</option>
+        <option *ngFor="let type of types" [value]="type.containerType.id">{{type.containerType.size+" "+type.containerType.type}}</option>
+      </select>       
     </div>
   </div>
   <div class="col-sm-4">

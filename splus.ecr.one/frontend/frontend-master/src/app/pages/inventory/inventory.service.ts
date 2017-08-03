@@ -12,10 +12,16 @@ export class InventoryService {
     status: string;
     condition: string;
   oldCondition: string;
+  companyId: string;
   getData() {
   console.log("GET");
+    var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
+    console.log("sessionData" + sessionData);
     
-    return this.http.get('http://localhost:8080/ecr/containers')
+    this.companyId = JSON.parse(sessionData)['companyId'];
+    console.log("this.companyId : "+this.companyId);
+    console.log("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
+    return this.http.get("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
             .map((response: Response) => {
                 let user = response.json();
                 console.log("http - result : "+user);
@@ -44,7 +50,7 @@ export class InventoryService {
   delete(jsonW) {
 
       console.log("json array : "+"[" + jsonW + "]");  
-    //  var jsonD = "[" + jsonW + "]";
+     // var jsonD = "[" + jsonW + "]";
      // var jsonD = jsonW;
       console.log("result : "+jsonW);
       

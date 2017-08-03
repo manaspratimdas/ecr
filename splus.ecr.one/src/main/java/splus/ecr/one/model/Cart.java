@@ -1,5 +1,6 @@
 package splus.ecr.one.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -19,9 +20,9 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
+//@Data
 @Table(name = "CART")
-public class Cart {
+public class Cart implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +56,73 @@ public class Cart {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CART_CONTAINER", joinColumns = { @JoinColumn(name = "CART_ID") }, inverseJoinColumns = { @JoinColumn(name = "CONTAINER_ID") })
 	private Set<Container> containers;
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Company getBorrower() {
+		return borrower;
+	}
+
+
+	public void setBorrower(Company borrower) {
+		this.borrower = borrower;
+	}
+
+
+	public Timestamp getRequestDate() {
+		return requestDate;
+	}
+
+
+	public void setRequestDate(Timestamp requestDate) {
+		this.requestDate = requestDate;
+	}
+
+
+	public Timestamp getReleaseDate() {
+		return releaseDate;
+	}
+
+
+	public void setReleaseDate(Timestamp releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+
+	public Port getDestinationPort() {
+		return destinationPort;
+	}
+
+
+	public void setDestinationPort(Port destinationPort) {
+		this.destinationPort = destinationPort;
+	}
+
+
+	public Set<Container> getContainers() {
+		return containers;
+	}
+
+
+	public void setContainers(Set<Container> containers) {
+		this.containers = containers;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Cart [id=" + id + ", borrower=" + borrower + ", requestDate=" + requestDate + ", releaseDate="
+				+ releaseDate + ", destinationPort=" + destinationPort + ", containers=" + containers + "]";
+	}
 	
 
 	

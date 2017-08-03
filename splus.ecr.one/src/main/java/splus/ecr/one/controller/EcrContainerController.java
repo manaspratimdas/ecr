@@ -1,5 +1,6 @@
 package splus.ecr.one.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,15 +59,23 @@ public class EcrContainerController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/containers/{id}", method = RequestMethod.GET)
-	public ResponseEntity getContainersById(@PathVariable("id") Long id) {
+	public ResponseEntity getContainersById(@PathVariable("id") List<Long> id) {
 
 		System.out.println("in list container controller");
+		System.out.println("ids:"+id);
 
-		Container container = ecrContainerService.getContainer(id);
-		if (container == null) {
+		List<Container> listofContainer = new ArrayList<Container>();
+		for(long ids : id){
+			
+			Container container = ecrContainerService.getContainer(ids);
+			System.out.println("data:"+container);
+			listofContainer.add(container);
+		}
+		System.out.println("list:"+listofContainer);
+		if (listofContainer == null) {
 			return new ResponseEntity("No Container found for ID " + id, HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(container, HttpStatus.OK);
+		return new ResponseEntity(listofContainer, HttpStatus.OK);
 
 	}
 
