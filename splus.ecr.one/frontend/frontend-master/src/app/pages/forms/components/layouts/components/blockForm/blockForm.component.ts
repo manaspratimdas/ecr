@@ -31,10 +31,8 @@ data: any;
   @Output() searchSelectedDestination: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedNote: EventEmitter<string> = new EventEmitter<string>()
 
-  @Input('testt') incomingData: string;
   parentValue:string;
-  //@Input('parentData') incomingData: string;
-  
+   
   selectedRequisitionNo: string;
   selectedRequestedQuantity: string;
   selectedPickupDate: string;
