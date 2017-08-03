@@ -28,7 +28,12 @@
       color: $default-text;
       line-height: 35px;
     }
-
+    .ng2-smart-th.id{
+	      width:90px;
+    }
+    .ng2-smart-th.lastUpdateDate{
+        width:170px;
+    }
     tbody {
       tr {
         color: $default-text;
@@ -81,7 +86,5 @@
     }
   }
 }
-.ng2-smart-th.id{
-	width:100px;
-}
+
 

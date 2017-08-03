@@ -57,7 +57,17 @@ export class Inventory {
       },
       status: {
         title: 'Status  ',
-        type: 'string'
+        type: 'string',
+        valuePrepareFunction: (value) => { 
+          
+          if(value === 'A'){
+          return 'Available';  
+          }else if(value === 'B'){
+            return 'Booked';
+          }else {
+            return 'Not Available';
+          }
+        }
       },
       containerCondition: {
         title: 'Condition',
