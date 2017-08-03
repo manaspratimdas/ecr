@@ -27,7 +27,7 @@ export class BaPageTop {
       });
      
      this.username = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))['username'];
-       this.companyid = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))['companyId'];
+       this.companyid = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))['companyName'];
     
       }
 
