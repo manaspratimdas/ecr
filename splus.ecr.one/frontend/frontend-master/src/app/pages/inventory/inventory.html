@@ -2,6 +2,8 @@
 
   <div class="row">
     <ba-card cardTitle="Inventory Data" baCardClass="with-scroll" class="smart-table-container">
+       <p *ngIf="updatemsg" class="autoHideAlert">Container updated successfully..!</p> 
+       <p *ngIf="deletemsg" class="autoHideAlert">Container deleted successfully..!</p> 
       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
       				(createConfirm)="onCreateConfirm($event)"
       				 (editConfirm)="onSaveConfirm($event)">

@@ -12,8 +12,12 @@ import { Observable } from 'rxjs';
 })
 export class Inventory {
 
+  updatemsg:boolean = false;
+  deletemsg:boolean = false;
+
   query: string = '';
   dee: string;
+
   settings = {
    actions:{
       position : 'right',
@@ -136,7 +140,12 @@ export class Inventory {
      this.service.update(jsonW)
       .subscribe(
           data => {
-            
+
+            this.updatemsg = true
+           setTimeout(function() {
+          
+           this.updatemsg = false;
+           }.bind(this), 2000); 
 
              this.service.getData()
       .subscribe(
@@ -158,17 +167,15 @@ export class Inventory {
           },
           error => {
           });
-    // } else {
-    //   event.confirm.reject();
-    // }  
+    
   }
 
      onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
+    //if (window.confirm('Are you sure you want to delete?')) {
    
       event.confirm.resolve();
   
- console.log("in delete call : "+event.data['id']);
+      console.log("in delete call : "+event.data['id']);
       var jsonData = JSON.stringify({ "id":event.data['id'],"code":event.data['code'],"depot":event.data['depot'],"containerType":event.data['containerType'],"status":event.data['status'],
      "containerCondition":event.data['containerCondition'],"port":event.data['port'],"company":event.data['company']});
     
@@ -183,7 +190,11 @@ export class Inventory {
       .subscribe(
           data => {
             
-            
+             this.deletemsg = true
+           setTimeout(function() {
+          
+           this.deletemsg = false;
+           }.bind(this), 2000); 
             console.log(data);
             // console.log("response : "+JSON.parse(data)['id']);
             if(data != null){
@@ -207,8 +218,8 @@ export class Inventory {
     // } else {
     //   event.confirm.reject();
     // }
-  } else {
-      event.confirm.reject();
-    }
+  // } else {
+  //     event.confirm.reject();
+  //   }
   }}
 
