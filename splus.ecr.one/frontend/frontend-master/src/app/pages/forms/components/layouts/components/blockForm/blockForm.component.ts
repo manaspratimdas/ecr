@@ -1,5 +1,6 @@
-import {Component,Output, EventEmitter, Input  } from '@angular/core';
+import {Component,Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Search } from '../../../../../search/search.component';
+import { Http } from '@angular/http';
 
 
 
@@ -15,12 +16,19 @@ export class BlockForm {
 test : string;
 searchfinal : Search;
 data: any;
-  constructor(search : Search) {
+private ports = [];
+  constructor(search : Search,private http: Http,cd: ChangeDetectorRef) {
     this.test = "Heraj";
     this.searchfinal = search;
     this.data = search.dataTransfer;
     this.destinations = search.bookedData;
     console.log("data:"+this.data);
+    http.get("http://localhost:8080/ecr/ports")
+        .flatMap((data) => data.json())
+        .subscribe((data) => {
+          this.ports.push(data);
+          cd.detectChanges();
+        });
   }
   @Input() fromSearchRequisitionNumber : string;
   @Input() fromSearchRequestQuantity : string;
@@ -57,6 +65,7 @@ data: any;
     
     this.searchSelectedRequisitionNo.emit(this.selectedRequisitionNo);
     console.log(this.searchfinal.selectedRequisitionNo)
+    
   }
   
   onRequestedQuantityChange(event:Event): void {

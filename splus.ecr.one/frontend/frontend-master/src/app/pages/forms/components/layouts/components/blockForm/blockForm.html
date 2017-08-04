@@ -28,7 +28,7 @@
 
       <select class="form-control" id="source" >
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of fromSearchSourcePorts" [value]="port.isoPortCode">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of fromSearchSourcePorts" [value]="port.id">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
@@ -40,7 +40,11 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="destination">Destination</label>
-       <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination"> 
+      <select class="form-control" id="destination" >
+		  	<option value="-1" >--Select--</option>
+		  	<option *ngFor="let port of ports" [value]="port.id">{{port.isoPortCode}}</option>
+		</select>
+       <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination">  -->
       <!-- <select class="form-control" id="destination" (change)="onDestinationChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
         <option *ngFor="let destination of destinations" [value]="destination.port.isoPortCode">{{destination.port.isoPortCode}}</option>
