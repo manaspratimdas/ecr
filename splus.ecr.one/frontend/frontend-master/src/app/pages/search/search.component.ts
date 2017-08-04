@@ -19,6 +19,7 @@ import 'rxjs/Rx';
   
 export class Search {
 
+  srcPorts: string[] = [];
   bookingContent:boolean = false;
   requisitionNumber:string = "";
   requestQuantity:String = "0";
@@ -34,6 +35,8 @@ export class Search {
   private countries = [];
   private ports = [];
   private companies = [];
+  private sourcePorts  = [];
+
 
   bookedData: any;
   dataTransfer: any;
@@ -273,8 +276,10 @@ settings1 = {
           data => {
            this.source1.load(data);
            this.bookedData = data;
-           
+           for (var i = 0; i< Object.keys(this.bookedData).length; i++) 
+                 this.srcPorts[i] = JSON.parse(JSON.stringify(this.bookedData[i])).port;
             
+           this.sourcePorts.push(this.srcPorts);
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);

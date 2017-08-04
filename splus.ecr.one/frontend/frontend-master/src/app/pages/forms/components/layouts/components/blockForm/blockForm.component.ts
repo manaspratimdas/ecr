@@ -24,6 +24,7 @@ data: any;
   }
   @Input() fromSearchRequisitionNumber : string;
   @Input() fromSearchRequestQuantity : string;
+  @Input() fromSearchSourcePorts : string;
   @Output() searchSelectedRequisitionNo: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedRequestedQuantity: EventEmitter<string> = new EventEmitter<string>()
   @Output() searchSelectedPickupDate: EventEmitter<string> = new EventEmitter<string>()
@@ -82,8 +83,8 @@ data: any;
     console.log(this.selectedNote);
   }
  onSourceChange(event:Event): void {
-    this.selectedSource = (<HTMLSelectElement>event.srcElement).value; 
-    this.searchSelectedSource.emit(this.selectedSource);
+    //this.selectedSource = (<HTMLSelectElement>event.srcElement).value; 
+    //this.searchSelectedSource.emit(this.selectedSource);
     console.log(this.selectedSource);
   }
 }

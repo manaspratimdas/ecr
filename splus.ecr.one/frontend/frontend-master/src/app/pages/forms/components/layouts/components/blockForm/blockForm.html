@@ -25,7 +25,12 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="source">Source</label>
-       <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source"> 
+
+      <select class="form-control" id="source" >
+		  	<option value="-1" >--Select--</option>
+		  	<option *ngFor="let port of fromSearchSourcePorts" [value]="port.isoPortCode">{{port.isoPortCode}}</option>
+		</select>
+       <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
 		  	<option value="-1" disabled>--Select--</option>
 		  	<option *ngFor="let source of sources" [value]="source.port.isoPortCode">{{source.port.isoPortCode}}</option>
