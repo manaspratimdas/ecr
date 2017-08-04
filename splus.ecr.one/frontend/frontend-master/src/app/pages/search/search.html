@@ -61,12 +61,12 @@
     <ng2-smart-table [settings]="settings1" [source]="source1" ></ng2-smart-table>
   </ba-card> -->
 <form (ngSubmit)="onConfirm($event)">
-  <ba-card cardTitle="Booking Content">
+  <ba-card *ngIf="bookingContent" cardTitle="Booking Content">
     <p *ngIf="msg" class="autoHideAlert">Container Booked successfully..!</p> 
   <div class="row">
     <div class="col-md-12">
       <div>
-        <ba-card cardTitle="Block Form" baCardClass="with-scroll">
+        <ba-card cardTitle="" baCardClass="with-scroll">
           <block-form [fromSearchRequisitionNumber]="requisitionNumber"
           [fromSearchRequestQuantity]="requestQuantity" 
           (searchSelectedRequisitionNo)="selectedRequisitionNo = $event" 

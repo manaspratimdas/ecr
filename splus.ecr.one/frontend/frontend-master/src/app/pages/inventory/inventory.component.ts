@@ -162,9 +162,13 @@ export class Inventory {
     //   event.confirm.reject();
     // }  
   }
-  onDeleteConfirm(event): void {
-   // if (window.confirm('Are you sure you want to delete?')) {
-     console.log("in delete call : "+event.data['id']);
+
+     onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+   
+      event.confirm.resolve();
+  
+ console.log("in delete call : "+event.data['id']);
       var jsonData = JSON.stringify({ "id":event.data['id'],"code":event.data['code'],"depot":event.data['depot'],"containerType":event.data['containerType'],"status":event.data['status'],
      "containerCondition":event.data['containerCondition'],"port":event.data['port'],"company":event.data['company']});
     
@@ -203,5 +207,8 @@ export class Inventory {
     // } else {
     //   event.confirm.reject();
     // }
-  }
-}
+  } else {
+      event.confirm.reject();
+    }
+  }}
+

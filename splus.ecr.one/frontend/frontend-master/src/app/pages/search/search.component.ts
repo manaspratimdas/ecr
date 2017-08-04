@@ -19,6 +19,7 @@ import 'rxjs/Rx';
   
 export class Search {
 
+  bookingContent:boolean = false;
   requisitionNumber:string = "";
   requestQuantity:String = "0";
   msg:boolean = false;
@@ -109,7 +110,7 @@ settings1 = {
       add:false,
       edit:false,
       delete:true,
-      editable:false
+      editable:false   
     }, 
 //    actions: false,
     columns: {
@@ -265,7 +266,8 @@ settings1 = {
         }
             
     onSubmit(){
-
+      
+      this.bookingContent = true;
      // window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {

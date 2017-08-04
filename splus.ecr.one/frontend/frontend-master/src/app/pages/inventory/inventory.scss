@@ -46,7 +46,7 @@
     a.ng2-smart-sort-link {
       font-size: 14px !important;
       color: $default-text;
-      font-weight: $font-bolder;
+      font-weight: 700;
       &.sort {
         font-weight: $font-bolder !important;
 
@@ -56,6 +56,9 @@
       }
     }
 
+	 a.ng2-smart-sort-link.sort {
+    	font-weight: 700 !important;
+	}
     .ng2-smart-actions {
       width: 70px;
       text-align: center;
