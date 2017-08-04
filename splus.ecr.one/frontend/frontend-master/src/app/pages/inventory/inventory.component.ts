@@ -144,7 +144,7 @@ export class Inventory {
   onSaveConfirm(event): void {
   //if (window.confirm('Are you sure you want to edit record?')) {
 
-     window.alert("status value : "+event.newData['status']);
+    // window.alert("status value : "+event.newData['status']);
 
       if(event.newData['status'] === "Available"){
         
