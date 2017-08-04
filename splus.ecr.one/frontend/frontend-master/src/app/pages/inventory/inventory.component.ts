@@ -154,10 +154,12 @@ export class Inventory {
         
         this.updatedStatus = 'B';
       
-      }else{
+      }else if(event.newData['status'] === "Not Available"){
 
         this.updatedStatus = 'NA';
       
+      }else{
+        this.updatedStatus = event.newData['status'];
       }
       
 
