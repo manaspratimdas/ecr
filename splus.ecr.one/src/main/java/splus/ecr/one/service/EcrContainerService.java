@@ -17,7 +17,7 @@ public interface EcrContainerService {
 
 	List<Container> saveOrUpdateContainers(List<Container> containers);
 
-	void delete(Container container);
+	public List<Container> delete(Container container);
 	
 	public CommunicationObject getContainersByCountry(String id);
 

@@ -65,6 +65,9 @@ public class Container implements Serializable {
 	@Column(name = "LAST_UPDATED_DATE")
 	private Timestamp lastUpdateDate;
 
+	@Column(name = "record_status")
+	private boolean recordStatus;
+	
 	
 	
 
@@ -222,6 +225,14 @@ public class Container implements Serializable {
 
 	public void setDepot(Depot depot) {
 		this.depot = depot;
+	}
+
+	public boolean isRecordStatus() {
+		return recordStatus;
+	}
+
+	public void setRecordStatus(boolean recordStatus) {
+		this.recordStatus = recordStatus;
 	}
 
 	
