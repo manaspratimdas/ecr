@@ -106,6 +106,8 @@ public class EcrContainerController {
 		System.out.println("json "+containers);
 
 		List<Container> updatedContainers = ecrContainerService.saveOrUpdateContainers(containers);
+		
+		
 		if (updatedContainers == null) {
 			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
 	}
@@ -121,9 +123,9 @@ public class EcrContainerController {
 		
 		System.out.println("json "+container);
 
-		 ecrContainerService.delete(container);
+		List<Container> containers = ecrContainerService.delete(container);
 	
-		return new ResponseEntity("Deleted", HttpStatus.OK);
+		return new ResponseEntity(containers, HttpStatus.OK);
 
 	}
 	

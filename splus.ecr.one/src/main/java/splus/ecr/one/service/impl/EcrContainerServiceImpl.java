@@ -1,5 +1,6 @@
 package splus.ecr.one.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,21 +56,31 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 
 	public List<Container> getContainersByCompanyId(Long companyId) {
 		
+		List<Container> containers = ecrContainerRepository.findByCompanyId(companyId);
 		
-		return ecrContainerRepository.findByCompanyId(companyId);
+		for (Iterator<Container> iterator = containers.iterator(); iterator.hasNext();) {
+			Container container = iterator.next();
+		    if (!container.isRecordStatus()) {
+		        iterator.remove();
+		    }
+		}
+		
+		return containers;
 	}
 
 	public List<Container> saveOrUpdateContainers(List<Container> containers) {
+		containers.get(0).setRecordStatus(true);
+		ecrContainerRepository.save(containers);
 		
-	
 		
-		return ecrContainerRepository.save(containers);
+		return getContainersByCompanyId(containers.get(0).getCompany().getId());
 	}
 
-	public void delete(Container container) {
-		
-		ecrContainerRepository.delete(container);
-		
+	public List<Container> delete(Container container) {
+		container = ecrContainerRepository.findById(container.getId());
+		container.setRecordStatus(false);
+		ecrContainerRepository.save(container);
+		return getContainersByCompanyId(container.getCompany().getId());
 	}
 
 	public CommunicationObject getContainersByCountry(String id) {
@@ -83,6 +94,8 @@ public List<Container>  getAvailableContainers(String type, String country, Stri
 		ContainerSpecificationBuilder builder=new ContainerSpecificationBuilder();
 		
 		builder.with("status", ":", "A");
+		
+		builder.with("recordStatus", ":", true);
 		
 		if(port!=null && !port.equals("null")){
 			builder.with("port", ":",Long.parseLong(port));
