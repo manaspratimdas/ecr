@@ -119,7 +119,7 @@ settings1 = {
     columns: {
 
       id: {
-        title: 'sr.no',
+        title: 'Sr.No',
         filter: false,
         type: 'number'
       },

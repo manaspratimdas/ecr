@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 @Component({
   selector: 'block-form',
   templateUrl: './blockForm.html',
+  styleUrls: ['./blockForm.scss'],
   providers: [Search],
   inputs:['parentValue']
 
