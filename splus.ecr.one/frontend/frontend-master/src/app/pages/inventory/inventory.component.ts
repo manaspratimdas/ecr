@@ -15,6 +15,7 @@ export class Inventory {
   updatemsg:boolean = false;
   deletemsg:boolean = false;
 
+  updatedStatus: string;
   query: string = '';
   dee: string;
 
@@ -61,23 +62,36 @@ export class Inventory {
                          return containerType.size+" "+containerType.type;
                      }
       },
-      status: {
-        title: 'Status  ',
+        status: {
+        title: 'Status',
         type: 'string',
-        valuePrepareFunction: (value) => { 
+         editor: {
+          type: 'list',
+        config: {
+            list: [{ value: 'Available', title: 'Available' }, { value: 'Booked', title: 'Booked' }, { value: 'Not Available', title: 'Not Available',}]
           
-          if(value === 'A'){
+       }
+        },valuePrepareFunction: (value) => { 
+          
+          if(value === 'A'|| value === 'Available'){
           return 'Available';  
-          }else if(value === 'B'){
+          }else if(value === 'B' || value === 'Booked'){
             return 'Booked';
           }else {
             return 'Not Available';
           }
         }
       },
+    
       containerCondition: {
-        title: 'Condition',
-        type: 'string'
+      title: 'Condition',
+      type: 'string',
+         editor: {
+          type: 'list',
+        config: {
+            list: [{ value: 'Good', title: 'Good' }, { value: 'Damaged', title: 'Damaged' }, { value: 'New', title: 'New',}]
+       }
+        }
       },
       port: {
         title: 'Port',
@@ -130,8 +144,24 @@ export class Inventory {
   onSaveConfirm(event): void {
   //if (window.confirm('Are you sure you want to edit record?')) {
 
-   // window.alert("port : "+event.newData['port']);
-     var jsonData = JSON.stringify({ "id":event.newData['id'],"code":event.newData['code'],"containerType":event.newData['containerType'],"status":event.newData['status'],
+     window.alert("status value : "+event.newData['status']);
+
+      if(event.newData['status'] === "Available"){
+        
+        this.updatedStatus = 'A';
+      
+      }else if(event.newData['status'] === "Booked"){
+        
+        this.updatedStatus = 'B';
+      
+      }else{
+
+        this.updatedStatus = 'NA';
+      
+      }
+      
+
+     var jsonData = JSON.stringify({ "id":event.newData['id'],"code":event.newData['code'],"containerType":event.newData['containerType'],"status":this.updatedStatus,
      "containerCondition":event.newData['containerCondition'],"port":event.newData['port'],"company":event.data['company']});
 
      var json1 = JSON.stringify(jsonData);
