@@ -30,27 +30,14 @@ constructor(private fb:FormBuilder ,private router: Router ,private service: Log
     ngOnInit() {
    this.title = "Login";
   }
-  
-onSubmit(){
+  onSubmit(){
       this.isSubmitting = true;
 
     let credentials = this.form.value;
-    if((credentials['email'] != "") && (credentials['password'] != "")){
-      console.log("in if looooooooooooooop");
+    
     this.service.test(credentials).subscribe(
           data => {
-            console.log("dbusername : "+data['username']);
-            console.log("dbpassword : "+data['password']);
-        
-            console.log("username : "+credentials['email']);
-            console.log("password : "+credentials['password']);
-        
-            if((data['username'] != credentials['email']) || ((data['password'] != credentials['password']))){
-              
-              console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
-                sessionStorage.removeItem("http://localhost:8080/ecr/user/login");
-                console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
-            }else{
+            if(data != null){
               this.username = data['username'];
               this.companyId = data['companyId'];
               if(this.companyId!=null){
@@ -59,21 +46,13 @@ onSubmit(){
 
               }else{
                 window.location.href = "/login.html";
-                window.location.href = "http://localhost:4200";
+
               }
+              
             }
           },
           error => {
           });
-    }else if((credentials['email'] != "")&&(credentials['password'] == "") || (credentials['email'] == "")&&(credentials['password'] != "")){
-               console.log("in else looooooooooooooop");
-               window.alert("Please check username & password");
-               window.location.href = "http://localhost:4200";
-            
-    }else{
-               console.log("in else looooooooooooooop");
-               window.alert("Please enter username & password");
-               window.location.href = "http://localhost:4200";
-    }
+
   }
 }
