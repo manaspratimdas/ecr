@@ -93,12 +93,7 @@ export class Search {
                          return port.isoPortCode;
                      }
       }
-      //               ,
-      // depot: {
-      //   title: 'Depot',
-      //   filer: false,
-      //   type: 'number'
-      // }
+     
     }
   };
 
@@ -115,7 +110,7 @@ settings1 = {
       delete:true,
       editable:false   
     }, 
-//    actions: false,
+
     columns: {
 
       id: {
@@ -181,8 +176,7 @@ settings1 = {
   isSubmitting: boolean = false;
   testt:string;
   
-  
- 
+   
   constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
     this.testt = 'Heraj1';
     console.log(this.testt);
@@ -216,7 +210,7 @@ settings1 = {
         });
       }
       onSearch() {
-         // window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
+
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
            this.source.load(data);
@@ -224,7 +218,7 @@ settings1 = {
          
         }
      
-        onConfirm(event:Event): void{
+        onConfirm(event:Event): void {
           
             console.log("selectedRequisitionNo     : " + this.selectedRequisitionNo)
             console.log("selectedRequestedQuantity : " + this.selectedRequestedQuantity)

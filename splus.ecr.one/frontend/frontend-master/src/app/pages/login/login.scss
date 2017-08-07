@@ -1,1 +1,28 @@
 @import '../../theme/sass/auth';
+
+
+.autoHideAlert{
+
+    position: absolute;
+    left: 50%;
+    top: 3px;
+    background: #00abff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 500px;
+    margin-left: -250px;
+    color: white;
+    text-align: center;
+}
+
+
+.auth-block{
+
+//    background-color: #000000;
+    background: #696969;
+}
+
+.auth-main{
+      background: #000000;
+}
+    
