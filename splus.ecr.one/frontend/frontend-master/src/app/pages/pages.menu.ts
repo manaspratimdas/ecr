@@ -61,9 +61,22 @@ export const PAGES_MENU = [
             order: 140
           }
         }
+      },
+      {
+ path: 'myaction',
+        data: {
+          menu: {
+            title: 'general.menu.myaction',
+            icon: 'ion-edit',
+            selected: false,
+            expanded: false,
+            order: 140
+          }
+        }
       }
     ]
   },
+  
   {
 path: 'login',
 data: {
