@@ -171,7 +171,7 @@ body {
 .switch-label {
   position: relative;
   z-index: 2;
-  float: left;
+  float: right;
   width: 80px;
   line-height: 50px;
   font-size: 14px;
@@ -266,5 +266,21 @@ background-color: black;
   background-image: linear-gradient(top, #e0dd94, #c4bb61);
 }
 
+.show-class {
+  visibility: visible;
+}
 
+.hide-class {
+  visibility: hidden;
+}
+.lButton {
+    display: inline-block;
+    text-align: right;
+    color:#00abf2;
+   // margin-right:16px;
+}
 
+button.btn.btn-primary {
+    background: #00abf2;
+    border-color:#00abf2;
+}

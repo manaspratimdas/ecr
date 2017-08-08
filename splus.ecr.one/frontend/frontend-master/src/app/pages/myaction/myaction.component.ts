@@ -73,11 +73,10 @@ export class MyAction {
     this.bButton = 'hide-class';
     this.lButton = 'show-class';
  
-    this.service.getData().then((data) => {
-   
-      this.source.load(data);
-    }
-    );
+    this.service.getData().subscribe(
+           data => {
+//                console.log("Data saved..!");
+          });
       
   }
 

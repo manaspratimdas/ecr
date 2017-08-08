@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef } from '@angular/core';
 
 import { TransactionService } from './transaction.service';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -63,12 +63,36 @@ export class Transaction {
   };
 
   source: LocalDataSource = new LocalDataSource();
-
+  lButton: string = '';
+  bButton: string = '';
+  visible: boolean;
   constructor(protected service: TransactionService) {
-    this.service.getData().then((data) => {
-      this.source.load(data);
-    });
+   // this.lButton = 'show-class';
+   // this.visible = true;
+    
+    //this.lButton.nativeElement.focus();
+    this.lButton = 'show-class';
+    this.bButton = 'hide-class';
+    this.service.getData().subscribe(
+           data => {
+//                console.log("Data saved..!");
+          });
+    // this.service.getData().then((data) => {
+    //   this.source.load(data);
+    // });
   }
 
+  lenderButton(){
+   // window.alert("lender click...");
+     this.bButton = 'hide-class';
+     this.lButton = 'show-class';
+  }
+  
+  borrowerButton(){
+ // window.alert("borrower click...");
+   this.lButton = 'hide-class';
+   this.bButton = 'show-class';
+   // : 'hide-class';
+  }
   
 }
