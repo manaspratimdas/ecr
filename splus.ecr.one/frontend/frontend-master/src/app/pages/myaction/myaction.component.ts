@@ -9,6 +9,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class MyAction {
   
+  id: any;
+ selectedRows = [];
+ unselectedRows = [];
   lButton: string = '';
   bButton: string = '';
 
@@ -75,11 +78,28 @@ export class MyAction {
  
     this.service.getData().subscribe(
            data => {
-//                console.log("Data saved..!");
+       //                console.log("Data saved..!");
           });
       
   }
 
+  onRowSelect(event): void {
+    //this.code = event.data['code'];
+    this.id = event.data['id'];
+    console.log("selected index :" + this.id);
+    if(this.selectedRows.includes(this.id)){
+      this.selectedRows = this.selectedRows.splice(this.id);
+    }else{
+      this.selectedRows.push(this.id);
+    }
+    
+    
+    
+    console.log("on select : "+this.selectedRows);
+  
+  }
+  
+  
    lenderButton(){
     window.alert("lender click...");
      this.bButton = 'hide-class';
