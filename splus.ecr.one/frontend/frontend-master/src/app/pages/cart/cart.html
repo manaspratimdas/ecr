@@ -1,0 +1,68 @@
+<form (ngSubmit)="onConfirm($event)">
+<ba-card cardTitle="" baCardClass="with-scroll">
+<div class="row">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="requisitionNo">Requisition No.</label>
+
+      <input type="text" class="form-control" id="requisitionNo" value="{{fromSearchRequisitionNumber}}" (change)="onRequisitionNoChange($event)" placeholder="Requisition Number">
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="requestedQuantity">Requested Quantity</label>
+      <input type="text" class="form-control" id="requestedQuantity" value="{{fromSearchRequestQuantity}}" (change)="onRequestedQuantityChange($event)" placeholder="Requested Quantity">
+    </div>
+  </div>
+  <div class="col-sm-4">
+     <div class="form-group">
+      <label for="pickupDate">Pickup Date</label>
+      <!-- <input type="text" class="form-control" id="pickupDate"  (change)=  "onPickupDateChange($event)" placeholder="Pickup Date"> -->
+      <input type="date"  class="form-control" id="pickupDate"  (change)="onPickupDateChange($event)"/>
+    </div> 
+    </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="source">Source</label>
+
+      <select class="form-control" id="source" >
+		  	<option value="-1" >--Select--</option>
+		  	<option *ngFor="let port of fromSearchSourcePorts" [value]="port.id">{{port.isoPortCode}}</option>
+		</select>
+       <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
+       <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
+		  	<option value="-1" disabled>--Select--</option>
+		  	<option *ngFor="let source of sources" [value]="source.port.isoPortCode">{{source.port.isoPortCode}}</option>
+		</select> -->
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="destination">Destination</label>
+      <select class="form-control" id="destination" >
+		  	<option value="-1" >--Select--</option>
+		  	<option *ngFor="let port of ports" [value]="port.id">{{port.isoPortCode}}</option>
+		</select>
+       <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination">  -->
+      <!-- <select class="form-control" id="destination" (change)="onDestinationChange($event)">
+		  	<option value="-1" disabled>--Select--</option>
+        <option *ngFor="let destination of destinations" [value]="destination.port.isoPortCode">{{destination.port.isoPortCode}}</option>
+      </select>        -->
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="note">Note</label>
+      <textarea  class="form-control" style="height: 100%" id="note" (change)=  "onNoteChange($event)" placeholder="Note"></textarea>
+    </div>
+  </div>
+</div>
+  </ba-card>
+<ba-card cardTitle="" baCardClass="with-scroll">
+    <ng2-smart-table [settings]="settings1" [source]="source1" (ngSubmit)="onConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" > </ng2-smart-table><br> 
+     <div align="right"  class="">
+      <button style="width:10%" class="btn btn-primary">Book</button>
+     </div> 
+ </ba-card></form>

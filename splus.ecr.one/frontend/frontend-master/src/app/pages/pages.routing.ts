@@ -22,7 +22,7 @@ export const routes: Routes = [
       { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
       { path: 'search', loadChildren: './search/search.module#SearchModule' },
       { path: 'transaction', loadChildren: './transaction/transaction.module#TransactionModule' },
-      { path: 'booking', loadChildren: './booking/booking.module#BookingModule' }
+      { path: 'cart', loadChildren: './cart/cart.module#CartModule' }
       
       
     ]

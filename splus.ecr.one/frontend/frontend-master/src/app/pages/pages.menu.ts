@@ -51,10 +51,10 @@ export const PAGES_MENU = [
         }
       }, 
       {
-        path: 'booking',
+        path: 'cart',
         data: {
           menu: {
-            title: 'general.menu.booking',
+            title: 'general.menu.cart',
             icon: 'ion-folder',
             selected: false,
             expanded: false,

@@ -22,7 +22,7 @@
       "inventory": "Container Inventory",
       "search": "Container Search",
       "transaction": "My Transaction",
-      "booking": "Container Booking",
+      "cart": "Cart",
       "editors": "Editors",
       "ck_editor": "CKEditor",
       "components": "Components",
