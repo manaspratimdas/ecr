@@ -20,6 +20,7 @@ export const routes: Routes = [
       { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
       { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
       { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
+      { path: 'myaction' , loadChildren: './myaction/myaction.module#MyActionModule' },
       { path: 'search', loadChildren: './search/search.module#SearchModule' },
       { path: 'transaction', loadChildren: './transaction/transaction.module#TransactionModule' },
       { path: 'cart', loadChildren: './cart/cart.module#CartModule' }

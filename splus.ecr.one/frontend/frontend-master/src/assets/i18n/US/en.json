@@ -23,6 +23,7 @@
       "search": "Container Search",
       "transaction": "My Transaction",
       "cart": "Cart",
+      "myaction":"My Action",
       "editors": "Editors",
       "ck_editor": "CKEditor",
       "components": "Components",

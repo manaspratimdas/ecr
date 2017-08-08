@@ -1,19 +1,22 @@
-import { Component,ElementRef } from '@angular/core';
-
-import { TransactionService } from './transaction.service';
+import { Component } from '@angular/core';
+import { MyActionService } from './myaction.service';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'transaction-table',
-  templateUrl: './transaction.html',
-  styleUrls: ['./transaction.scss']
+  selector: 'myaction-table',
+  templateUrl: './myaction.html',
+  styleUrls: ['./myaction.scss']
 })
-export class Transaction {
+export class MyAction {
+  
+  lButton: string = '';
+  bButton: string = '';
 
   query: string = '';
-
+  
+  
   settings = {
-//  selectMode: 'multi',
+  selectMode: 'multi',
  actions:{
       position : 'right',
       add:false,
@@ -62,37 +65,31 @@ export class Transaction {
     }
   };
 
+  
   source: LocalDataSource = new LocalDataSource();
-  lButton: string = '';
-  bButton: string = '';
-  visible: boolean;
-  constructor(protected service: TransactionService) {
-   // this.lButton = 'show-class';
-   // this.visible = true;
-    
-    //this.lButton.nativeElement.focus();
-    this.lButton = 'show-class';
+
+ constructor(protected service: MyActionService) {
+   
     this.bButton = 'hide-class';
+    this.lButton = 'show-class';
+ 
     this.service.getData().subscribe(
            data => {
 //                console.log("Data saved..!");
           });
-    // this.service.getData().then((data) => {
-    //   this.source.load(data);
-    // });
+      
   }
 
-  lenderButton(){
-   // window.alert("lender click...");
+   lenderButton(){
+    window.alert("lender click...");
      this.bButton = 'hide-class';
      this.lButton = 'show-class';
   }
   
   borrowerButton(){
- // window.alert("borrower click...");
+  window.alert("borrower click...");
    this.lButton = 'hide-class';
    this.bButton = 'show-class';
    // : 'hide-class';
   }
-  
 }
