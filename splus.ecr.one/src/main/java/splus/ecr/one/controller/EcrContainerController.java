@@ -72,10 +72,11 @@ public class EcrContainerController {
 			listofContainer.add(container);
 		}
 		System.out.println("list:"+listofContainer);
-		if (listofContainer == null) {
-			return new ResponseEntity("No Container found for ID " + id, HttpStatus.NOT_FOUND);
+		Object listofCart = null;
+		if (listofCart == null) {
+			return new ResponseEntity("No Cart found for ID " + id, HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(listofContainer, HttpStatus.OK);
+		return new ResponseEntity(listofCart, HttpStatus.OK);
 
 	}
 

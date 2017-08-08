@@ -1,5 +1,7 @@
 package splus.ecr.one.service.impl;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +45,19 @@ public class EcrCartServiceImpl implements EcrCartService {
 		return ecrCartRepository.save(cart);
 	}
 
+
+	public List<Cart> getCartsByCompanyId(Long companyId) {
+		
+		List<Cart> carts = ecrCartRepository.findByCompanyId(companyId);
+		
+		for (Iterator<Cart> iterator = carts.iterator();
+				iterator.hasNext();) {
+			Cart cart = iterator.next();
+		    }
+		
+		
+		return carts;
+	}
+
+	
 }

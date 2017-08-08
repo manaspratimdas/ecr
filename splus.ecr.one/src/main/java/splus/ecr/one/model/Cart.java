@@ -37,7 +37,7 @@ public class Cart implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
-	private Company borrower;
+	private Company company;
 	
 	@Column(name = "STATUS")
 	private int status;
@@ -195,12 +195,12 @@ public void setNote(String note) {
 
 
 	public Company getBorrower() {
-		return borrower;
+		return company;
 	}
 
 
 	public void setBorrower(Company borrower) {
-		this.borrower = borrower;
+		this.company = borrower;
 	}
 
 
@@ -250,7 +250,7 @@ public void setNote(String note) {
 	@Override
 	public String toString() {
 		return "Cart [id=" + id + ", PortSource=" + PortSource + ", PortDestination=" + PortDestination + ", borrower="
-				+ borrower + ", status=" + status + ", requestDate=" + requestDate + ", releaseDate=" + releaseDate
+				+ company + ", status=" + status + ", requestDate=" + requestDate + ", releaseDate=" + releaseDate
 				+ ", destinationPort=" + destinationPort + ", containers=" + containers + ", requisitionNo="
 				+ requisitionNo + ", requestedQuantity=" + requestedQuantity + ", pickUpDate=" + pickUpDate + ", note="
 				+ note + "]";

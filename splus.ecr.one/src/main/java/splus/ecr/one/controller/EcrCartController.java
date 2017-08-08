@@ -1,5 +1,7 @@
 package splus.ecr.one.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import splus.ecr.one.model.Cart;
+import splus.ecr.one.model.Container;
 import splus.ecr.one.service.EcrCartService;
 
 @RestController
@@ -45,6 +48,20 @@ public class EcrCartController {
 			return new ResponseEntity("No Cart found", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity(cart, HttpStatus.OK);
+
+	}
+	
+
+	@RequestMapping(value = "/company/{companyId}", method = RequestMethod.GET)
+	public ResponseEntity getCartsByCompany(@PathVariable("companyId") Long companyId) {
+
+		System.out.println("in list cart controller");
+
+		List<Cart> carts = ecrCartService.getCartsByCompanyId(companyId);
+		if (carts == null) {
+			return new ResponseEntity("No carts found", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(carts, HttpStatus.OK);
 
 	}
 
