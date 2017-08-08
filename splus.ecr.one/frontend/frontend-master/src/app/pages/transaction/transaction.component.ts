@@ -13,43 +13,50 @@ export class Transaction {
   query: string = '';
 
   settings = {
-    add: {
-      addButtonContent: '<i class="ion-ios-plus-outline"></i>',
-      createButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
-      saveButtonContent: '<i class="ion-checkmark"></i>',
-      cancelButtonContent: '<i class="ion-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
+//  selectMode: 'multi',
+ actions:{
+      position : 'right',
+      add:false,
+      edit:false,
+      delete:false,
+      editable:false   
+    },  
     columns: {
-      id: {
-        title: 'ID',
+       id: {
+        title: 'Sr.No',
+        filter: false,
         type: 'number'
       },
-      firstName: {
-        title: 'First Name',
+      
+       Date: {
+        title: 'Date',
+           filter: false,
         type: 'string'
       },
-      lastName: {
-        title: 'Last Name',
+      OriginPort: {
+        title: 'Origin Port',
+          filter: false,
         type: 'string'
       },
-      username: {
-        title: 'Username',
+      DestinationPort: {
+        title: 'Destination Port',
+          filter: false,
         type: 'string'
       },
-      email: {
-        title: 'E-mail',
+      ETA: {
+        title: 'ETA',
+          filter: false,
         type: 'string'
       },
-      age: {
-        title: 'Age',
+      containerNo: {
+        title: 'Container No.',
+          filter: false,
+        type: 'number'
+      },
+      
+      Size : {
+        title: 'Size/Type',
+          filter: false,
         type: 'number'
       }
     }
@@ -63,11 +70,5 @@ export class Transaction {
     });
   }
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }
+  
 }
