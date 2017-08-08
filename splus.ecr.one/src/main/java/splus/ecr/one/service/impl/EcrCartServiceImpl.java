@@ -37,11 +37,10 @@ public class EcrCartServiceImpl implements EcrCartService {
 			container.setPort(destinationPort);
 			container.setLastUpdateDate(cart.getRequestDate());
 			container.setStatus("B");
-			ecrContainerRepository.save(container);
-
+			
 		}
 		
-		return cart;
+		return ecrCartRepository.save(cart);
 	}
 
 }

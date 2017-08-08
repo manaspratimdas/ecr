@@ -29,17 +29,19 @@ public class Cart implements Serializable{
 	@Column(name = "CART_ID")
 	private Long id;
 	
-	/*@Column(name = "PORT_SOURCE")
+	@Column(name = "PORT_SOURCE")
 	private String PortSource;
 	
 	@Column(name = "PORT_DESTINATION")
-	private String PortDestination;*/
+	private String PortDestination;
 
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
 	private Company borrower;
 	
-
+	@Column(name = "STATUS")
+	private int status;
+	
 	
 	@Column(name = "REQUEST_DATE")
 	private Timestamp requestDate;
@@ -66,6 +68,130 @@ public class Cart implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Column(name = "REQUISITION_NO")
+	private long requisitionNo;
+	
+	@Column(name = "REQUESTED_QUANTITY")
+	private long requestedQuantity;
+	
+	@Column(name = "PICKUP_DATE")
+	private Date pickUpDate;
+	
+	@Column(name = "NOTE")
+	private String note;
+
+	
+	/**
+ * @return the status
+ */
+public int getStatus() {
+	return status;
+}
+
+
+/**
+ * @param status the status to set
+ */
+public void setStatus(int status) {
+	this.status = status;
+}
+
+
+	/**
+ * @return the portSource
+ */
+public String getPortSource() {
+	return PortSource;
+}
+
+
+/**
+ * @param portSource the portSource to set
+ */
+public void setPortSource(String portSource) {
+	PortSource = portSource;
+}
+
+
+/**
+ * @return the portDestination
+ */
+public String getPortDestination() {
+	return PortDestination;
+}
+
+
+/**
+ * @param portDestination the portDestination to set
+ */
+public void setPortDestination(String portDestination) {
+	PortDestination = portDestination;
+}
+
+
+/**
+ * @return the requisitionNo
+ */
+public long getRequisitionNo() {
+	return requisitionNo;
+}
+
+
+/**
+ * @param requisitionNo the requisitionNo to set
+ */
+public void setRequisitionNo(long requisitionNo) {
+	this.requisitionNo = requisitionNo;
+}
+
+
+/**
+ * @return the requestedQuantity
+ */
+public long getRequestedQuantity() {
+	return requestedQuantity;
+}
+
+
+/**
+ * @param requestedQuantity the requestedQuantity to set
+ */
+public void setRequestedQuantity(long requestedQuantity) {
+	this.requestedQuantity = requestedQuantity;
+}
+
+
+/**
+ * @return the pickUpDate
+ */
+public Date getPickUpDate() {
+	return pickUpDate;
+}
+
+
+/**
+ * @param pickUpDate the pickUpDate to set
+ */
+public void setPickUpDate(Date pickUpDate) {
+	this.pickUpDate = pickUpDate;
+}
+
+
+/**
+ * @return the note
+ */
+public String getNote() {
+	return note;
+}
+
+
+/**
+ * @param note the note to set
+ */
+public void setNote(String note) {
+	this.note = note;
+}
 
 
 	public Company getBorrower() {
@@ -118,10 +244,16 @@ public class Cart implements Serializable{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", borrower=" + borrower + ", requestDate=" + requestDate + ", releaseDate="
-				+ releaseDate + ", destinationPort=" + destinationPort + ", containers=" + containers + "]";
+		return "Cart [id=" + id + ", PortSource=" + PortSource + ", PortDestination=" + PortDestination + ", borrower="
+				+ borrower + ", status=" + status + ", requestDate=" + requestDate + ", releaseDate=" + releaseDate
+				+ ", destinationPort=" + destinationPort + ", containers=" + containers + ", requisitionNo="
+				+ requisitionNo + ", requestedQuantity=" + requestedQuantity + ", pickUpDate=" + pickUpDate + ", note="
+				+ note + "]";
 	}
 	
 
