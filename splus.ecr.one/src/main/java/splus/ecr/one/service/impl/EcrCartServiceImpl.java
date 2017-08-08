@@ -50,11 +50,11 @@ public class EcrCartServiceImpl implements EcrCartService {
 		
 		List<Cart> carts = ecrCartRepository.findByCompanyId(companyId);
 		
-		for (Iterator<Cart> iterator = carts.iterator();
-				iterator.hasNext();) {
+		for (Iterator<Cart> iterator = carts.iterator(); iterator.hasNext();) {
+			
 			Cart cart = iterator.next();
-		    }
-		
+		   
+		}
 		
 		return carts;
 	}

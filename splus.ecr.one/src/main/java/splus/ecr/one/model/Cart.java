@@ -35,9 +35,11 @@ public class Cart implements Serializable{
 	@Column(name = "PORT_DESTINATION")
 	private String PortDestination;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "COMPANY_ID")
 	private Company company;
+	
 	
 	@Column(name = "STATUS")
 	private int status;

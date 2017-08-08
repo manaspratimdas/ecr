@@ -51,6 +51,10 @@ public class EcrCartController {
 
 	}
 	
+	/**
+	 * This will list carts of a company
+	 * @return
+	 */
 
 	@RequestMapping(value = "/company/{companyId}", method = RequestMethod.GET)
 	public ResponseEntity getCartsByCompany(@PathVariable("companyId") Long companyId) {
