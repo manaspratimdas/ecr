@@ -103,11 +103,11 @@ settings1 = {
     console.log("in cart..");
     
     //service.bookedData;
-    console.log("result 1----------> "+this.service.bookedData);
-    console.log("result 2----------> "+this.service.testData);
+  //  console.log("result 1----------> "+this.service.bookedData);
+  //  console.log("result 2----------> "+this.service.testData);
 
-    console.log("result 1----------> "+service.bookedData);
-    console.log("result 2----------> "+service.testData);
+  //  console.log("result 1----------> "+service.bookedData);
+ //  console.log("result 2----------> "+service.testData);
 
   }
 
