@@ -46,6 +46,7 @@ export class BaPageTop {
     console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
     sessionStorage.removeItem("http://localhost:8080/ecr/user/login");
     console.log("session " + sessionStorage.getItem("http://localhost:8080/ecr/user/login"));
+    sessionStorage.removeItem("add2Cart");
   }
 
   

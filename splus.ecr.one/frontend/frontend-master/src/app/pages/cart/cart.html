@@ -5,13 +5,13 @@
     <div class="form-group">
       <label for="requisitionNo">Requisition No.</label>
 
-      <input type="text" class="form-control" id="requisitionNo" value="{{fromSearchRequisitionNumber}}" (change)="onRequisitionNoChange($event)" placeholder="Requisition Number">
+      <input type="text" class="form-control" id="requisitionNo" value="{{requisitionNumber}}" (change)="onRequisitionNoChange($event)" placeholder="Requisition Number">
     </div>
   </div>
   <div class="col-sm-4">
     <div class="form-group">
       <label for="requestedQuantity">Requested Quantity</label>
-      <input type="text" class="form-control" id="requestedQuantity" value="{{fromSearchRequestQuantity}}" (change)="onRequestedQuantityChange($event)" placeholder="Requested Quantity">
+      <input type="text" class="form-control" id="requestedQuantity" value={{requestQuantity}} placeholder="Requested Quantity">
     </div>
   </div>
   <div class="col-sm-4">
@@ -29,7 +29,7 @@
 
       <select class="form-control" id="source" >
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of fromSearchSourcePorts" [value]="port.id">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of srcPorts" [value]="port.id">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
@@ -43,7 +43,7 @@
       <label for="destination">Destination</label>
       <select class="form-control" id="destination" >
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of ports" [value]="port.id">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of destPorts" [value]="port.id">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination">  -->
       <!-- <select class="form-control" id="destination" (change)="onDestinationChange($event)">

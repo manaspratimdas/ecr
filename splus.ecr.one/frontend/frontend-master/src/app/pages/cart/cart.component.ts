@@ -13,7 +13,10 @@ import 'rxjs/Rx';
   providers: [SearchService]
 })
 export class Cart {
-  
+ srcPorts: string[] = [];
+ destPorts:any[] = [];
+ requisitionNumber:string;
+ requestQuantity : string;
 settings1 = {
   
     delete: {
@@ -94,25 +97,32 @@ settings1 = {
   
   @Output()
   change = new EventEmitter();
-
-   //@Input()
-   count: string = '';
-
-  constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
   
+  constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
+  http.get("http://localhost:8080/ecr/ports")
+        .flatMap((data) => data.json())
+        .subscribe((data) => {
+          this.destPorts.push(data);
+          cd.detectChanges();
+        });
+    this.requisitionNumber = (String)(new Date().getMilliseconds());
     console.log("in cart..");
-    
-    //service.bookedData;
-  //  console.log("result 1----------> "+this.service.bookedData);
-  //  console.log("result 2----------> "+this.service.testData);
-
-  //  console.log("result 1----------> "+service.bookedData);
- //  console.log("result 2----------> "+service.testData);
-
+      
   }
 
-   onConfirm(event:Event): void {
+  ngOnInit(){
+    let data = JSON.parse(sessionStorage.getItem("add2Cart"));
+     
+    this.requestQuantity = (String)(Object.keys(data).length);
+    this.source1.load(data);
 
+		for (var i = 0,j=0; i< Object.keys(data).length; i++,j++) {
+      this.srcPorts[i] = JSON.parse(JSON.stringify(data[i])).port;
+    }
+  }
+
+ onConfirm(event:Event): void {
+    sessionStorage.removeItem("add2Cart");
     window.alert("book click..!");
    }
 }
