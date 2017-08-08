@@ -39,23 +39,23 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'transaction',
-        data: {
-          menu: {
-            title: 'general.menu.transaction',
-            icon: 'ion-gear-a',
-            selected: false,
-            expanded: false,
-            order: 140
-          }
-        }
-      }, 
-      {
         path: 'cart',
         data: {
           menu: {
             title: 'general.menu.cart',
             icon: 'ion-folder',
+            selected: false,
+            expanded: false,
+            order: 140
+          }
+        }
+      },
+      {
+        path: 'transaction',
+        data: {
+          menu: {
+            title: 'general.menu.transaction',
+            icon: 'ion-gear-a',
             selected: false,
             expanded: false,
             order: 140
