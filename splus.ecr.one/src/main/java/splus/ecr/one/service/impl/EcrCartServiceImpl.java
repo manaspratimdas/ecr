@@ -28,7 +28,7 @@ public class EcrCartServiceImpl implements EcrCartService {
 		return ecrCartRepository.findOne(id);
 	}
 
-	public Cart saveCart(Cart cart) {
+	/*public Cart saveCart(Cart cart) {
 
 		Port destinationPort = cart.getDestinationPort();
 
@@ -44,7 +44,7 @@ public class EcrCartServiceImpl implements EcrCartService {
 		
 		return ecrCartRepository.save(cart);
 	}
-
+*/
 
 	public List<Cart> getCartsByCompanyId(Long companyId) {
 		
@@ -63,6 +63,11 @@ public class EcrCartServiceImpl implements EcrCartService {
 	public List<Cart> getAllCarts() {
 		List<Cart> carts = ecrCartRepository.findAll();
 		return carts;
+	}
+
+	public Cart saveCart(Cart cart) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

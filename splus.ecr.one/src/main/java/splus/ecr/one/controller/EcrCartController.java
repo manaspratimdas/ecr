@@ -73,7 +73,7 @@ public class EcrCartController {
 	}
 	
 
-	@RequestMapping(value = "/lender/{companyId}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/lender/{companyId}", method = RequestMethod.GET)
 	public ResponseEntity getCarts(@PathVariable("companyId") Long companyId) {
 
 		System.out.println("in list cart controller");
@@ -104,6 +104,6 @@ public class EcrCartController {
 		}
 		return new ResponseEntity(containersofCompany, HttpStatus.OK);
 
-	}
+	}*/
 
 }
