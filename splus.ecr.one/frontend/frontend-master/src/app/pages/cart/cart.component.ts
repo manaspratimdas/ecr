@@ -111,8 +111,14 @@ settings1 = {
   }
 
   ngOnInit(){
-    let data = JSON.parse(sessionStorage.getItem("add2Cart"));
+    let data = null;
      
+if(sessionStorage.getItem("add2Cart")!= null){
+        data = JSON.parse(sessionStorage.getItem("add2Cart"));
+     }else{
+        data = JSON.parse("[]");
+     }
+
     this.requestQuantity = (String)(Object.keys(data).length);
     this.source1.load(data);
 

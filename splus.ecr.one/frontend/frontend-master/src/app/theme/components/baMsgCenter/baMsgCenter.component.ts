@@ -18,4 +18,8 @@ export class BaMsgCenter {
     this.messages = this._baMsgCenterService.getMessages();
   }
 
+  protected liClicked():void{
+    window.location.href = "http://localhost:4200/#/pages/cart";
+  }
+
 }

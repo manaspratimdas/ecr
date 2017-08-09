@@ -27,7 +27,7 @@
       <a href>See all notifications</a>
     </div> -->
   </li>
-  <li class="dropdown">
+  <li class="dropdown" (click)="liClicked()">
     <a href class="msg dropdown-toggle" id="msg-dd2" data-toggle="dropdown" aria-expanded="false">
       <i class="fa fa-envelope-o"></i><span ng-if="messages != null">{{ messages.length }}</span>
       <div class="notification-ring"></div>
