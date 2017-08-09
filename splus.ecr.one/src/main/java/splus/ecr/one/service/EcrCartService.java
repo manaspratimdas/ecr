@@ -14,4 +14,7 @@ public interface EcrCartService {
 	
 	List<Cart> getCartsByCompanyId(Long companyId);
 
+
+	List<Cart> getAllCarts();
+
 }

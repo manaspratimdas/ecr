@@ -32,7 +32,7 @@ public class EcrCartServiceImpl implements EcrCartService {
 
 		Port destinationPort = cart.getDestinationPort();
 
-		Set<Container> containers = cart.getContainers();
+		List<Container> containers = cart.getContainers();
 		
 		for (Container container : containers) {
 			
@@ -53,9 +53,15 @@ public class EcrCartServiceImpl implements EcrCartService {
 		for (Iterator<Cart> iterator = carts.iterator(); iterator.hasNext();) {
 			
 			Cart cart = iterator.next();
+		
 		   
 		}
 		
+		return carts;
+	}
+
+	public List<Cart> getAllCarts() {
+		List<Cart> carts = ecrCartRepository.findAll();
 		return carts;
 	}
 
