@@ -8,8 +8,6 @@ import splus.ecr.one.model.Cart;
 
 public interface EcrCartRepository extends JpaRepository<Cart, Long>{
 
-	
 	List<Cart> findByCompanyId(Long companyId);	
-	
 
 }
