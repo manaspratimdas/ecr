@@ -291,7 +291,21 @@ settings1 = {
             }
 
            console.log( JSON.stringify(this.bookedData));
+           let exisingJson = JSON.parse(JSON.stringify(sessionStorage.getItem("add2Cart")));
+           var newJson = new Array<any>();
+           if(exisingJson!=null){
+            let index = 0;
+            for(index = 0; index<Object.keys(JSON.parse(exisingJson)).length; index++){
+              newJson.push(JSON.parse(exisingJson)[index]);
+            }
+           for(index = 0; index<Object.keys(this.bookedData).length; index++){
+              newJson.push(this.bookedData[index]);
+           }
+             sessionStorage.setItem("add2Cart",JSON.stringify(newJson));
+          }else{
             sessionStorage.setItem("add2Cart",JSON.stringify(this.bookedData));
+          }
+          
            this.sourcePorts.push(this.srcPorts);
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
