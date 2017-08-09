@@ -3,6 +3,7 @@ package splus.ecr.one.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,8 +17,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import lombok.Data;
 
 @Entity
 //@Data
@@ -59,7 +58,7 @@ public class Cart implements Serializable{
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CART_CONTAINER", joinColumns = { @JoinColumn(name = "CART_ID") }, inverseJoinColumns = { @JoinColumn(name = "CONTAINER_ID") })
-	private Set<Container> containers;
+	private List<Container> containers;
 
 
 	public Long getId() {
@@ -236,29 +235,40 @@ public void setNote(String note) {
 	}
 
 
-	public Set<Container> getContainers() {
+	
+
+
+	public Company getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+
+	public List<Container> getContainers() {
 		return containers;
 	}
 
 
-	public void setContainers(Set<Container> containers) {
+	public void setContainers(List<Container> containers) {
 		this.containers = containers;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", PortSource=" + PortSource + ", PortDestination=" + PortDestination + ", borrower="
+		return "Cart [id=" + id + ", PortSource=" + PortSource + ", PortDestination=" + PortDestination + ", company="
 				+ company + ", status=" + status + ", requestDate=" + requestDate + ", releaseDate=" + releaseDate
 				+ ", destinationPort=" + destinationPort + ", containers=" + containers + ", requisitionNo="
 				+ requisitionNo + ", requestedQuantity=" + requestedQuantity + ", pickUpDate=" + pickUpDate + ", note="
 				+ note + "]";
 	}
-	
 
+
+	
 	
 	
 }
