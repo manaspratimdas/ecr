@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-
+import {Observable} from 'rxjs/Observable';
 import {BaMsgCenterService} from './baMsgCenter.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {BaMsgCenterService} from './baMsgCenter.service';
 export class BaMsgCenter {
 
   public notifications:Array<Object>;
-  public messages:Array<Object>;
+  public messages: Observable<any> ;
 
   constructor(private _baMsgCenterService:BaMsgCenterService) {
     this.notifications = this._baMsgCenterService.getNotifications();

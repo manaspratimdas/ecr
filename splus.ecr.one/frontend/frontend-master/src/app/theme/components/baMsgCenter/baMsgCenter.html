@@ -29,10 +29,10 @@
   </li>
   <li class="dropdown">
     <a href class="msg dropdown-toggle" id="msg-dd2" data-toggle="dropdown" aria-expanded="false">
-      <i class="fa fa-envelope-o"></i><span>{{ messages.length }}</span>
+      <i class="fa fa-envelope-o"></i><span ng-if="messages != null">{{ messages.length }}</span>
       <div class="notification-ring"></div>
     </a>
-    <!-- <div class="top-dropdown-menu dropdown-menu" aria-labelledby="msg-dd2">
+    < <div class="top-dropdown-menu dropdown-menu" aria-labelledby="msg-dd2">
       <i class="dropdown-arr"></i>
       <div class="header clearfix">
         <strong>Messages</strong>
@@ -40,16 +40,16 @@
         <a href>Settings</a>
       </div>
       <div class="msg-list">
-        <a *ngFor="let msg of messages" href class="clearfix">
+        <a  ng-if="messages != null" *ngFor="let msg of messages" href class="clearfix">
           <div class="img-area"><img [ngClass]="{'photo-msg-item': !msg.image}"
-                                     src="{{ ( msg.image ||  (msg.name | baProfilePicture)) }}"></div>
+                                     src="{{ ( msg.code ||  (msg.name | baProfilePicture)) }}"></div>
           <div class="msg-area">
-            <div>{{ msg.text }}</div>
-            <span>{{ msg.time }}</span>
+            <div>{{ msg.code }}</div>
+            <span>{{ msg.name }}</span>
           </div>
         </a>
       </div>
       <a href>See all messages</a>
-    </div> -->
+    </div> 
   </li>
 </ul>

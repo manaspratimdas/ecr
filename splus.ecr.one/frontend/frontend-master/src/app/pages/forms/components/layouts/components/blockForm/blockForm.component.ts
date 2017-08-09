@@ -31,7 +31,7 @@ private ports = [];
           cd.detectChanges();
         });
   }
-  @Input() fromSearchRequisitionNumber : string;
+      
   @Input() fromSearchRequestQuantity : string;
   @Input() fromSearchSourcePorts : string;
   @Output() searchSelectedRequisitionNo: EventEmitter<string> = new EventEmitter<string>()

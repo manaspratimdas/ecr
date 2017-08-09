@@ -9,6 +9,7 @@ export class SearchService {
   selectedCountry: string;
   selectedPort: string;
   selectedCompany: string;
+  test1:string="Heraj Test";
 
   constructor(private http: Http) { }
 
@@ -76,6 +77,8 @@ export class SearchService {
   
   test(id) {
     console.log("in service.."+id);
+    
+    
     console.log("url : "+"http://localhost:8080/ecr/containers/"+id);
     
        return this.http.get('http://localhost:8080/ecr/containers/'+id)
@@ -84,6 +87,7 @@ export class SearchService {
                 console.log("json data : "+response.json());
                 let user = response.json();
                 console.log("http - result : "+user['id']);
+                this.test1 = id;
                 return user;
             });
   }

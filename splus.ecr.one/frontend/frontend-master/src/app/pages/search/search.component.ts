@@ -6,13 +6,15 @@ import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { Http ,RequestOptions, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
+import { CartDataService } from '../search2cart/cartData.service';
+
 
 @Injectable()
 @Component({
   selector: 'search-table',
   templateUrl: './search.html',
   styleUrls: ['./search.scss'],
-  
+  providers: [CartDataService]
 })
 
 
@@ -20,6 +22,7 @@ import 'rxjs/Rx';
 export class Search {
 
   srcPorts: string[] = [];
+  addedPorts: string[] = [];
   bookingContent:boolean = false;
   requisitionNumber:string = "";
   requestQuantity:String = "0";
@@ -93,7 +96,12 @@ export class Search {
                          return port.isoPortCode;
                      }
       }
-     
+      //               ,
+      // depot: {
+      //   title: 'Depot',
+      //   filer: false,
+      //   type: 'number'
+      // }
     }
   };
 
@@ -110,11 +118,11 @@ settings1 = {
       delete:true,
       editable:false   
     }, 
-
+//    actions: false,
     columns: {
 
       id: {
-        title: 'Sr.No',
+        title: 'sr.no',
         filter: false,
         type: 'number'
       },
@@ -124,6 +132,7 @@ settings1 = {
          valuePrepareFunction: (company) => {
                          return company.name;
                      }
+                        
       },
       code: {
         title: 'Container No.',
@@ -175,11 +184,14 @@ settings1 = {
   form:FormGroup;
   isSubmitting: boolean = false;
   testt:string;
+  cartDataService : CartDataService;
   
-   
-  constructor(private fb:FormBuilder,protected service: SearchService,private http: Http,cd: ChangeDetectorRef) {
+ 
+  constructor(private fb:FormBuilder,protected service: SearchService, cartDataServ : CartDataService, private http: Http,cd: ChangeDetectorRef) {
     this.testt = 'Heraj1';
     console.log(this.testt);
+    this.cartDataService = cartDataServ;
+    cartDataServ.changeMessage("test 12121212");
    
     http.get("http://localhost:8080/ecr/containertypes")
         .flatMap((data) => data.json())
@@ -210,7 +222,7 @@ settings1 = {
         });
       }
       onSearch() {
-
+         // window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
            this.source.load(data);
@@ -218,7 +230,7 @@ settings1 = {
          
         }
      
-        onConfirm(event:Event): void {
+        onConfirm(event:Event): void{
           
             console.log("selectedRequisitionNo     : " + this.selectedRequisitionNo)
             console.log("selectedRequestedQuantity : " + this.selectedRequestedQuantity)
@@ -263,22 +275,39 @@ settings1 = {
         }
             
     onSubmit(){
-      
+       
       this.bookingContent = true;
      // window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {
            this.source1.load(data);
            this.bookedData = data;
-           for (var i = 0; i< Object.keys(this.bookedData).length; i++) 
+           for (var i = 0,j=0; i< Object.keys(this.bookedData).length; i++,j++) {
+            // if(!this.hasId(this.srcPorts, JSON.parse(JSON.stringify(this.bookedData[i])).port.id)){
                  this.srcPorts[i] = JSON.parse(JSON.stringify(this.bookedData[i])).port;
-            
+               //  this.data2Cart[i] = JSON.parse(JSON.stringify(this.bookedData[i]));
+            // }
+                 
+
+            }
+
+           console.log( JSON.stringify(this.bookedData));
+            sessionStorage.setItem("add2Cart",JSON.stringify(this.bookedData));
            this.sourcePorts.push(this.srcPorts);
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);
+           window.location.href = "http://localhost:4200/#/pages/cart";
           });
     }
+
+   hasId(data, id) {
+     
+     
+  return (JSON.parse(JSON.stringify(data))).some(function (el) {
+    return true;
+  });
+}
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();

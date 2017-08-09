@@ -42,6 +42,8 @@ export class LoginService {
     } else {
         return this.http.post("http://localhost:8080/ecr/user/login",myJSON).map((response: Response) => {
             sessionStorage.setItem("http://localhost:8080/ecr/user/login", response.text());
+            sessionStorage.setItem("IP", "http://localhost:8080");
+            sessionStorage.removeItem("add2Cart");
             return response.json();
         });
     }
