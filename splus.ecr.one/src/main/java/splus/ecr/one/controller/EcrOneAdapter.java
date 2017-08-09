@@ -44,11 +44,15 @@ public class EcrOneAdapter {
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
 				
-				transactionRow.put("SOURCE", cart.getPortSource());
-				transactionRow.put("CONTAINER_CODE", container.getCode());
-				transactionRow.put("CONTAINER_TYPE", container.getContainerType().getType()+container.getContainerType().getSize());
-				transaction.add(transactionRow);
+				transactionRow.put("id", cart.getId().toString());
+				transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+				transactionRow.put("portSource", cart.getPortSource());
+				transactionRow.put("portDestination", cart.getPortDestination());
+				transactionRow.put("ETA", cart.getNote());
+				transactionRow.put("containerCode", container.getCode());
+				transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
 				
+				transaction.add(transactionRow);
 				
 			}
 		}
