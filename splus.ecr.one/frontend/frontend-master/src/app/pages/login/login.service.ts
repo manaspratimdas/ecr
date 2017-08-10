@@ -13,8 +13,8 @@ export class LoginService {
   pass: string;
 
     constructor(private http: Http){
-        //sessionStorage.getItem("IP")
-        //sessionStorage.setItem("IP", "http://10.4.3.182:8080");
+       sessionStorage.getItem("IP")
+        sessionStorage.setItem("IP", "http://localhost:8080");
     }
    userData(){
      console.log("get user data from db..");
@@ -31,8 +31,6 @@ export class LoginService {
     }
   
       test(credentials){
-           sessionStorage.getItem("IP")
-        sessionStorage.setItem("IP", "http://10.4.3.182:8080");
         console.log("insert user in db..");
         this.email = credentials['email'];
         this.pass = credentials['password'];
