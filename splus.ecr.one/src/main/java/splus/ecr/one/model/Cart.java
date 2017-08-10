@@ -24,7 +24,7 @@ import javax.persistence.Table;
 public class Cart implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CART_ID")
 	private Long id;
 	
