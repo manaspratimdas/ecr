@@ -2,10 +2,12 @@ package splus.ecr.one.service.impl;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import splus.ecr.one.model.Cart;
 import splus.ecr.one.model.Container;
@@ -22,13 +24,18 @@ public class EcrCartServiceImpl implements EcrCartService {
 	
 	@Autowired
 	EcrContainerRepository ecrContainerRepository;
+	
+	
+	@Autowired 
+	private EntityManager entityManager;
 
 	public Cart getCart(Long id) {
 
 		return ecrCartRepository.findOne(id);
 	}
 
-	/*public Cart saveCart(Cart cart) {
+	@Transactional
+	public Cart saveCart(Cart cart) {
 
 		Port destinationPort = cart.getDestinationPort();
 
@@ -41,10 +48,13 @@ public class EcrCartServiceImpl implements EcrCartService {
 			container.setStatus("B");
 			
 		}
+	//ecrCartRepository.saveAndFlush(cart);
+		entityManager.merge(cart);
 		
-		return ecrCartRepository.save(cart);
+		
+		return cart;//ecrCartRepository.save(cart);
 	}
-*/
+
 
 	public List<Cart> getCartsByCompanyId(Long companyId) {
 		
@@ -65,10 +75,10 @@ public class EcrCartServiceImpl implements EcrCartService {
 		return carts;
 	}
 
-	public Cart saveCart(Cart cart) {
+	/*public Cart saveCart(Cart cart) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 	
 }
