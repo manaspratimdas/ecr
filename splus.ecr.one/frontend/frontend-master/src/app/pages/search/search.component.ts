@@ -310,7 +310,7 @@ settings1 = {
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);
-           window.location.href = "http://10.4.3.182:4200/#/pages/cart";
+           window.location.href = "http://localhost:4200/#/pages/cart";
           });
     }
 
