@@ -12,4 +12,16 @@ export class CartService {
 
   constructor(private http: Http) { }
 
+  
+  saveToCart(jsonW) {
+
+    console.log("result : "+jsonW);
+      
+      var headers = new Headers();
+      headers.append('Content-Type','application/json; charset=utf8');
+      
+      return this.http.post('http://localhost:8080/ecr/cart/save',jsonW,{headers:headers})
+              .map((response: Response) => response.json());
+  }
+
 }

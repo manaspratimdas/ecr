@@ -27,9 +27,9 @@
     <div class="form-group">
       <label for="source">Source</label>
 
-      <select class="form-control" id="source" >
+      <select class="form-control" id="source"  (change)="onSourceChange($event)">
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of srcPorts" [value]="port.id">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of srcPorts"  [value]="port.id">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
@@ -41,7 +41,7 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="destination">Destination</label>
-      <select class="form-control" id="destination" >
+      <select class="form-control" id="destination" (change)="onDestChange($event)">
 		  	<option value="-1" >--Select--</option>
 		  	<option *ngFor="let port of destPorts" [value]="port.id">{{port.isoPortCode}}</option>
 		</select>
@@ -55,7 +55,7 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="note">Note</label>
-      <textarea  class="form-control" style="height: 100%" id="note" (change)=  "onNoteChange($event)" placeholder="Note"></textarea>
+      <textarea  class="form-control" style="height: 100%" id="note" (change)="onNoteChange($event)" placeholder="Note"></textarea>
     </div>
   </div>
 </div>

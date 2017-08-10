@@ -34,36 +34,42 @@ export class MyAction {
         type: 'number'
       },
       
-       Date: {
+       pickUpDate: {
         title: 'Date',
-           filter: false,
-        type: 'string'
+        filter: false,
+        type: 'Date'
       },
-      OriginPort: {
+      portSource: {
         title: 'Origin Port',
           filter: false,
         type: 'string'
       },
-      DestinationPort: {
+      portDestination: {
         title: 'Destination Port',
           filter: false,
-        type: 'string'
+        type: 'string',
+        
       },
       ETA: {
         title: 'ETA',
           filter: false,
         type: 'string'
       },
-      containerNo: {
+      containerCode: {
         title: 'Container No.',
           filter: false,
         type: 'number'
       },
       
-      Size : {
+      sizeType : {
         title: 'Size/Type',
           filter: false,
-        type: 'number'
+        type: 'string'
+      },
+      companyName : {
+        title: 'Lender/Borrower',
+        filter: false,
+        type: 'string'
       }
     }
   };
@@ -76,11 +82,12 @@ export class MyAction {
     this.bButton = 'hide-class';
     this.lButton = 'show-class';
  
-    this.service.getData().subscribe(
-           data => {
-       //                console.log("Data saved..!");
+    this.service.getDataforLender().subscribe(
+             data => {
+             this.source.load(data);
+          },
+          error => {
           });
-      
   }
 
   onRowSelect(event): void {
@@ -101,15 +108,54 @@ export class MyAction {
   
   
    lenderButton(){
-    window.alert("lender click...");
+   // window.alert("lender click...");
      this.bButton = 'hide-class';
      this.lButton = 'show-class';
+      
+     this.service.getDataforLender().subscribe(
+             data => {
+             this.source.load(data);
+          },
+          error => {
+          });
   }
   
   borrowerButton(){
-  window.alert("borrower click...");
+  //window.alert("borrower click...");
    this.lButton = 'hide-class';
    this.bButton = 'show-class';
-   // : 'hide-class';
+   
+   this.service.getDataforBorrower().subscribe(
+             data => {
+             this.source.load(data);
+          },
+          error => {
+          });
+  }
+
+  onRelease(){
+  //window.alert("click on release click"+this.selectedRows);
+  this.service.onRelease(this.selectedRows).subscribe(
+  data => {
+  }
+  );
+  }
+  
+  onConfirm() {
+    
+    //window.alert("array : "+this.selectedRows);
+     this.service.onConfirm(this.selectedRows).subscribe(
+     
+     data => {
+     });
+  }
+  
+  onReject() {
+    
+   // window.alert("array : "+this.selectedRows);
+     this.service.onReject(this.selectedRows).subscribe(
+     
+     data => {
+     });
   }
 }

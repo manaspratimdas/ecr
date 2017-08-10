@@ -16,8 +16,15 @@ export class Cart {
  srcPorts: string[] = [];
  destPorts:any[] = [];
  requisitionNumber:string;
- requestQuantity : string;
-settings1 = {
+ requestQuantity: string;
+ pickupDate: string;
+ source:string;
+ distPort:string; 
+ note:string;
+ companyId:string;
+ msg:boolean = false;
+
+ settings1 = {
   
     delete: {
       deleteButtonContent: '<i class="ion-trash-a"></i>',
@@ -94,6 +101,8 @@ settings1 = {
   
   source1: LocalDataSource = new LocalDataSource();
   form:FormGroup;
+  localData: any;
+  requisitionNo:string;
   
   @Output()
   change = new EventEmitter();
@@ -118,17 +127,85 @@ if(sessionStorage.getItem("add2Cart")!= null){
      }else{
         data = JSON.parse("[]");
      }
-
+   //  console.log("requisitionNumber:: "+this.requisitionNumber);
     this.requestQuantity = (String)(Object.keys(data).length);
     this.source1.load(data);
+    this.localData = data;
 
 		for (var i = 0,j=0; i< Object.keys(data).length; i++,j++) {
       this.srcPorts[i] = JSON.parse(JSON.stringify(data[i])).port;
     }
   }
 
- onConfirm(event:Event): void {
-    sessionStorage.removeItem("add2Cart");
-    window.alert("book click..!");
+  onConfirm(event:Event): void {
+  //  this.requisitionNo = event['requisitionNumber'];
+    //this.requisitionNo = (<HTMLSelectElement>event.srcElement).value; 
+    // window.alert("requisitionNumber ---> "+this.requisitionNumber);
+    // sessionStorage.removeItem("add2Cart");
+    // window.alert("requested quantity ---> "+this.localData.length);
+
+          var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
+          console.log("sessionData" + sessionData);
+    
+          this.companyId = JSON.parse(sessionData)['companyId'];
+
+          var borrower = JSON.stringify({ "id":this.companyId,"name":"this.userName"});
+          var jsona = JSON.parse(borrower);
+          
+          console.log(borrower);
+          console.log(jsona);
+          
+          var destinationPort = JSON.stringify({ "id":this.companyId,"isoPortName":"userName"});
+          var jsonb = JSON.parse(destinationPort);
+          
+          var company = JSON.stringify({ "id":this.companyId,"isoPortName":"userName"});
+          var jsonc = JSON.parse(company);
+ 
+          var jsonData = JSON.stringify({ "id":"","company":jsonc,"status":"1","requestDate":this.pickupDate,
+          "releaseDate":this.pickupDate,"destinationPort":jsonb,"containers":this.localData,"requisitionNo":this.requisitionNumber,
+          "requestedQuantity":this.requestQuantity,"pickUpDate":this.pickupDate,"note":this.note,"portSource":this.source,
+          "portDestination":this.distPort,"borrower":jsona});
+          
+          console.log("object : "+jsonData);
+          
+          var json1 = JSON.stringify(jsonData);
+          var jsonW = JSON.parse(json1);
+
+          this.service.saveToCart(jsonW).subscribe(
+           data => {
+                console.log("Data saved..!");
+          });
+
+           this.msg = true
+           setTimeout(function() {
+          
+           this.msg = false;
+           }.bind(this), 2000); 
+   }
+  
+   onPickupDateChange(event:Event): void{
+    
+    this.pickupDate = (<HTMLSelectElement>event.srcElement).value; 
+    window.alert("pickup date ---> "+this.pickupDate);
+   
+   }
+
+   onSourceChange(event:Event): void{
+  
+    this.source = (<HTMLSelectElement>event.srcElement).value;
+    console.log("source ---> "+this.source);
+    window.alert("source ---> "+this.source);
+   }
+  
+   onDestChange(event:Event): void{
+  
+    this.distPort = (<HTMLSelectElement>event.srcElement).value; 
+    window.alert("distPort ---> "+this.distPort);
+   }
+
+   onNoteChange(event:Event): void{
+   
+    this.note = (<HTMLSelectElement>event.srcElement).value; 
+    window.alert("notes ---> "+this.note);
    }
 }
