@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,7 +80,79 @@ public class EcrContainerController {
 		return new ResponseEntity(listofContainer, HttpStatus.OK);
 
 	}
-
+	 /*
+	  * added by tanya
+	  */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/lender/onConfirm/containers/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateLenderOnConfirmById(@PathVariable("id") List<Long> ids) {
+		List<Container> listofContainer = new ArrayList<Container>();
+		for(long id : ids){
+			
+			Container container = ecrContainerService.getContainer(id);
+			container.setStatus("B");
+			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
+//			
+//			System.out.println("data:"+container);
+			listofContainer.add(updatedContainer);
+		}
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+//		
+	return new ResponseEntity(listofContainer, HttpStatus.OK);
+	}
+	
+	 /*
+	  * added by tanya
+	  */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/lender/onReject/containers/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateLenderOnRejectById(@PathVariable("id") List<Long> ids) {
+		List<Container> listofContainer = new ArrayList<Container>();
+		for(long id : ids){
+			
+			Container container = ecrContainerService.getContainer(id);
+			container.setStatus("A");
+			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
+			
+//			System.out.println("data:"+container);
+			listofContainer.add(updatedContainer);
+		}
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+//		
+	return new ResponseEntity(listofContainer, HttpStatus.OK);
+	}
+	/*
+	  * added by tanya
+	  */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/borrower/onRelease/containers/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateBorrowerOnReleaseById(@PathVariable("id") List<Long> ids) {
+		List<Container> listofContainer = new ArrayList<Container>();
+		for(long id : ids){
+			
+			Container container = ecrContainerService.getContainer(id);
+			container.setStatus("A");
+			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
+			
+//			System.out.println("data:"+container);
+			listofContainer.add(updatedContainer);
+		}
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+		
+		return new ResponseEntity(listofContainer, HttpStatus.OK);
+	}
 	/**
 	 * This will list all the container for a company
 	 * @return
