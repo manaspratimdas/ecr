@@ -14,6 +14,10 @@ public interface EcrContainerService {
 	Container getContainerById(Long id);
 
 	List<Container> getContainersByCompanyId(Long companyId);
+	//added by dbangar
+	List<Container> getLenderContainersByCompanyId(Long companyId);
+	List<Container> getBorrowerContainersByCompanyId(Long companyId);
+	
 
 	List<Container> saveOrUpdateContainers(List<Container> containers);
 	//added by tanya

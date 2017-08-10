@@ -1,5 +1,6 @@
 package splus.ecr.one.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,6 +67,56 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		}
 		
 		return containers;
+	}
+	/*
+	 * added by dbangar
+	 * 
+	 */
+	public List<Container> getLenderContainersByCompanyId(Long companyId) {
+		
+		List<Container> containers = ecrContainerRepository.findByCompanyId(companyId);
+		List<Container> lendercontainers = new ArrayList<Container>();
+		
+		for (Iterator<Container> iterator = containers.iterator(); iterator.hasNext();) {
+			Container container = iterator.next();
+			
+		    if (!"".equals(container.getStatus())) {
+		    	if("R".equals(container.getStatus())){
+		    		
+		    		lendercontainers.add(container);
+		    		
+		    	}
+		        iterator.remove();
+		    }
+		}
+		
+		return lendercontainers;
+	}
+	/*
+	 * added by dbangar
+	 * 
+	 */
+	public List<Container> getBorrowerContainersByCompanyId(Long companyId) {
+		
+		List<Container> containers = ecrContainerRepository.findByCompanyId(companyId);
+		List<Container> lendercontainers = new ArrayList<Container>();
+		
+		for (Iterator<Container> iterator = containers.iterator(); iterator.hasNext();) {
+			
+			Container container = iterator.next();
+		    
+			if (!"".equals(container.getStatus())) {
+		    	
+		    	if("B".equals(container.getStatus())){
+		    		
+		    		lendercontainers.add(container);
+		    		
+		    	}
+		        iterator.remove();
+		    }
+		}
+		
+		return lendercontainers;
 	}
 
 	public List<Container> saveOrUpdateContainers(List<Container> containers) {

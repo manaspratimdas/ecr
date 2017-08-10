@@ -28,33 +28,33 @@ export class Transaction {
         type: 'number'
       },
       
-       Date: {
+       pickUpDate: {
         title: 'Date',
            filter: false,
         type: 'string'
       },
-      OriginPort: {
+      portSource: {
         title: 'Origin Port',
           filter: false,
         type: 'string'
       },
-      DestinationPort: {
+      portDestination: {
         title: 'Destination Port',
           filter: false,
         type: 'string'
       },
       ETA: {
-        title: 'ETA',
+          title: 'ETA',
           filter: false,
         type: 'string'
       },
-      containerNo: {
+      containerCode: {
         title: 'Container No.',
           filter: false,
-        type: 'number'
+          type: 'string'
       },
       
-      Size : {
+      sizeType : {
         title: 'Size/Type',
           filter: false,
         type: 'number'
@@ -66,32 +66,47 @@ export class Transaction {
   lButton: string = '';
   bButton: string = '';
   visible: boolean;
+  companyId: string = '';
   constructor(protected service: TransactionService) {
-   // this.lButton = 'show-class';
-   // this.visible = true;
+   
+    var sessionData = sessionStorage.getItem("http://localhost:8080/ecr/user/login");
+    console.log("sessionData" + sessionData);
     
-    //this.lButton.nativeElement.focus();
+    this.companyId = JSON.parse(sessionData)['companyId'];
+    console.log("companyId : "+this.companyId);
     this.lButton = 'show-class';
     this.bButton = 'hide-class';
-    this.service.getData().subscribe(
-           data => {
-//                console.log("Data saved..!");
-          });
-    // this.service.getData().then((data) => {
-    //   this.source.load(data);
-    // });
+
+      this.service.getData(this.companyId).subscribe(
+             data => {
+               console.log("Data saved..!");
+              this.source.load(data);
+            });
   }
 
   lenderButton(){
-   // window.alert("lender click...");
+    //window.alert("lender click...");
+    
+    this.service.getLenderData(this.companyId).subscribe(
+           data => {
+           this.source.load(data);
+          });
+
      this.bButton = 'hide-class';
      this.lButton = 'show-class';
   }
   
   borrowerButton(){
- // window.alert("borrower click...");
-   this.lButton = 'hide-class';
-   this.bButton = 'show-class';
+  //window.alert("borrower click...");
+    
+  this.service.getBorrowerData(this.companyId).subscribe(
+           data => {
+             console.log(JSON.stringify(data));
+           this.source.load(data);
+          });
+  
+  this.lButton = 'hide-class';
+  this.bButton = 'show-class';
    // : 'hide-class';
   }
   

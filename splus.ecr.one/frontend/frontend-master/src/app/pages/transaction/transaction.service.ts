@@ -9,18 +9,32 @@ export class TransactionService {
   
   }
 
-  getData() {
+  getData(companyId) {
+    
+   // console.log("in borrower service.."+"http://localhost:8080/ecr/cart/company/2");
+    console.log("company id : "+companyId);
 
-    // window.alert("in transaction service..");
-     
-      return this.http.get('http://localhost:8080/ecr/cart/save')
+    return this.http.get('http://localhost:8080/ecr/adapter/cart/company/'+companyId)
               .map((response: Response) => response.json());
   }
-  // getData(): Promise<any> {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve(this.smartTableData);
-  //     }, 2000);
-  //   });
-  // }
+
+ getBorrowerData(companyId) {
+    
+    //console.log("in borrower service.."+"http://localhost:8080/ecr/adapter/cart/company");
+    console.log("company id : "+companyId);
+
+    return this.http.get('http://localhost:8080/ecr/adapter/cart/company/'+companyId)
+              .map((response: Response) => response.json());
+  
+ }
+
+ getLenderData(companyId) {
+  
+    //console.log("in borrower service.."+"http://localhost:8080/ecr/cart/company/"+companyId);
+    console.log("company id : "+companyId);
+
+    return this.http.get('http://localhost:8080/ecr/adapter/cart/company/'+companyId)
+              .map((response: Response) => response.json());
+  
+ }
 }

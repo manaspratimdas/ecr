@@ -171,7 +171,44 @@ public class EcrContainerController {
 
 	}
 	
+	/**
+	 * added by dbangar
+	 * This will list all the lender container for a company
+	 * @return
+	 */
+
+	@RequestMapping(value = "/company/{companyId}/containers/lender", method = RequestMethod.GET)
+	public ResponseEntity getLenderContainersByCompany(@PathVariable("companyId") Long companyId) {
+
+		System.out.println("in list container controller");
+
+		List<Container> containers = ecrContainerService.getLenderContainersByCompanyId(companyId);
+		if (containers == null) {
+			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(containers, HttpStatus.OK);
+
+	}
 	
+	/**
+	 * added by dbangar
+	 * This will list all the borrower container for a company
+	 * @return
+	 */
+
+	@RequestMapping(value = "/company/{companyId}/containers/borrower", method = RequestMethod.GET)
+	public ResponseEntity getBorrowerContainersByCompany(@PathVariable("companyId") Long companyId) {
+
+		System.out.println("in list container controller");
+
+		List<Container> containers = ecrContainerService.getBorrowerContainersByCompanyId(companyId);
+		if (containers == null) {
+			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(containers, HttpStatus.OK);
+
+	}
+		
 	@RequestMapping(value = "/containers/update", method = RequestMethod.POST)
 	public ResponseEntity saveOrUpdateContainers(@RequestBody List<Container> containers) {
 
