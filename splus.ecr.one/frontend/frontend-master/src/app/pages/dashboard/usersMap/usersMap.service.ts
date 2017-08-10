@@ -5,11 +5,21 @@ import { Http, Response, Headers } from '@angular/http';
 @Injectable()
 export class UsersMapService {
 
+  containers:any;
   constructor(private _baConfig:BaThemeConfigProvider, private http: Http) {
     console.log("in UsersMapService..");
+
+    this.http.get("http://localhost:8080/ecr/companies").subscribe((data) => {
+          //this.containers.push(data);
+          console.log("testinnggg")
+          //this.usersMapService = _usersMapService
+          this.getData(this.containers);
+        });
+      
   }
 
-  getData() {
+  getData(containers) {
+    console.log("in container getData");
     var layoutColors = this._baConfig.get().colors;
 
     return {
@@ -22,7 +32,7 @@ export class UsersMapService {
         zoomLevel: 3.5,
         zoomLongitude: 10,
         zoomLatitude: 52,
-        areas: this.getDataFromServer(layoutColors)
+        areas: this.containers
       },
 
       areasSettings: {
@@ -83,8 +93,10 @@ export class UsersMapService {
     //             console.log("http - result : "+json);
     //             if (json && json.token) {
     //             }
+
+    
                 return [
-          { title: 'Austria', id: 'AT', color: layoutColors.primary, customData: '1 244', groupId: '1'},
+          { title: 'India', id: 'IN', color: layoutColors.primary, customData: '1 244', groupId: '1'},
           { title: 'Ireland', id: 'IE', color: layoutColors.primary, customData: '1 342', groupId: '1'},
           { title: 'Denmark', id: 'DK', color: layoutColors.primary, customData: '1 973', groupId: '1'},
           { title: 'Finland', id: 'FI', color: layoutColors.primary, customData: '1 573', groupId: '1'},
@@ -113,6 +125,8 @@ export class UsersMapService {
           { title: 'Slovenia', id: 'SI', color: layoutColors.danger, customData: '23', groupId: '4'},
           { title: 'Croatia', id: 'HR', color: layoutColors.danger, customData: '96', groupId: '4'}
         ];
+
+        //return this.containers;
 			//	}); 
   }
 }

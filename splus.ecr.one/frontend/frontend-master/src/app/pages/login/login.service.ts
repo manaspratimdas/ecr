@@ -13,12 +13,14 @@ export class LoginService {
   pass: string;
 
     constructor(private http: Http){
+        //sessionStorage.getItem("IP")
+        //sessionStorage.setItem("IP", "http://10.4.3.182:8080");
     }
    userData(){
      console.log("get user data from db..");
      
      
-           return this.http.get('http://localhost:8080/ecr/user/loggedIn_users?')
+           return this.http.get(sessionStorage.getItem("IP") + '/ecr/user/loggedIn_users?')
              .map((response: Response) => {
                let user = response.json();
                console.log("application user is : "+user['username']);
@@ -29,6 +31,8 @@ export class LoginService {
     }
   
       test(credentials){
+           sessionStorage.getItem("IP")
+        sessionStorage.setItem("IP", "http://10.4.3.182:8080");
         console.log("insert user in db..");
         this.email = credentials['email'];
         this.pass = credentials['password'];
@@ -40,9 +44,9 @@ export class LoginService {
     if (cached = sessionStorage.getItem("http://localhost:8080/ecr/user/login")) {
         return Observable.of(JSON.parse(cached));
     } else {
-        return this.http.post("http://localhost:8080/ecr/user/login",myJSON).map((response: Response) => {
+        return this.http.post(sessionStorage.getItem("IP") +"/ecr/user/login",myJSON).map((response: Response) => {
             sessionStorage.setItem("http://localhost:8080/ecr/user/login", response.text());
-            sessionStorage.setItem("IP", "http://localhost:8080");
+            
             sessionStorage.removeItem("add2Cart");
             return response.json();
         });

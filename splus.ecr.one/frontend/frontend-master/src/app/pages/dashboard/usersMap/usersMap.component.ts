@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 
+import { Http } from '@angular/http'
+
 import {UsersMapService} from './usersMap.service';
 
 @Component({
@@ -10,8 +12,18 @@ import {UsersMapService} from './usersMap.service';
 export class UsersMap {
 
   mapData:Object;
+  containers:any;
+  usersMapService:UsersMapService;
+  constructor(private _usersMapService:UsersMapService, private http:Http) {
 
-  constructor(private _usersMapService:UsersMapService) {
-    this.mapData = this._usersMapService.getData();
+       // this.http.get("http://localhost:8080/ecr/companies").subscribe((data) => {
+          //this.containers.push(data);
+        //  console.log("testinnggg")
+          this.usersMapService = _usersMapService
+          this.mapData = this.usersMapService.getData(this.containers);
+       // });
+    
   }
+
+ 
 }

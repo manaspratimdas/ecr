@@ -192,28 +192,28 @@ settings1 = {
     console.log(this.testt);
     
    
-    http.get("http://localhost:8080/ecr/containertypes")
+    http.get(sessionStorage.getItem("IP") +"/ecr/containertypes")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.types.push(data);
           cd.detectChanges();
         });
         
-         http.get("http://localhost:8080/ecr/countries")
+         http.get(sessionStorage.getItem("IP") +"/ecr/countries")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.countries.push(data);
           cd.detectChanges();
         });
         
-         http.get("http://localhost:8080/ecr/ports")
+         http.get(sessionStorage.getItem("IP") +"/ecr/ports")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.ports.push(data);
           cd.detectChanges();
         });
         
-        http.get("http://localhost:8080/ecr/companies")
+        http.get(sessionStorage.getItem("IP") +"/ecr/companies")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.companies.push(data);
@@ -310,7 +310,7 @@ settings1 = {
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);
-           window.location.href = "http://localhost:4200/#/pages/cart";
+           window.location.href = "http://10.4.3.182:4200/#/pages/cart";
           });
     }
 

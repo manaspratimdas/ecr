@@ -15,7 +15,7 @@ export class SearchService {
 
   getSearchData() {
     
-     return this.http.get('http://localhost:8080/ecr/containers')
+     return this.http.get(sessionStorage.getItem("IP") + '/ecr/containers')
             .map((response: Response) => {
                 let user = response.json();
                 console.log("http - result : "+user);
@@ -30,35 +30,35 @@ export class SearchService {
     
         if(selectedType!=null&&selectedCountry!=null&&selectedPort!=null&&selectedCompany!=null){
           console.log("in loop..");
-          url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&port='+selectedPort+'&company='+selectedCompany;
+          url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&port='+selectedPort+'&company='+selectedCompany;
         }else if(selectedType!=null&&selectedCountry!=null&&selectedPort!=null){
-             url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&port='+selectedPort;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&port='+selectedPort;
         }else if(selectedType!=null&&selectedCountry!=null&&selectedCompany!=null){
           console.log("in loop..");
-          url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&company='+selectedCompany;
+          url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&country='+selectedCountry+'&company='+selectedCompany;
         }else if(selectedCountry!=null&&selectedPort!=null&&selectedCompany!=null){
           console.log("in loop..");
-          url = 'http://localhost:8080/ecr/search'+'?country='+selectedCountry+'&port='+selectedPort+'&company='+selectedCompany;
+          url = sessionStorage.getItem("IP") + '/ecr/search'+'?country='+selectedCountry+'&port='+selectedPort+'&company='+selectedCompany;
         }else if(selectedType!=null&&selectedCountry!=null){
-             url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&country='+selectedCountry;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&country='+selectedCountry;
         }else if(selectedType!=null&&selectedPort!=null){
-             url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&port='+selectedPort;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&port='+selectedPort;
         }else if(selectedType!=null&&selectedCompany!=null){
-             url = 'http://localhost:8080/ecr/search'+'?type='+selectedType+'&company='+selectedCompany;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType+'&company='+selectedCompany;
         }else if(selectedCountry!=null&&selectedPort!=null){
-             url = 'http://localhost:8080/ecr/search'+'?country='+selectedCountry+'&port='+selectedPort;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?country='+selectedCountry+'&port='+selectedPort;
         }else if(selectedCompany!=null&&selectedCountry!=null){
-             url = 'http://localhost:8080/ecr/search'+'?company='+selectedCompany+'&country='+selectedCountry;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?company='+selectedCompany+'&country='+selectedCountry;
         }else if(selectedCompany!=null&&selectedPort!=null){
-             url = 'http://localhost:8080/ecr/search'+'?company='+selectedCompany+'&port='+selectedPort;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?company='+selectedCompany+'&port='+selectedPort;
         }else if(selectedType!=null){
-             url = 'http://localhost:8080/ecr/search'+'?type='+selectedType;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?type='+selectedType;
         }else if(selectedCountry!=null){
-             url = 'http://localhost:8080/ecr/search'+'?country='+selectedCountry;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?country='+selectedCountry;
         }else if(selectedPort!=null){
-             url = 'http://localhost:8080/ecr/search'+'?port='+selectedPort;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?port='+selectedPort;
         }else if(selectedCompany!=null){
-             url = 'http://localhost:8080/ecr/search'+'?company='+selectedCompany;
+             url = sessionStorage.getItem("IP") + '/ecr/search'+'?company='+selectedCompany;
         }else{
             window.alert("Please select one of the field..!");
         }
@@ -79,9 +79,9 @@ export class SearchService {
     console.log("in service.."+id);
     
     
-    console.log("url : "+"http://localhost:8080/ecr/containers/"+id);
+    //console.log("url : "+""sessionStorage.getItem("IP")"/ecr/containers/"+id);
     
-       return this.http.get('http://localhost:8080/ecr/containers/'+id)
+       return this.http.get(sessionStorage.getItem("IP") + '/ecr/containers/'+id)
             .map((response: Response) => {
 
                 console.log("json data : "+response.json());
@@ -101,7 +101,7 @@ export class SearchService {
       var headers = new Headers();
       headers.append('Content-Type','application/json; charset=utf8');
       
-      return this.http.post('http://localhost:8080/ecr/cart/save',jsonW,{headers:headers})
+      return this.http.post(sessionStorage.getItem("IP") + '/ecr/cart/save',jsonW,{headers:headers})
               .map((response: Response) => response.json());
   }
 }
