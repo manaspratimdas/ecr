@@ -45,7 +45,7 @@ public class EcrCartServiceImpl implements EcrCartService {
 			
 			container.setPort(destinationPort);
 			container.setLastUpdateDate(cart.getRequestDate());
-			container.setStatus("B");
+			container.setStatus("R");
 			
 		}
 	//ecrCartRepository.saveAndFlush(cart);
