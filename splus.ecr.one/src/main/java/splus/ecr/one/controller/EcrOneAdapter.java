@@ -46,7 +46,7 @@ public class EcrOneAdapter {
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
 				
-				transactionRow.put("id", cart.getId().toString());
+				transactionRow.put("code", container.getId().toString());
 				transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());
@@ -111,7 +111,7 @@ public class EcrOneAdapter {
 							
 							Map<String,String> transactionRow=new HashMap<String,String>();
 
-							transactionRow.put("id", cart.getId().toString());
+							transactionRow.put("code", container.getId().toString());
 							transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
 							transactionRow.put("portSource", cart.getPortSource());
 							transactionRow.put("portDestination", cart.getPortDestination());
@@ -184,7 +184,7 @@ public class EcrOneAdapter {
 								
 								Map<String,String> transactionRow=new HashMap<String,String>();
 
-								transactionRow.put("id", cart.getId().toString());
+								transactionRow.put("code", container.getId().toString());
 								transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
 								transactionRow.put("portSource", cart.getPortSource());
 								transactionRow.put("portDestination", cart.getPortDestination());
@@ -251,7 +251,7 @@ public class EcrOneAdapter {
 				
 				if("B".equals(container.getStatus())) {
 					
-				transactionRow.put("id", cart.getId().toString());
+				transactionRow.put("code", container.getId().toString());
 				transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());

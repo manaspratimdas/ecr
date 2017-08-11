@@ -1,5 +1,6 @@
 package splus.ecr.one.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import splus.ecr.one.model.CommunicationObject;
+import com.google.gson.Gson;
+
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.ContainerMapData;
 import splus.ecr.one.service.EcrContainerService;
-
-import com.google.gson.Gson;
 //@CrossOrigin
 @RestController
 public class EcrContainerController {
@@ -88,7 +88,9 @@ public class EcrContainerController {
 		for(long id : ids){
 			
 			Container container = ecrContainerService.getContainer(id);
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			container.setStatus("B");
+			container.setLastUpdateDate(timestamp);
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
 //			
 //			System.out.println("data:"+container);
@@ -113,7 +115,9 @@ public class EcrContainerController {
 		for(long id : ids){
 			
 			Container container = ecrContainerService.getContainer(id);
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			container.setStatus("A");
+			container.setLastUpdateDate(timestamp);
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
 			
 //			System.out.println("data:"+container);
@@ -139,7 +143,9 @@ public class EcrContainerController {
 		for(long id : ids){
 			
 			Container container = ecrContainerService.getContainer(id);
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			container.setStatus("A");
+			container.setLastUpdateDate(timestamp);
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
 			
 //			System.out.println("data:"+container);
