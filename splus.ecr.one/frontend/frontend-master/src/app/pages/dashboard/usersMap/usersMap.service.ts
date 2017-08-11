@@ -21,7 +21,7 @@ export class UsersMapService {
 
       dataProvider: {
         map: 'worldLow',
-        zoomLevel: 1.0,
+        zoomLevel: 1.1,
         zoomLongitude: 10,
         zoomLatitude: 52,
         areas: this.getDataFromServer(layoutColors)
