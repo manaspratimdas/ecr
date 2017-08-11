@@ -1,9 +1,13 @@
 package splus.ecr.one.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
@@ -11,8 +15,11 @@ import org.springframework.stereotype.Service;
 
 import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
+import splus.ecr.one.model.ContainerMapData;
+import splus.ecr.one.model.Country;
 import splus.ecr.one.model.Port;
 import splus.ecr.one.repository.EcrContainerRepository;
+import splus.ecr.one.repository.EcrCountryRepository;
 import splus.ecr.one.repository.EcrPortRepository;
 import splus.ecr.one.service.EcrContainerService;
 import splus.ecr.one.service.EcrPortService;
@@ -24,12 +31,14 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 	@Autowired
 	EcrContainerRepository ecrContainerRepository;
 	
-	
 	@Autowired
 	EcrPortRepository ecrPortRepository;
 	
 	@Autowired
 	EcrPortService ecrPortService;
+	
+	@Autowired
+	EcrCountryRepository ecrCountryRepository;
 	
 	public List<Container> getContainers() {
 		
@@ -143,8 +152,43 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		return getContainersByCompanyId(container.getCompany().getId());
 	}
 
-	public CommunicationObject getContainersByCountry(String id) {
-	return  null;//ecrContainerRepository.getContainersByCountry(id);
+	public List<ContainerMapData> getContainersByCountry(String id) {
+		List<Port> ports = ecrPortRepository.findAll();
+		Map<Long, List<Long>> countryPortMap = new HashMap<Long, List<Long>>();
+		for(Port port : ports){
+			if(countryPortMap.keySet().contains(port.getCountry().getId())){
+				countryPortMap.get(port.getCountry().getId()).add(port.getId());
+			}else{
+				List<Long> portIds = new ArrayList<Long>();
+				portIds.add(port.getId());
+				countryPortMap.put(port.getCountry().getId(), portIds);
+			}
+		}
+		Map<Country, Long> containerGroupByCountry = new HashMap<Country, Long>();
+		for(Long countryId : countryPortMap.keySet()){
+			long containerSize = ecrContainerRepository.findAll(countryPortMap.get(countryId)).size();
+			Country country = ecrCountryRepository.findOne(countryId);
+			containerGroupByCountry.put(country, containerSize);
+		}
+		
+		CommunicationObject communicationObject = new CommunicationObject();
+		communicationObject.setMap(containerGroupByCountry);
+		
+		//title: 'India', id: 'IN', color: layoutColors.primary, customData: '1 244', groupId: '1'
+		List<ContainerMapData> containerMapDatas = new ArrayList<ContainerMapData>();
+		for(Country country : containerGroupByCountry.keySet()){
+			ContainerMapData containerMapData = new ContainerMapData();
+			containerMapData.setColor("layoutColors.primary");
+			containerMapData.setGroupId("1");
+			containerMapData.setTitle(country.getIsoLocalName());
+			containerMapData.setId(country.getIsoCountryCode());
+			containerMapData.setCustomData(String.valueOf(containerGroupByCountry.get(country)));
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.append("title", country.getName()).append("id", country.getIsoCountryCode()).append("color", "layoutColors.primary").append("customData", containerGroupByCountry.get(country)).append("groupId", "1");
+			containerMapDatas.add(containerMapData);
+			
+		}
+		return containerMapDatas;
 }
 
 public List<Container>  getAvailableContainers(String type, String country, String port, String company) {

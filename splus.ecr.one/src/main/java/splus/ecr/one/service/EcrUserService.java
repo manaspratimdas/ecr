@@ -27,5 +27,5 @@ public interface EcrUserService {
 	
 	 User save(User user);
 
-	Map<String, String> login(String email, String password);
+	Map<String, Object> login(String email, String password);
 }

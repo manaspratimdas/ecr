@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import splus.ecr.one.model.Cart;
 import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
-import splus.ecr.one.model.Port;
-import splus.ecr.one.service.EcrCartService;
+import splus.ecr.one.model.ContainerMapData;
 import splus.ecr.one.service.EcrContainerService;
-import splus.ecr.one.service.EcrPortService;
 
 import com.google.gson.Gson;
 //@CrossOrigin
@@ -30,8 +26,9 @@ public class EcrContainerController {
 	@Autowired
 	EcrContainerService ecrContainerService;
 	
-	@Autowired
-	EcrCartService ecrCartService;
+	
+	
+	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "containers/test", method = RequestMethod.GET)
@@ -93,9 +90,16 @@ public class EcrContainerController {
 			Container container = ecrContainerService.getContainer(id);
 			container.setStatus("B");
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
+//			
+//			System.out.println("data:"+container);
 			listofContainer.add(updatedContainer);
 		}
-		
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+//		
 	return new ResponseEntity(listofContainer, HttpStatus.OK);
 	}
 	
@@ -112,8 +116,15 @@ public class EcrContainerController {
 			container.setStatus("A");
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
 			
+//			System.out.println("data:"+container);
 			listofContainer.add(updatedContainer);
 		}
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+//		
 	return new ResponseEntity(listofContainer, HttpStatus.OK);
 	}
 	/*
@@ -129,8 +140,15 @@ public class EcrContainerController {
 			container.setStatus("A");
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
 			
+//			System.out.println("data:"+container);
 			listofContainer.add(updatedContainer);
 		}
+//		System.out.println("list:"+listofContainer);
+//		Object listofCart = null;
+//		if (listofContainer == null || listofContainer.isEmpty()) {
+//			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
+//		}
+		
 		return new ResponseEntity(listofContainer, HttpStatus.OK);
 	}
 	/**
@@ -161,31 +179,12 @@ public class EcrContainerController {
 	public ResponseEntity getLenderContainersByCompany(@PathVariable("companyId") Long companyId) {
 
 		System.out.println("in list container controller");
-		List<Cart> carts = ecrCartService.getAllCarts();
-		
-		List<Container> containerlist = new ArrayList<Container>();
-		
-		for(Cart cart:carts){
 
-			List<Container> containerbycart =  cart.getContainers();
-			
-			for(Container container : containerbycart){
-				
-				List<Container> containers = ecrContainerService.getLenderContainersByCompanyId(companyId);
-				for(Container container2:containers){
-					if(container2.getCode().equals(container.getCode())){
-						containerlist.add(container);
-					}
-				}
-				
-			}
-			
-		}
-		
-		if (containerlist == null) {
+		List<Container> containers = ecrContainerService.getLenderContainersByCompanyId(companyId);
+		if (containers == null) {
 			return new ResponseEntity("No Containers found", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(containerlist, HttpStatus.OK);
+		return new ResponseEntity(containers, HttpStatus.OK);
 
 	}
 	
@@ -246,9 +245,9 @@ public class EcrContainerController {
 		
 		System.out.println("json "+id);
 
-		CommunicationObject communicationObject = ecrContainerService.getContainersByCountry(id);
+		List<ContainerMapData> containerMapDatas = ecrContainerService.getContainersByCountry(id);
 		
-		String json = new Gson().toJson(communicationObject);
+		String json = new Gson().toJson(containerMapDatas);
 		
 		
 		System.out.println(json);

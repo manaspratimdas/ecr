@@ -106,13 +106,13 @@ public class EcrUserServiceImpl implements EcrUserService, UserDetailsService {
 		
 	}
 
-	public Map<String, String> login(String email, String password) {
+	public Map<String, Object> login(String email, String password) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
 		user = ecrUserRepository.login(user);
 		
-		Map<String, String> result = new HashMap<String, String>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		if(user!=null){
 			result.put("username", user.getUsername());
 			result.put("companyId", String.valueOf(user.getCompany().getId()));

@@ -5,20 +5,12 @@ import { Http, Response, Headers } from '@angular/http';
 @Injectable()
 export class UsersMapService {
 
-  containers:any;
+  containers:any[] = []; 
   constructor(private _baConfig:BaThemeConfigProvider, private http: Http) {
-    console.log("in UsersMapService..");
-
-    this.http.get("http://localhost:8080/ecr/companies").subscribe((data) => {
-          //this.containers.push(data);
-          console.log("testinnggg")
-          //this.usersMapService = _usersMapService
-          this.getData(this.containers);
-        });
-      
+       
   }
 
-  getData(containers) {
+  getData() {
     console.log("in container getData");
     var layoutColors = this._baConfig.get().colors;
 
@@ -32,7 +24,7 @@ export class UsersMapService {
         zoomLevel: 3.5,
         zoomLongitude: 10,
         zoomLatitude: 52,
-        areas: this.containers
+        areas: this.getDataFromServer(layoutColors)
       },
 
       areasSettings: {
@@ -82,51 +74,34 @@ export class UsersMapService {
       creditsPosition: 'bottom-right',
       pathToImages: layoutPaths.images.amChart
     };
+  
             
   }
 
   getDataFromServer(layoutColors){
-    console.log("in UsersMapService -> getDataFromServer..");
-    // return this.http.get('http://localhost:8080/ecr/containers/getContainersByCountry/1')
-    //         .map((response: Response) => {
-    //             let json = response.json();
-    //             console.log("http - result : "+json);
-    //             if (json && json.token) {
-    //             }
-
+   
+      var constainersJson = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))["containersInCountries"];
+      for(var i = 0; i<Object.keys(constainersJson).length; i++){
+        var colour = layoutColors.primary;
+        var group = constainersJson[i].groupId
+      if(constainersJson[i].customData>1000){
+          colour = layoutColors.primary;
+          group = constainersJson[i].groupId
+      }else if(constainersJson[i].customData>500){
+          colour = layoutColors.successLight;  
+          group = constainersJson[i].groupId   
+      }else if(constainersJson[i].customData>200){
+          colour = layoutColors.success;
+          group = constainersJson[i].groupId
+      }else{
+          colour = layoutColors.danger;
+          group = constainersJson[i].groupId
+      }
+          this.containers.push({ 'title': constainersJson[i].title, 'id': constainersJson[i].id, color:colour, customData: constainersJson[i].customData, groupId: group});
+      
+     }
+        return this.containers;
     
-                return [
-          { title: 'India', id: 'IN', color: layoutColors.primary, customData: '1 244', groupId: '1'},
-          { title: 'Ireland', id: 'IE', color: layoutColors.primary, customData: '1 342', groupId: '1'},
-          { title: 'Denmark', id: 'DK', color: layoutColors.primary, customData: '1 973', groupId: '1'},
-          { title: 'Finland', id: 'FI', color: layoutColors.primary, customData: '1 573', groupId: '1'},
-          { title: 'Sweden', id: 'SE', color: layoutColors.primary, customData: '1 084', groupId: '1'},
-          { title: 'Great Britain', id: 'GB', color: layoutColors.primary, customData: '1 452', groupId: '1'},
-          { title: 'Italy', id: 'IT', color: layoutColors.primary, customData: '1 321', groupId: '1'},
-          { title: 'France', id: 'FR', color: layoutColors.primary, customData: '1 112', groupId: '1'},
-          { title: 'Spain', id: 'ES', color: layoutColors.primary, customData: '1 865', groupId: '1'},
-          { title: 'Greece', id: 'GR', color: layoutColors.primary, customData: '1 453', groupId: '1'},
-          { title: 'Germany', id: 'DE', color: layoutColors.primary, customData: '1 957', groupId: '1'},
-          { title: 'Belgium', id: 'BE', color: layoutColors.primary, customData: '1 011', groupId: '1'},
-          { title: 'Luxembourg', id: 'LU', color: layoutColors.primary, customData: '1 011', groupId: '1'},
-          { title: 'Netherlands', id: 'NL', color: layoutColors.primary, customData: '1 213', groupId: '1'},
-          { title: 'Portugal', id: 'PT', color: layoutColors.primary, customData: '1 291', groupId: '1'},
-          { title: 'Lithuania', id: 'LT', color: layoutColors.successLight, customData: '567', groupId: '2'},
-          { title: 'Latvia', id: 'LV', color: layoutColors.successLight, customData: '589', groupId: '2'},
-          { title: 'Czech Republic ', id: 'CZ', color: layoutColors.successLight, customData: '785', groupId: '2'},
-          { title: 'Slovakia', id: 'SK', color: layoutColors.successLight, customData: '965', groupId: '2'},
-          { title: 'Estonia', id: 'EE', color: layoutColors.successLight, customData: '685', groupId: '2'},
-          { title: 'Hungary', id: 'HU', color: layoutColors.successLight, customData: '854', groupId: '2'},
-          { title: 'Cyprus', id: 'CY', color: layoutColors.successLight, customData: '754', groupId: '2'},
-          { title: 'Malta', id: 'MT', color: layoutColors.successLight, customData: '867', groupId: '2'},
-          { title: 'Poland', id: 'PL', color: layoutColors.successLight, customData: '759', groupId: '2'},
-          { title: 'Romania', id: 'RO', color: layoutColors.success, customData: '302', groupId: '3'},
-          { title: 'Bulgaria', id: 'BG', color: layoutColors.success, customData: '102', groupId: '3'},
-          { title: 'Slovenia', id: 'SI', color: layoutColors.danger, customData: '23', groupId: '4'},
-          { title: 'Croatia', id: 'HR', color: layoutColors.danger, customData: '96', groupId: '4'}
-        ];
-
-        //return this.containers;
-			//	}); 
+      
   }
 }

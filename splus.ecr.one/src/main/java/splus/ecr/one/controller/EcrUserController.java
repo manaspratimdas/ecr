@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import splus.ecr.one.model.ContainerMapData;
 import splus.ecr.one.model.User;
+import splus.ecr.one.service.EcrContainerService;
 import splus.ecr.one.service.EcrSecurityService;
 import splus.ecr.one.service.EcrUserService;
 
@@ -27,6 +30,7 @@ import com.google.gson.JsonParser;
 
 @RestController
 @RequestMapping("/user")
+@ResponseBody
 public class EcrUserController {
 
 
@@ -35,6 +39,9 @@ public class EcrUserController {
 
 	@Autowired
 	private EcrSecurityService securityService;
+	
+	@Autowired
+	EcrContainerService ecrContainerService;
 
 
 	@RequestMapping(value = "/testuserapi", method = RequestMethod.GET)
@@ -155,7 +162,9 @@ public class EcrUserController {
 	public ResponseEntity login(@RequestBody String json) {
 
 		JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-		Map<String, String> resultMap =  ecrUserService.login(jsonObject.get("email").getAsString(), jsonObject.get("pass").getAsString());
+		Map<String, Object> resultMap =  ecrUserService.login(jsonObject.get("email").getAsString(), jsonObject.get("pass").getAsString());
+		List<ContainerMapData> containerMapDatas = ecrContainerService.getContainersByCountry(String.valueOf(resultMap.get("companyId")));
+		resultMap.put("containersInCountries", containerMapDatas);
 		Gson gson = new Gson(); 
 		json = gson.toJson(resultMap);
 		return new ResponseEntity(json, HttpStatus.OK);

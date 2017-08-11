@@ -2,8 +2,11 @@ package splus.ecr.one.service;
 
 import java.util.List;
 
+import org.json.JSONArray;
+
 import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
+import splus.ecr.one.model.ContainerMapData;
 
 public interface EcrContainerService {
 
@@ -25,7 +28,7 @@ public interface EcrContainerService {
 
 	public List<Container> delete(Container container);
 	
-	public CommunicationObject getContainersByCountry(String id);
+	public List<ContainerMapData> getContainersByCountry(String id);
 
 	List<Container> getAvailableContainers(String type, String country, String port, String company);
 }
