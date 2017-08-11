@@ -1,20 +1,24 @@
+
 <div class="auth-main">
+<div class="logoCont">
+<!-- <img  class="logo" src="assets/images/logo.png"/> -->
+</div>
   <div class="auth-block">
    <h1 class="md-display-4" translate><font color="white"><b>Empty Container Repositioning</b></font></h1>
-    <a routerLink="/" class="auth-link" translate><font color="black">New to ECR? Sign up!</font></a><!-- <a routerLink="/register" class="auth-link" translate>{{'login.signup_link'}}</a>-->
+   <!-- <a routerLink="/register" class="auth-link" translate>{{'login.signup_link'}}</a>-->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
    <p *ngIf="errormsg" class="autoHideAlert">Please enter username & password</p> 
   
         <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
+            <label>User Name</label>
               <input
                 formControlName="username"
                 placeholder="Username"
                 class="form-control form-control-lg"
                 type="text"
                 *ngIf="authType == 'register'" />
-            </fieldset>
-            <fieldset class="form-group">
+
               <input
                 formControlName="email"
                 placeholder="Email"
@@ -22,6 +26,8 @@
                 type="text" />
             </fieldset>
             <fieldset class="form-group">
+            <label>Password</label>  <a routerLink="/login" class="forgot-pass" translate><font color="Aqua">Forgot Password</font></a>
+            
               <input
                 formControlName="password"
                 placeholder="Password"
@@ -31,15 +37,19 @@
             <button type="submit"  routerLink="/register" class="btn btn-default btn-auth" translate>
               {{ title }}
             </button>
-            <a routerLink="/login" class="forgot-pass" translate><font color="Aqua">{{'login.forgot_password'}}</font></a>
-          </fieldset>
+                     </fieldset>
     </form>
-    <div class="al-share-auth">
+    <!-- <div class="al-share-auth">
       <ul class="al-share clearfix">
         <li><i class="socicon socicon-facebook" title="{{'login.share_on_facebook' | translate}}"></i></li>
         <li><i class="socicon socicon-twitter" title="{{'login.share_on_twitter' | translate}}"></i></li>
         <li><i class="socicon socicon-google" title="{{'login.share_on_google_plus' | translate}}"></i></li>
       </ul>
-    </div>
+    </div> -->
+     <a routerLink="/" class="auth-link" class="btn btn-default btn-signup" translate><font color="black">New to ECR? Sign up!</font></a>
+    <div class="copyright text-center">
+    	&copy; 2017, Developed by <a href="http://systems-plus.com/splus/" target="_blank">Systems +</a>
+</div>
   </div>
 </div>
+

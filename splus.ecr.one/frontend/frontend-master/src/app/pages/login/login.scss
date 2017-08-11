@@ -17,12 +17,35 @@
 
 
 .auth-block{
-
-//    background-color: #000000;
-    background: #696969;
+    background: #ffffff;
 }
 
+.auth-block font{
+	color:#666;
+}
 .auth-main{
-      background: #000000;
+      background: #00b9f2;
+}
+ .auth-block .btn-auth {
+    background: #00abf2!important;
+}
+.forgot-pass{
+	top:10px;
+	color:#00b9f2;
+}
+.forgot-pass font, .copyright a{
+	color:#00b9f2;
+}
+.copyright {
+    margin-top: 40px;
+    color: #666;
+}
+.btn-signup{
+    border: 1px solid #8d9096;
+    background: #e7e9ec;
+    display:block;
+    margin:0 auto;
+    width:200px;
+    font-size: 0.9rem;
 }
     
