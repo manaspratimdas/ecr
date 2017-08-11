@@ -19,7 +19,7 @@ export class BaMsgCenter {
   }
 
   protected liClicked():void{
-    window.location.href = "http://10.4.3.182:4200/#/pages/cart";
+    window.location.href = "http://localhost:4200/#/pages/cart";
   }
 
 }
