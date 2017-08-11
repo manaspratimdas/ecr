@@ -34,22 +34,22 @@ onConfirm(selectedRows){
   
   //  window.alert("selected : "+selectedRows);
     console.log("hello");
-    
-      return this.http.get('http://localhost:8080/ecr/lender/onConfirm/containers/'+selectedRows)
+    console.log('http://localhost:8080/ecr/containers/lender/confirm/'+selectedRows);
+      return this.http.get('http://localhost:8080/ecr/containers/lender/confirm/'+selectedRows)
               .map((response: Response) => response.json());
   
   }
   
   onReject(selectedRows){
   
-      return this.http.get('http://localhost:8080/ecr/lender/onReject/containers/'+selectedRows)
+      return this.http.get('http://localhost:8080/ecr/containers/lender/reject/'+selectedRows)
               .map((response: Response) => response.json());
   
   }
   
   onRelease(selectedRows){
     
-   return this.http.get('http://localhost:8080/ecr/borrower/onRelease/containers/'+selectedRows)
+   return this.http.get('http://localhost:8080/ecr/containers/borrower/release/'+selectedRows)
               .map((response: Response) => response.json());
  
   }

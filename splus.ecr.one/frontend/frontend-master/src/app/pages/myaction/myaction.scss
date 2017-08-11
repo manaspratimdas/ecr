@@ -284,3 +284,16 @@ button.btn.btn-primary {
     background: #00abf2;
     border-color:#00abf2;
 }
+.autoHideAlert{
+
+    position: absolute;
+    left: 50%;
+    top: 3px;
+    background: #00abff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 500px;
+    margin-left: -250px;
+    color: white;
+    text-align: center;
+}

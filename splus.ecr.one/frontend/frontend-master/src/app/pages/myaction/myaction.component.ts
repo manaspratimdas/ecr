@@ -10,11 +10,15 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class MyAction {
   
   id: any;
- selectedRows = [];
- unselectedRows = [];
+  selectedRows = [];
+  unselectedRows = [];
   lButton: string = '';
   bButton: string = '';
-
+  code: number;
+  
+  rmsg:boolean = false;
+  cmsg:boolean = false;
+  rjmsg:boolean = false;
   query: string = '';
   
   
@@ -28,10 +32,10 @@ export class MyAction {
       editable:false   
     },  
     columns: {
-       id: {
+       code: {
         title: 'Sr.No',
         filter: false,
-        type: 'number'
+        type: 'string'
       },
       
        pickUpDate: {
@@ -91,13 +95,14 @@ export class MyAction {
   }
 
   onRowSelect(event): void {
-    //this.code = event.data['code'];
-    this.id = event.data['id'];
+    this.code = event.data['code'];
+    console.log("value of code :" + this.code);
+    //this.id = event.data['id'];
     console.log("selected index :" + this.id);
-    if(this.selectedRows.includes(this.id)){
-      this.selectedRows = this.selectedRows.splice(this.id);
+    if(this.selectedRows.includes(this.code)){
+      this.selectedRows = this.selectedRows.splice(this.code);
     }else{
-      this.selectedRows.push(this.id);
+      this.selectedRows.push(this.code);
     }
     
     
@@ -137,8 +142,15 @@ export class MyAction {
   //window.alert("click on release click"+this.selectedRows);
   this.service.onRelease(this.selectedRows).subscribe(
   data => {
+
+         
   }
   );
+  this.rmsg = true
+           setTimeout(function() {
+          
+           this.rmsg = false;
+           }.bind(this), 2000); 
   }
   
   onConfirm() {
@@ -147,7 +159,13 @@ export class MyAction {
      this.service.onConfirm(this.selectedRows).subscribe(
      
      data => {
+       
      });
+      this.cmsg = true
+           setTimeout(function() {
+          
+           this.cmsg = false;
+           }.bind(this), 2000); 
   }
   
   onReject() {
@@ -156,6 +174,12 @@ export class MyAction {
      this.service.onReject(this.selectedRows).subscribe(
      
      data => {
+         
      });
+           this.rjmsg = true
+           setTimeout(function() {
+          
+           this.rjmsg = false;
+           }.bind(this), 2000); 
   }
 }

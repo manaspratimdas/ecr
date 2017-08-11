@@ -1,5 +1,6 @@
 <form (ngSubmit)="onConfirm($event)">
 <ba-card cardTitle="" baCardClass="with-scroll">
+<p *ngIf="msg" class="autoHideAlert">Container Booked successfully..!</p> <br>
 <div class="row">
   <div class="col-sm-4">
     <div class="form-group">

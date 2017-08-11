@@ -29,7 +29,7 @@
   </li>
   <li class="dropdown" (click)="liClicked()">
     <a href class="msg dropdown-toggle" id="msg-dd2" data-toggle="dropdown" aria-expanded="false">
-      <i class="fa fa-envelope-o"></i><span ng-if="messages != null">{{ messages.length }}</span>
+      <i class="fa fa-shopping-cart fa-lg"></i><span ng-if="messages != null">{{ messages.length }}</span>
       <div class="notification-ring"></div>
     </a>
     < <div class="top-dropdown-menu dropdown-menu" aria-labelledby="msg-dd2">
@@ -41,8 +41,8 @@
       </div>
       <div class="msg-list">
         <a  ng-if="messages != null" *ngFor="let msg of messages" href class="clearfix">
-          <div class="img-area"><img [ngClass]="{'photo-msg-item': !msg.image}"
-                                     src="{{ ( msg.code ||  (msg.name | baProfilePicture)) }}"></div>
+          <!-- <div class="img-area"><img [ngClass]="{'photo-msg-item': !msg.image}"
+                                     src="{{ ( msg.code ||  (msg.name | baProfilePicture)) }}"></div> -->
           <div class="msg-area">
             <div>{{ msg.code }}</div>
             <span>{{ msg.name }}</span>

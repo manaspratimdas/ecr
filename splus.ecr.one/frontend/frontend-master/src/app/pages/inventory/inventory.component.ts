@@ -68,15 +68,16 @@ export class Inventory {
          editor: {
           type: 'list',
         config: {
-            list: [{ value: 'Available', title: 'Available' }, { value: 'Booked', title: 'Booked' }, { value: 'Not Available', title: 'Not Available',}]
-          
-       }
+            list: [{ value: 'Available', title: 'Available' }, { value: 'Booked', title: 'Booked' }, { value: 'Requested', title: 'Requested' }, { value: 'Not Available', title: 'Not Available' }]
+          }
         },valuePrepareFunction: (value) => { 
           
           if(value === 'A'|| value === 'Available'){
           return 'Available';  
           }else if(value === 'B' || value === 'Booked'){
             return 'Booked';
+          }else if(value === 'R' || value === 'Requested'){
+            return 'Requested';
           }else {
             return 'Not Available';
           }
@@ -89,7 +90,7 @@ export class Inventory {
          editor: {
           type: 'list',
         config: {
-            list: [{ value: 'Good', title: 'Good' }, { value: 'Damaged', title: 'Damaged' }, { value: 'New', title: 'New',}]
+            list: [{ value: 'Good', title: 'Good' }, { value: 'Damaged', title: 'Damaged' }, { value: 'New', title: 'New' }]
        }
         }
       },
@@ -153,6 +154,10 @@ export class Inventory {
       }else if(event.newData['status'] === "Booked"){
         
         this.updatedStatus = 'B';
+      
+      }else if(event.newData['status'] === "Requested"){
+
+        this.updatedStatus = 'R';
       
       }else if(event.newData['status'] === "Not Available"){
 
