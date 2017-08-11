@@ -187,7 +187,7 @@ if(sessionStorage.getItem("add2Cart")!= null){
    onPickupDateChange(event:Event): void{
     
     this.pickupDate = (<HTMLSelectElement>event.srcElement).value; 
-    window.alert("pickup date ---> "+this.pickupDate);
+  //  window.alert("pickup date ---> "+this.pickupDate);
    
    }
 
@@ -195,18 +195,18 @@ if(sessionStorage.getItem("add2Cart")!= null){
   
     this.source = (<HTMLSelectElement>event.srcElement).value;
     console.log("source ---> "+this.source);
-    window.alert("source ---> "+this.source);
+ //   window.alert("source ---> "+this.source);
    }
   
    onDestChange(event:Event): void{
   
     this.distPort = (<HTMLSelectElement>event.srcElement).value; 
-    window.alert("distPort ---> "+this.distPort);
+ //   window.alert("distPort ---> "+this.distPort);
    }
 
    onNoteChange(event:Event): void{
    
     this.note = (<HTMLSelectElement>event.srcElement).value; 
-    window.alert("notes ---> "+this.note);
+  //  window.alert("notes ---> "+this.note);
    }
 }
