@@ -25,7 +25,7 @@ export class Cart {
  msg:boolean = false;
 
  settings1 = {
-  
+   hideSubHeader: true,
     delete: {
       deleteButtonContent: '<i class="ion-trash-a"></i>',
       confirmDelete: true
@@ -186,7 +186,7 @@ if(sessionStorage.getItem("add2Cart")!= null){
           let data = null;
      
 
-        data = JSON.parse("[]");
+           data = JSON.parse("[]");
            this.source1.load(data);
            this.localData = data;
 

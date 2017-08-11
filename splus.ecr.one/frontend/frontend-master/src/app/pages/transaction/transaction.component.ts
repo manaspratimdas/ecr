@@ -14,6 +14,7 @@ export class Transaction {
 
   settings = {
 //  selectMode: 'multi',
+ hideSubHeader: true,
  actions:{
       position : 'right',
       add:false,

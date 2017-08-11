@@ -23,8 +23,12 @@ export class MyAction {
   
   
   settings = {
-  selectMode: 'multi',
- actions:{
+    mode: 'inline', 
+    selectMode: 'multi',
+    hideHeader: false,
+    hideSubHeader: true,
+    
+    actions:{
       position : 'right',
       add:false,
       edit:false,
@@ -88,7 +92,9 @@ export class MyAction {
  
     this.service.getDataforLender().subscribe(
              data => {
+               
              this.source.load(data);
+        
           },
           error => {
           });
@@ -151,6 +157,15 @@ export class MyAction {
           
            this.rmsg = false;
            }.bind(this), 2000); 
+      
+           this.service.getDataforLender().subscribe(
+             data => {
+               
+             this.source.load(data);
+       
+          },
+          error => {
+          });
   }
   
   onConfirm() {
@@ -166,6 +181,16 @@ export class MyAction {
           
            this.cmsg = false;
            }.bind(this), 2000); 
+        
+           this.service.getDataforLender().subscribe(
+             data => {
+               
+             this.source.load(data);
+       
+          },
+          error => {
+          });
+          
   }
   
   onReject() {
@@ -181,5 +206,14 @@ export class MyAction {
           
            this.rjmsg = false;
            }.bind(this), 2000); 
+
+             this.service.getDataforLender().subscribe(
+             data => {
+               
+             this.source.load(data);
+     
+          },
+          error => {
+          });
   }
 }

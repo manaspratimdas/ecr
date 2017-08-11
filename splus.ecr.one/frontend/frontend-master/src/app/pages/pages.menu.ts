@@ -38,18 +38,7 @@ export const PAGES_MENU = [
           }
         }
       },
-      {
-        path: 'cart',
-        data: {
-          menu: {
-            title: 'general.menu.cart',
-            icon: 'ion-folder',
-            selected: false,
-            expanded: false,
-            order: 140
-          }
-        }
-      },
+      
       {
         path: 'transaction',
         data: {
@@ -75,18 +64,5 @@ export const PAGES_MENU = [
         }
       }
     ]
-  },
-  
-  {
-path: 'login',
-data: {
-  menu: {
-    title: 'general.menu.login',
-    icon: 'ion-document',
-    selected: false,
-    expanded: false,
-    order: 650
   }
-}
-}
 ];
