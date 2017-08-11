@@ -181,6 +181,7 @@ if(sessionStorage.getItem("add2Cart")!= null){
           
            this.msg = false;
            }.bind(this), 2000); 
+          sessionStorage.removeItem("add2Cart")
    }
   
    onPickupDateChange(event:Event): void{

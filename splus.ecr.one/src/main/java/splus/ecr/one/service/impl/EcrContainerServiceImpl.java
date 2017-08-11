@@ -176,6 +176,7 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		
 		//title: 'India', id: 'IN', color: layoutColors.primary, customData: '1 244', groupId: '1'
 		List<ContainerMapData> containerMapDatas = new ArrayList<ContainerMapData>();
+		List<Country> countries = ecrCountryRepository.findAll();
 		for(Country country : containerGroupByCountry.keySet()){
 			ContainerMapData containerMapData = new ContainerMapData();
 			containerMapData.setColor("layoutColors.primary");
@@ -186,7 +187,19 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.append("title", country.getName()).append("id", country.getIsoCountryCode()).append("color", "layoutColors.primary").append("customData", containerGroupByCountry.get(country)).append("groupId", "1");
 			containerMapDatas.add(containerMapData);
-			
+			countries.remove(country);
+		}
+		
+		for(Country country : countries){
+			ContainerMapData containerMapData = new ContainerMapData();
+			containerMapData.setColor("layoutColors.primary");
+			containerMapData.setGroupId("1");
+			containerMapData.setTitle(country.getIsoLocalName());
+			containerMapData.setId(country.getIsoCountryCode());
+			containerMapData.setCustomData("0");
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.append("title", country.getName()).append("id", country.getIsoCountryCode()).append("color", "layoutColors.primary").append("customData", containerGroupByCountry.get(country)).append("groupId", "1");
+			containerMapDatas.add(containerMapData);
 		}
 		return containerMapDatas;
 }
