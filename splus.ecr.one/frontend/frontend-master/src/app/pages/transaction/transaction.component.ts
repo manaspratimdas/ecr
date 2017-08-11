@@ -58,6 +58,11 @@ export class Transaction {
         title: 'Size/Type',
           filter: false,
         type: 'number'
+      },
+        companyName : {
+        title: 'Lender/Borrower',
+          filter: false,
+        type: 'number'
       }
     }
   };

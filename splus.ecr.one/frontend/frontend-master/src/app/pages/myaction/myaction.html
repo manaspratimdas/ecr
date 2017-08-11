@@ -13,11 +13,11 @@
     <ba-card cardTitle="" baCardClass="with-scroll" class="smart-table-container">
       <ng2-smart-table [settings]="settings" [source]="source" (rowSelect)="onRowSelect($event)"></ng2-smart-table><br>
        <div [ngClass]="bButton" align="right">
-      <button style="width:10%" class="btn btn-primary" >Realese</button>
+      <button style="width:10%" class="btn btn-primary" (click)="onRelease()">Realese</button>
       </div>
      <div [ngClass]="lButton" align="right">
-      <button style="width:10%" class="btn btn-primary" style="margin-left:16px;">Confirm</button>
-      <button style="width:10%" class="btn btn-primary" style="margin-right:16px;">Reject</button>
+      <button style="width:10%" class="btn btn-primary" style="margin-left:16px;" (click)="onConfirm()">Confirm</button>
+      <button style="width:10%" class="btn btn-primary" style="margin-right:16px;" (click)="onReject()">Reject</button>
       </div>
     </ba-card>
   </div>
