@@ -42,7 +42,7 @@ constructor(private fb:FormBuilder ,private router: Router ,private service: Log
               this.companyId = data['companyId'];
               if(this.companyId!=null){
                 
-                window.location.href = "http://10.4.3.182:4200/#/pages/dashboard";
+                window.location.href = "http://localhost:4200/#/pages/dashboard";
 
               }else{
                 window.location.href = "/login.html";
