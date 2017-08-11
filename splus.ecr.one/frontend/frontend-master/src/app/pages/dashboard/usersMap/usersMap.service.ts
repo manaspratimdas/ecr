@@ -21,7 +21,7 @@ export class UsersMapService {
 
       dataProvider: {
         map: 'worldLow',
-        zoomLevel: 3.5,
+        zoomLevel: 1.0,
         zoomLongitude: 10,
         zoomLatitude: 52,
         areas: this.getDataFromServer(layoutColors)
@@ -33,7 +33,7 @@ export class UsersMapService {
         alpha: 0.8,
         unlistedAreasAlpha: 0.2,
         unlistedAreasColor: layoutColors.defaultText,
-        balloonText: '[[title]]: [[customData]] users'
+        balloonText: '[[title]]: [[customData]] containers'
       },
 
 
