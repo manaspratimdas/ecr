@@ -85,8 +85,8 @@ public class EcrContainerController {
 	  * added by tanya
 	  */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/lender/onConfirm/containers/{id}", method = RequestMethod.GET)
-	public ResponseEntity updateLenderOnConfirmById(@PathVariable("id") List<Long> ids) {
+	@RequestMapping(value = "containers/lender/confirm/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateContanersOnConfirm(@PathVariable("id") List<Long> ids) {
 		List<Container> listofContainer = new ArrayList<Container>();
 		for(long id : ids){
 			
@@ -103,8 +103,8 @@ public class EcrContainerController {
 	  * added by tanya
 	  */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/lender/onReject/containers/{id}", method = RequestMethod.GET)
-	public ResponseEntity updateLenderOnRejectById(@PathVariable("id") List<Long> ids) {
+	@RequestMapping(value = "containers/lender/reject/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateContanersOnReject(@PathVariable("id") List<Long> ids) {
 		List<Container> listofContainer = new ArrayList<Container>();
 		for(long id : ids){
 			
@@ -116,12 +116,14 @@ public class EcrContainerController {
 		}
 	return new ResponseEntity(listofContainer, HttpStatus.OK);
 	}
+	
+	
 	/*
 	  * added by tanya
 	  */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "/borrower/onRelease/containers/{id}", method = RequestMethod.GET)
-	public ResponseEntity updateBorrowerOnReleaseById(@PathVariable("id") List<Long> ids) {
+	@RequestMapping(value = "containers/borrower/release/{id}", method = RequestMethod.GET)
+	public ResponseEntity updateContanersOnRelease(@PathVariable("id") List<Long> ids) {
 		List<Container> listofContainer = new ArrayList<Container>();
 		for(long id : ids){
 			
@@ -133,6 +135,8 @@ public class EcrContainerController {
 		}
 		return new ResponseEntity(listofContainer, HttpStatus.OK);
 	}
+	
+	
 	/**
 	 * This will list all the container for a company
 	 * @return
@@ -274,6 +278,12 @@ public class EcrContainerController {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }
