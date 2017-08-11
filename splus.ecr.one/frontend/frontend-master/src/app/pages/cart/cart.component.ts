@@ -182,6 +182,16 @@ if(sessionStorage.getItem("add2Cart")!= null){
            this.msg = false;
            }.bind(this), 2000); 
           sessionStorage.removeItem("add2Cart")
+
+          let data = null;
+     
+
+        data = JSON.parse("[]");
+           this.source1.load(data);
+           this.localData = data;
+
+           this.requestQuantity = "0"
+           
    }
   
    onPickupDateChange(event:Event): void{
