@@ -5,8 +5,11 @@
 </div>
   <div class="auth-block">
    <h1 class="md-display-4" translate><font color="white"><b>Empty Container Repositioning</b></font></h1>
+   
    <!-- <a routerLink="/register" class="auth-link" translate>{{'login.signup_link'}}</a>-->
+    
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
+  
    <p *ngIf="errormsg" class="autoHideAlert">Please enter username & password</p> 
   
         <fieldset [disabled]="isSubmitting">
