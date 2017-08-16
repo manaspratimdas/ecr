@@ -11,7 +11,7 @@
     height: 66px;
     width: 100%;
     min-width: $resMin;
-    padding: 0 32px 0 40px;
+    padding: 0 32px 0 15px;
 
     .dropdown-toggle::after {
       display: none;
@@ -108,6 +108,7 @@
     padding: 0;
     float: left;
     margin: 11px 0 0 25px;
+    margin-left:35px;
 
     &:hover {
       text-decoration: none;
@@ -216,6 +217,7 @@
 	font-family: "Clear Sans";
 	font-size:22px;
 	font-weight:500;
+	margin-left:20px;
 }
 .al-logo span span{
 	font-family: "Clear Sans";
