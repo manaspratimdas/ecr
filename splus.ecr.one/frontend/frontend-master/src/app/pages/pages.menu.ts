@@ -62,6 +62,18 @@ export const PAGES_MENU = [
             order: 140
           }
         }
+      },
+            {
+ path: 'cart',
+        data: {
+          menu: {
+            title: 'general.menu.cart',
+            icon: 'ion-edit',
+            selected: false,
+            expanded: false,
+            hidden:"hidden"
+          }
+        }
       }
     ]
   }

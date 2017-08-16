@@ -58,8 +58,15 @@ export class Inventory {
       containerType: {
         title: 'Size/Type',
         type: 'string',
-         valuePrepareFunction: (containerType) => {
-                         return containerType.size+" "+containerType.type;
+        editor:{
+        type:'list',
+        config:{
+        
+        list:[{value:'40 HC', title:'40 HC'},{value:'40 DC', title:'40 DC'},{value:'20 TK', title:'20 TK'},{value:'20 DV', title:'20 DV'}]
+        }
+        },
+         valuePrepareFunction: (value) => {
+                         return value.size+" "+value.type;
                      }
       },
         status: {
@@ -68,9 +75,10 @@ export class Inventory {
          editor: {
           type: 'list',
         config: {
-            list: [{ value: 'Available', title: 'Available' }, { value: 'Booked', title: 'Booked' }, { value: 'Requested', title: 'Requested' }, { value: 'Not Available', title: 'Not Available' }]
+            list: [{ value: 'A', title: 'Available' },{ value: 'B', title: 'Booked' }, { value: 'R', title: 'Requested' }, { value: 'NA', title: 'Not Available' }]
           }
-        },valuePrepareFunction: (value) => { 
+        },
+       valuePrepareFunction: (value) => { 
           
           if(value === 'A'|| value === 'Available'){
           return 'Available';  
@@ -97,6 +105,11 @@ export class Inventory {
       port: {
         title: 'Port',
         type: 'string',
+        editor: {
+          type: 'list',
+        config: {
+            list: [{ value: 'INKTR', title: 'INKTR' }, { value: 'INPHB', title: 'INPHB' }, { value: 'CHSNN', title: 'CHSNN' }, { value: 'USVIH', title: 'USVIH' }, { value: 'CAWAT', title: 'CAWAT' }, { value: 'DEPKS', title: 'DEPKS' }, { value: 'FRBOB', title: 'FRBOB' }, { value: 'CHWTG', title: 'CHWTG' }, { value: 'USLSN', title: 'USLSN' }, { value: 'CAODS', title: 'CAODS' }, { value: 'KEWJR', title: 'KEWJR' }, { value: 'DEPOC', title: 'DEPOC' }, { value: 'FRBRG', title: 'FRBRG' }, { value: 'KEUKA', title: 'KEUKA' }, { value: 'BRBSS', title: 'BRBSS' }, { value: 'ARLUQ', title: 'ARLUQ' }, { value: 'NOMAG', title: 'NOMAG' }, { value: 'UGMBQ', title: 'UGMBQ' }, { value: 'NZTKA', title: 'NZTKA' }, { value: 'FRBRG', title: 'FRBRG' }]
+       }},
          valuePrepareFunction: (port) => {
                           return port.isoPortCode;
                       }
@@ -128,6 +141,7 @@ export class Inventory {
        this.service.getData()
       .subscribe(
           data => {
+        //  	console.log("data" + JSON.stringify(data));
              this.source.load(data);
           },
           error => {

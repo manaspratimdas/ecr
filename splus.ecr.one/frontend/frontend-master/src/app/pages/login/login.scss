@@ -15,9 +15,15 @@
     text-align: center;
 }
 
-
+.logo{
+	width:130px;
+}
+.logoCont{
+	padding: 10px 0;
+}
 .auth-block{
     background: #ffffff;
+    padding-bottom: 5px !important;
 }
 
 .auth-block font{
@@ -25,6 +31,7 @@
 }
 .auth-main{
       background: #00b9f2;
+      flex-direction:column;    
 }
  .auth-block .btn-auth {
     background: #00abf2!important;
@@ -48,4 +55,8 @@
     width:200px;
     font-size: 0.9rem;
 }
-    
+    .form-group label {
+   
+    font-weight: 700;
+   
+}
