@@ -30,7 +30,7 @@
 
       <select class="form-control" id="source"  (change)="onSourceChange($event)">
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of srcPorts"  [value]="port.id">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of srcPorts"  [value]="port.isoPortCode">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
@@ -44,7 +44,7 @@
       <label for="destination">Destination</label>
       <select class="form-control" id="destination" (change)="onDestChange($event)">
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of destPorts" [value]="port.id">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of destPorts" [value]="port.isoPortCode">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="destination" (change)=  "onDestinationChange($event)" placeholder="Destination">  -->
       <!-- <select class="form-control" id="destination" (change)="onDestinationChange($event)">

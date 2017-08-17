@@ -37,13 +37,15 @@ public class EcrCartServiceImpl implements EcrCartService {
 	@Transactional
 	public Cart saveCart(Cart cart) {
 
-		Port destinationPort = cart.getDestinationPort();
+	//	Port destinationPort = cart.getDestinationPort();
 
 		List<Container> containers = cart.getContainers();
 		
 		for (Container container : containers) {
 			
-			container.setPort(destinationPort);
+			System.out.println("containers >>>> "+container);
+			
+			//container.setPort(destinationPort);
 			container.setLastUpdateDate(cart.getRequestDate());
 			container.setStatus("R");
 			
