@@ -51,7 +51,7 @@
     <ba-card cardTitle="Search Result" baCardClass="with-scroll" class="smart-table-container">
       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table><br>
       <div class="" align="right">
-      <button style="width:15%" onclick="onSubmit()" class="btn btn-primary" >Add to Cart</button>
+      <button id="myBtn" style="width:15%" onclick="onSubmit()" class="btn btn-primary" disabled>Add to Cart</button>
       </div>
     </ba-card>
     </div>
@@ -60,7 +60,8 @@
   <!-- <ba-card cardTitle="Booking Content">
     <ng2-smart-table [settings]="settings1" [source]="source1" ></ng2-smart-table>
   </ba-card> -->
-<form (ngSubmit)="onConfirm($event)">
+
+ <form (ngSubmit)="onConfirm($event)">
   <ba-card *ngIf="bookingContent" cardTitle="Booking Requisition Form">
     <p *ngIf="msg" class="autoHideAlert">Container Booked successfully..!</p> 
   <div class="row">
@@ -87,4 +88,4 @@
       </div>
     
        
-  </ba-card></form>
+  </ba-card></form> 

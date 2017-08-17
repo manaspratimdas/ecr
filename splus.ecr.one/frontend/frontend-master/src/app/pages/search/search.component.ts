@@ -221,12 +221,23 @@ settings1 = {
         });
       }
       onSearch() {
+      if((this.selectedPort!==null)&&(this.selectedCompany!==null)&&(this.selectedCountry!==null)&&(this.selectedType!==null)){
+             
+      
          // window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
-           this.source.load(data);
-          });
-         
+             if(data != null && data != ''){
+             (<HTMLInputElement> document.getElementById("myBtn")).disabled = false;
+            this.source.load(data);
+          } 
+            else{
+              (<HTMLInputElement> document.getElementById("myBtn")).disabled = true;
+            }
+            });
+      }
+          
+      
         }
      
         onConfirm(event:Event): void{
@@ -279,7 +290,14 @@ settings1 = {
      // window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {
-           this.source1.load(data);
+            if(data != null && data != ''){
+             (<HTMLInputElement> document.getElementById("myBtn")).disabled = false;
+            this.source1.load(data);
+          } 
+            else{
+              (<HTMLInputElement> document.getElementById("myBtn")).disabled = true;
+            }
+          
            this.bookedData = data;
            for (var i = 0,j=0; i< Object.keys(this.bookedData).length; i++,j++) {
             // if(!this.hasId(this.srcPorts, JSON.parse(JSON.stringify(this.bookedData[i])).port.id)){

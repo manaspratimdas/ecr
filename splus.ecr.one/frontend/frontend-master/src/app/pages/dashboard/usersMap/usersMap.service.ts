@@ -82,7 +82,7 @@ export class UsersMapService {
    
       var constainersJson = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))["containersInCountries"];
       for(var i = 0; i<Object.keys(constainersJson).length; i++){
-        var colour = layoutColors.primary;
+        var colour = layoutColors.primaryDark;
         var group = constainersJson[i].groupId
       if(constainersJson[i].customData>1000){
           colour = layoutColors.primary;
@@ -94,7 +94,7 @@ export class UsersMapService {
           colour = layoutColors.success;
           group = constainersJson[i].groupId
       }else{
-          colour = layoutColors.danger;
+          colour = layoutColors.primaryDark;
           group = constainersJson[i].groupId
       }
           this.containers.push({ 'title': constainersJson[i].title, 'id': constainersJson[i].id, color:colour, customData: constainersJson[i].customData, groupId: group});
