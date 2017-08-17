@@ -22,61 +22,8 @@ export class MyAction {
   query: string = '';
   
   
-  settings = {
-    //mode: 'inline', 
-     selectMode: 'multi',
-   // hideHeader: false,
-    hideSubHeader: true,
-    
-    actions: true,
-    columns: {
-       code: {
-        title: 'Sr.No',
-        filter: false,
-        type: 'string'
-      },
-      
-       pickUpDate: {
-        title: 'Date',
-        filter: false,
-        type: 'Date'
-      },
-      portSource: {
-        title: 'Origin Port',
-          filter: false,
-        type: 'string'
-      },
-      portDestination: {
-        title: 'Destination Port',
-          filter: false,
-        type: 'string',
-        
-      },
-      ETA: {
-        title: 'ETA',
-          filter: false,
-        type: 'string'
-      },
-      containerCode: {
-        title: 'Container No.',
-          filter: false,
-        type: 'number'
-      },
-      
-      sizeType : {
-        title: 'Size/Type',
-          filter: false,
-        type: 'string'
-      },
-      companyName : {
-        title: 'Lender/Borrower',
-        filter: false,
-        type: 'string'
-      }
-    }
-  };
-
-  
+  settings = this.getSettings("Borrower");
+ 
   source: LocalDataSource = new LocalDataSource();
 
  constructor(protected service: MyActionService) {
@@ -113,7 +60,7 @@ export class MyAction {
   
   
    lenderButton(){
-   // window.alert("lender click...");
+    this.settings = this.getSettings("Borrower");
      this.bButton = 'hide-class';
      this.lButton = 'show-class';
       
@@ -126,7 +73,7 @@ export class MyAction {
   }
   
   borrowerButton(){
-  //window.alert("borrower click...");
+    this.settings =this.getSettings("Lender");
    this.lButton = 'hide-class';
    this.bButton = 'show-class';
    
@@ -209,5 +156,67 @@ export class MyAction {
           },
           error => {
           });
+  }
+  getSettings(lenderBorrower){
+    return  {
+    mode: 'inline', 
+    selectMode: 'multi',
+    hideHeader: false,
+    hideSubHeader: true,
+    
+    actions:{
+      position : 'right',
+      add:false,
+      edit:false,
+      delete:false,
+      editable:false   
+    },  
+    columns: {
+       code: {
+        title: 'Sr.No',
+        filter: false,
+        type: 'string'
+      },
+      
+       pickUpDate: {
+        title: 'Date',
+        filter: false,
+        type: 'Date'
+      },
+      portSource: {
+        title: 'Origin Port',
+          filter: false,
+        type: 'string'
+      },
+      portDestination: {
+        title: 'Destination Port',
+          filter: false,
+        type: 'string',
+        
+      },
+      ETA: {
+        title: 'ETA',
+          filter: false,
+        type: 'string'
+      },
+      containerCode: {
+        title: 'Container No.',
+          filter: false,
+        type: 'number'
+      },
+      
+      sizeType : {
+        title: 'Size/Type',
+          filter: false,
+        type: 'string'
+      },
+      companyName : {
+        title: lenderBorrower,
+        filter: false,
+        type: 'string'
+      }
+    }
+  };
+
   }
 }
