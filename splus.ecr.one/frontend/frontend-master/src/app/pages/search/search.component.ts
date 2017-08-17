@@ -192,28 +192,28 @@ settings1 = {
     console.log(this.testt);
     
    
-    http.get(sessionStorage.getItem("IP") +"/ecr/containertypes")
+    http.get(sessionStorage.getItem("IP") +":8080/ecr/containertypes")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.types.push(data);
           cd.detectChanges();
         });
         
-         http.get(sessionStorage.getItem("IP") +"/ecr/countries")
+         http.get(sessionStorage.getItem("IP") +":8080/ecr/countries")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.countries.push(data);
           cd.detectChanges();
         });
         
-         http.get(sessionStorage.getItem("IP") +"/ecr/ports")
+         http.get(sessionStorage.getItem("IP") +":8080/ecr/ports")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.ports.push(data);
           cd.detectChanges();
         });
         
-        http.get(sessionStorage.getItem("IP") +"/ecr/companies")
+        http.get(sessionStorage.getItem("IP") +":8080/ecr/companies")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.companies.push(data);
@@ -222,12 +222,11 @@ settings1 = {
       }
       onSearch() {
       if((this.selectedPort!==null)&&(this.selectedCompany!==null)&&(this.selectedCountry!==null)&&(this.selectedType!==null)){
-             
-      
+       
          // window.alert("search clicked..!"+ this.selectedType+","+ this.selectedCountry+","+ this.selectedPort+","+ this.selectedCompany);
            this.service.getData(this.selectedType,this.selectedCountry,this.selectedPort,this.selectedCompany).subscribe(
            data => {
-             if(data != null && data != ''){
+            if(data != null && data != ''){
              (<HTMLInputElement> document.getElementById("myBtn")).disabled = false;
             this.source.load(data);
           } 
@@ -236,8 +235,6 @@ settings1 = {
             }
             });
       }
-          
-      
         }
      
         onConfirm(event:Event): void{
@@ -290,7 +287,7 @@ settings1 = {
      // window.alert("book click.."+this.selectedRows); 
        this.service.test(this.selectedRows).subscribe(
           data => {
-            if(data != null && data != ''){
+           if(data != null && data != ''){
              (<HTMLInputElement> document.getElementById("myBtn")).disabled = false;
             this.source1.load(data);
           } 
@@ -328,7 +325,7 @@ settings1 = {
            this.requisitionNumber = (String)(new Date().getMilliseconds());
            console.log("booked size" + Object.keys(this.bookedData).length);
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);
-           window.location.href = "http://localhost:4200/#/pages/cart";
+           window.location.href = sessionStorage.getItem("IP")+":4200/#/pages/cart";
           });
     }
 
