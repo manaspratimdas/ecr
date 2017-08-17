@@ -164,13 +164,7 @@ export class MyAction {
     hideHeader: false,
     hideSubHeader: true,
     
-    actions:{
-      position : 'right',
-      add:false,
-      edit:false,
-      delete:false,
-      editable:false   
-    },  
+     actions: true,
     columns: {
        code: {
         title: 'Sr.No',
