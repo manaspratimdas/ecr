@@ -195,16 +195,18 @@ if(sessionStorage.getItem("add2Cart")!= null){
      
 
            data = JSON.parse("[]");
-           this.source1.load(data);
+          
            this.localData = data;
 
-
+           this.pickupDate = "mm/dd/yyyy";
+           console.log("updated date : "+ this.pickupDate);
            
            this.requisitionNumber = "0";
            this.srcPorts = [];
            this.destPorts = [];
-           this.pickupDate ="mm/dd/yyyy";
+           this.note = null;
            this.requestQuantity = "0";
+           this.source1.load(data);
            
    }
   
