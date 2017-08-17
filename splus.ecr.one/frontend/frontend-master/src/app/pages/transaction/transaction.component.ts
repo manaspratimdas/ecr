@@ -36,8 +36,6 @@ export class Transaction {
   }
 
   lenderButton(){
-    //window.alert("lender click...");
-   // this.lenderBorrower = "Borrower";
    this.settings = this.getSettings("Borrower");
     this.service.getLenderData(this.companyId).subscribe(
            data => {
@@ -49,8 +47,6 @@ export class Transaction {
   }
   
   borrowerButton(){
-  //window.alert("borrower click...");
-  //this.lenderBorrower = ;
   this.settings =this.getSettings("Lender");
   this.service.getBorrowerData(this.companyId).subscribe(
            data => {
@@ -60,7 +56,6 @@ export class Transaction {
   
   this.lButton = 'hide-class';
   this.bButton = 'show-class';
-   // : 'hide-class';
   }
 
   getSettings(lenderBorrower){
