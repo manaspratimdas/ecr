@@ -51,7 +51,7 @@ public class EcrOneAdapter {
 				
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());
-				transactionRow.put("ETA", cart.getNote());
+				transactionRow.put("ETA",  String.valueOf(cart.getReleaseDate()));
 				transactionRow.put("containerCode", container.getCode());
 				transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
 				transactionRow.put("companyName", container.getCompany().getName());
@@ -256,7 +256,7 @@ public class EcrOneAdapter {
 				transactionRow.put("pickUpDate",  String.valueOf(cart.getPickUpDate()));
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());
-				transactionRow.put("ETA", cart.getNote());
+				transactionRow.put("ETA",  String.valueOf(cart.getReleaseDate()));
 				transactionRow.put("containerCode", container.getCode());
 				transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
 				transactionRow.put("companyName", container.getCompany().getName());
