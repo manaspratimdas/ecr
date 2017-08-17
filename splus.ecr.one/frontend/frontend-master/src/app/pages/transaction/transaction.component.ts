@@ -70,7 +70,7 @@ export class Transaction {
             editable:false   
           },  
           columns: {
-             id: {
+            SrNo: {
               title: 'Sr.No',
               filter: false,
               type: 'number'

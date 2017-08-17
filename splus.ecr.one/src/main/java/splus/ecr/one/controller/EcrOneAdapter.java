@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.keygen.StringKeyGenerator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,6 +102,7 @@ public class EcrOneAdapter {
 					List<Container> containers =  cart.getContainers();
 					String companyName = cart.getCompany().getName();
 					System.out.println("company name for cart : "+companyName);
+					int count=1;
 					for(Container container : containers){
 						
 						Long companyIdvalue = container.getCompany().getId();
@@ -120,6 +122,7 @@ public class EcrOneAdapter {
 							transactionRow.put("companyName", companyName);
 							transactionRow.put("containerCode", container.getCode());
 							transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
+							transactionRow.put("SrNo", String.valueOf(count++));
 							transaction.add(transactionRow);
 							
 						}else{
@@ -173,6 +176,7 @@ public class EcrOneAdapter {
 					System.out.println("all carts : "+cart.getId());
 					List<Container> containers =  cart.getContainers();
 					String companyName = cart.getCompany().getName();
+					int count=1;
 					for(Container container : containers){
 						
 						if("R".equals(container.getStatus())){
@@ -193,6 +197,7 @@ public class EcrOneAdapter {
 								transactionRow.put("companyName", companyName);
 								transactionRow.put("containerCode", container.getCode());
 								transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
+								transactionRow.put("SrNo", String.valueOf(count++));
 								transaction.add(transactionRow);
 								
 							}else{
