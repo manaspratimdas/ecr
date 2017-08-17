@@ -34,8 +34,11 @@
       background: #00b9f2;
       flex-direction:column;    
 }
+.auth-block {
+    max-width: 400px;
+    width: 100%;
+}
  .auth-block .btn-auth {
- 
     background: #00abf2!important;
 }
 .forgot-pass{
