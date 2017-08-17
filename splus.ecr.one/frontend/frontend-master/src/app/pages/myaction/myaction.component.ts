@@ -23,18 +23,12 @@ export class MyAction {
   
   
   settings = {
-    mode: 'inline', 
-    selectMode: 'multi',
-    hideHeader: false,
+    //mode: 'inline', 
+     selectMode: 'multi',
+   // hideHeader: false,
     hideSubHeader: true,
     
-    actions:{
-      position : 'right',
-      add:false,
-      edit:false,
-      delete:false,
-      editable:false   
-    },  
+    actions: true,
     columns: {
        code: {
         title: 'Sr.No',

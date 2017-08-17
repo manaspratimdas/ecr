@@ -59,7 +59,7 @@ export class Search {
   
   settings = {
     selectMode: 'multi',
-    actions: false,
+    actions: true,
     columns: {
 
       company: {
