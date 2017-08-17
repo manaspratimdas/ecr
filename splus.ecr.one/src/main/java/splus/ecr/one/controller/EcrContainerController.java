@@ -2,7 +2,9 @@ package splus.ecr.one.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import splus.ecr.one.model.Cart;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.ContainerMapData;
+import splus.ecr.one.service.EcrCartService;
 import splus.ecr.one.service.EcrContainerService;
 //@CrossOrigin
 @RestController
@@ -26,7 +30,8 @@ public class EcrContainerController {
 	@Autowired
 	EcrContainerService ecrContainerService;
 	
-	
+	@Autowired
+	EcrCartService ecrCartService;
 	
 	
 	
@@ -85,6 +90,7 @@ public class EcrContainerController {
 	@RequestMapping(value = "containers/lender/confirm/{id}", method = RequestMethod.GET)
 	public ResponseEntity updateContanersOnConfirm(@PathVariable("id") List<Long> ids) {
 		List<Container> listofContainer = new ArrayList<Container>();
+		Long companyId = new Long(0);
 		for(long id : ids){
 			
 			Container container = ecrContainerService.getContainer(id);
@@ -92,7 +98,7 @@ public class EcrContainerController {
 			container.setStatus("B");
 			container.setLastUpdateDate(timestamp);
 			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
-//			
+			companyId = container.getCompany().getId();
 //			System.out.println("data:"+container);
 			listofContainer.add(updatedContainer);
 		}
@@ -101,8 +107,49 @@ public class EcrContainerController {
 //		if (listofContainer == null || listofContainer.isEmpty()) {
 //			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
 //		}
+		List<Cart> carts= new ArrayList<Cart>();
+		carts= ecrCartService.getAllCarts();
+		List<Container> containersofCompany= new ArrayList<Container>();
+		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		for(Cart cart: carts){
+			System.out.println("all carts : "+cart.getId());
+			List<Container> containers =  cart.getContainers();
+			String companyName = cart.getCompany().getName();
+			int count=1;
+			for(Container container : containers){
+				
+				if("R".equals(container.getStatus())){
+					Long companyIdvalue = container.getCompany().getId();
+					System.out.println("container id : "+container.getId() +" code : " +container.getCode());
+					
+					if(companyId.equals(companyIdvalue)){
+						System.out.println("checked value of company : "+companyIdvalue);
+						containersofCompany.add(container);
+						
+						Map<String,String> transactionRow=new HashMap<String,String>();
+
+						transactionRow.put("code", container.getId().toString());
+						transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+						transactionRow.put("portSource", cart.getPortSource());
+						transactionRow.put("portDestination", cart.getPortDestination());
+						transactionRow.put("ETA", cart.getReleaseDate().toString());
+						transactionRow.put("companyName", companyName);
+						transactionRow.put("containerCode", container.getCode());
+						transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
+						transactionRow.put("SrNo", String.valueOf(count++));
+						transaction.add(transactionRow);
+						
+					}else{
+
+						System.out.println("Unmatched : "  +  container.getId());
+					}
+					
+				}
+				
+			}
+		}
 //		
-	return new ResponseEntity(listofContainer, HttpStatus.OK);
+	return new ResponseEntity(transaction, HttpStatus.OK);
 	}
 	
 	 /*
@@ -112,16 +159,24 @@ public class EcrContainerController {
 	@RequestMapping(value = "containers/lender/reject/{id}", method = RequestMethod.GET)
 	public ResponseEntity updateContanersOnReject(@PathVariable("id") List<Long> ids) {
 		List<Container> listofContainer = new ArrayList<Container>();
+		List<Cart> carts= new ArrayList<Cart>();
+		Long companyId = new Long(0);
 		for(long id : ids){
 			
 			Container container = ecrContainerService.getContainer(id);
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			container.setStatus("A");
 			container.setLastUpdateDate(timestamp);
-			Container updatedContainer= ecrContainerService.saveOrUpdateContainer(container);
+			
+			
+			ecrContainerService.saveOrUpdateContainer(container);
+			companyId = container.getCompany().getId();
+			
+			
+			
 			
 //			System.out.println("data:"+container);
-			listofContainer.add(updatedContainer);
+			//listofContainer.add(updatedContainer);
 		}
 //		System.out.println("list:"+listofContainer);
 //		Object listofCart = null;
@@ -129,7 +184,47 @@ public class EcrContainerController {
 //			return new ResponseEntity("No Cart found for ID " + ids, HttpStatus.NOT_FOUND);
 //		}
 //		
-	return new ResponseEntity(listofContainer, HttpStatus.OK);
+		carts= ecrCartService.getAllCarts();
+		List<Container> containersofCompany= new ArrayList<Container>();
+		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		for(Cart cart: carts){
+			System.out.println("all carts : "+cart.getId());
+			List<Container> containers =  cart.getContainers();
+			String companyName = cart.getCompany().getName();
+			int count=1;
+			for(Container container : containers){
+				
+				if("R".equals(container.getStatus())){
+					Long companyIdvalue = container.getCompany().getId();
+					System.out.println("container id : "+container.getId() +" code : " +container.getCode());
+					
+					if(companyId.equals(companyIdvalue)){
+						System.out.println("checked value of company : "+companyIdvalue);
+						containersofCompany.add(container);
+						
+						Map<String,String> transactionRow=new HashMap<String,String>();
+
+						transactionRow.put("code", container.getId().toString());
+						transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+						transactionRow.put("portSource", cart.getPortSource());
+						transactionRow.put("portDestination", cart.getPortDestination());
+						transactionRow.put("ETA", cart.getReleaseDate().toString());
+						transactionRow.put("companyName", companyName);
+						transactionRow.put("containerCode", container.getCode());
+						transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
+						transactionRow.put("SrNo", String.valueOf(count++));
+						transaction.add(transactionRow);
+						
+					}else{
+
+						System.out.println("Unmatched : "  +  container.getId());
+					}
+					
+				}
+				
+			}
+		}
+	return new ResponseEntity(transaction, HttpStatus.OK);
 	}
 	
 	

@@ -115,22 +115,9 @@ export class MyAction {
      this.service.onConfirm(this.selectedRows).subscribe(
      
      data => {
-       
+      this.source.load(data);
      });
-      this.cmsg = true
-           setTimeout(function() {
-          
-           this.cmsg = false;
-           }.bind(this), 2000); 
-        
-           this.service.getDataforLender().subscribe(
-             data => {
-               
-             this.source.load(data);
-       
-          },
-          error => {
-          });
+      
           
   }
   
@@ -140,22 +127,9 @@ export class MyAction {
      this.service.onReject(this.selectedRows).subscribe(
      
      data => {
-         
+      this.source.load(data);
      });
-           this.rjmsg = true
-           setTimeout(function() {
-          
-           this.rjmsg = false;
-           }.bind(this), 2000); 
-
-             this.service.getDataforLender().subscribe(
-             data => {
-               
-             this.source.load(data);
-     
-          },
-          error => {
-          });
+           
   }
   getSettings(lenderBorrower){
     return  {
