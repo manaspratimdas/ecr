@@ -9,64 +9,9 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./transaction.scss']
 })
 export class Transaction {
-
   query: string = '';
 
-  settings = {
-//  selectMode: 'multi',
- hideSubHeader: true,
- actions:{
-      position : 'right',
-      add:false,
-      edit:false,
-      delete:false,
-      editable:false   
-    },  
-    columns: {
-       id: {
-        title: 'Sr.No',
-        filter: false,
-        type: 'number'
-      },
-      
-       pickUpDate: {
-        title: 'Date',
-           filter: false,
-        type: 'string'
-      },
-      portSource: {
-        title: 'Origin Port',
-          filter: false,
-        type: 'string'
-      },
-      portDestination: {
-        title: 'Destination Port',
-          filter: false,
-        type: 'string'
-      },
-      ETA: {
-          title: 'ETA',
-          filter: false,
-        type: 'string'
-      },
-      containerCode: {
-        title: 'Container No.',
-          filter: false,
-          type: 'string'
-      },
-      
-      sizeType : {
-        title: 'Size/Type',
-          filter: false,
-        type: 'number'
-      },
-        companyName : {
-        title: 'Lender/Borrower',
-          filter: false,
-        type: 'number'
-      }
-    }
-  };
+  settings = this.getSettings("Borrower");
 
   source: LocalDataSource = new LocalDataSource();
   lButton: string = '';
@@ -92,7 +37,8 @@ export class Transaction {
 
   lenderButton(){
     //window.alert("lender click...");
-    
+   // this.lenderBorrower = "Borrower";
+   this.settings = this.getSettings("Borrower");
     this.service.getLenderData(this.companyId).subscribe(
            data => {
            this.source.load(data);
@@ -104,7 +50,8 @@ export class Transaction {
   
   borrowerButton(){
   //window.alert("borrower click...");
-    
+  //this.lenderBorrower = ;
+  this.settings =this.getSettings("Lender");
   this.service.getBorrowerData(this.companyId).subscribe(
            data => {
              console.log(JSON.stringify(data));
@@ -115,5 +62,63 @@ export class Transaction {
   this.bButton = 'show-class';
    // : 'hide-class';
   }
-  
+
+  getSettings(lenderBorrower){
+  return  {
+      //  selectMode: 'multi',
+       hideSubHeader: true,
+       actions:{
+            position : 'right',
+            add:false,
+            edit:false,
+            delete:false,
+            editable:false   
+          },  
+          columns: {
+             id: {
+              title: 'Sr.No',
+              filter: false,
+              type: 'number'
+            },
+            
+             pickUpDate: {
+              title: 'Date',
+                 filter: false,
+              type: 'string'
+            },
+            portSource: {
+              title: 'Origin Port',
+                filter: false,
+              type: 'string'
+            },
+            portDestination: {
+              title: 'Destination Port',
+                filter: false,
+              type: 'string'
+            },
+            ETA: {
+                title: 'ETA',
+                filter: false,
+              type: 'string'
+            },
+            containerCode: {
+              title: 'Container No.',
+                filter: false,
+                type: 'string'
+            },
+            
+            sizeType : {
+              title: 'Size/Type',
+                filter: false,
+              type: 'number'
+            },
+              companyName : {
+              title: lenderBorrower,
+                filter: false,
+              type: 'number'
+            }
+          }
+        };
+  }
+    
 }
