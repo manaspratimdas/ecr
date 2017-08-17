@@ -201,7 +201,9 @@ if(sessionStorage.getItem("add2Cart")!= null){
            this.source1.load(data);
            this.localData = data;
 
-           this.requestQuantity = "0"
+           this.requestQuantity = "0";
+           this.requisitionNumber = "0";
+           this.srcPorts = [];
            
    }
   
