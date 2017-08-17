@@ -119,7 +119,7 @@ export class Cart {
       
   }
 
-  ngOnInit(){
+ ngOnInit(){
     let data = null;
      
 if(sessionStorage.getItem("add2Cart")!= null){
@@ -132,9 +132,17 @@ if(sessionStorage.getItem("add2Cart")!= null){
     this.source1.load(data);
     this.localData = data;
 
-		for (var i = 0,j=0; i< Object.keys(data).length; i++,j++) {
+  for (var i = 0,j=0; i< Object.keys(data).length; i++,j++) {
       this.srcPorts[i] = JSON.parse(JSON.stringify(data[i])).port;
     }
+
+    if(data != null && data != ''){
+             (<HTMLInputElement> document.getElementById("myButton")).disabled = false;
+            this.source1.load(data);
+          } 
+            else{
+              (<HTMLInputElement> document.getElementById("myButton")).disabled = true;
+            }
   }
 
   onConfirm(event:Event): void {
@@ -190,7 +198,13 @@ if(sessionStorage.getItem("add2Cart")!= null){
            this.source1.load(data);
            this.localData = data;
 
-           this.requestQuantity = "0"
+
+           
+           this.requisitionNumber = "0";
+           this.srcPorts = [];
+           this.destPorts = [];
+           this.pickupDate ="mm/dd/yyyy";
+           this.requestQuantity = "0";
            
    }
   
