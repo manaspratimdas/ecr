@@ -14,13 +14,13 @@ export class LoginService {
 
     constructor(private http: Http){
        sessionStorage.getItem("IP")
-        sessionStorage.setItem("IP", "http://localhost:8080");
+        sessionStorage.setItem("IP", "http://localhost");
     }
    userData(){
      console.log("get user data from db..");
      
      
-           return this.http.get(sessionStorage.getItem("IP") + '/ecr/user/loggedIn_users?')
+           return this.http.get(sessionStorage.getItem("IP") + ':8080/ecr/user/loggedIn_users?')
              .map((response: Response) => {
                let user = response.json();
                console.log("application user is : "+user['username']);
@@ -42,7 +42,7 @@ export class LoginService {
     if (cached = sessionStorage.getItem("http://localhost:8080/ecr/user/login")) {
         return Observable.of(JSON.parse(cached));
     } else {
-        return this.http.post(sessionStorage.getItem("IP") +"/ecr/user/login",myJSON).map((response: Response) => {
+        return this.http.post(sessionStorage.getItem("IP") +":8080/ecr/user/login",myJSON).map((response: Response) => {
             sessionStorage.setItem("http://localhost:8080/ecr/user/login", response.text());
             
             sessionStorage.removeItem("add2Cart");
