@@ -20,7 +20,7 @@ export class CartService {
       var headers = new Headers();
       headers.append('Content-Type','application/json; charset=utf8');
       
-      return this.http.post('http://localhost:8080/ecr/cart/save',jsonW,{headers:headers})
+      return this.http.post(sessionStorage.getItem("IP")+':8080/ecr/cart/save',jsonW,{headers:headers})
               .map((response: Response) => response.json());
   }
 

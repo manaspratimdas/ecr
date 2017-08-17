@@ -21,7 +21,7 @@ export class InventoryService {
     this.companyId = JSON.parse(sessionData)['companyId'];
     console.log("this.companyId : "+this.companyId);
     console.log("http://localhost:8080/ecr/company/"+this.companyId+"/containers")
-    return this.http.get(sessionStorage.getItem("IP") +"/ecr/company/"+this.companyId+"/containers")
+    return this.http.get(sessionStorage.getItem("IP") +":8080/ecr/company/"+this.companyId+"/containers")
             .map((response: Response) => {
                 let user = response.json();
                 console.log("http - result : "+user);
@@ -42,7 +42,7 @@ export class InventoryService {
       var headers = new Headers();
       headers.append('Content-Type','application/json; charset=utf8');
       
-      return this.http.post(sessionStorage.getItem("IP") + '/ecr/containers/update',jsonD,{headers:headers})
+      return this.http.post(sessionStorage.getItem("IP") + ':8080/ecr/containers/update',jsonD,{headers:headers})
               .map((response: Response) => response.json());
   }
 
@@ -57,7 +57,7 @@ export class InventoryService {
       var headers = new Headers();
       headers.append('Content-Type','application/json; charset=utf8');
       
-      return this.http.post(sessionStorage.getItem("IP") + '/ecr/containers/delete',jsonW,{headers:headers})
+      return this.http.post(sessionStorage.getItem("IP") + ':8080/ecr/containers/delete',jsonW,{headers:headers})
             .map((response: Response) => response.json());
     
   }

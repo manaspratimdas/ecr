@@ -14,7 +14,7 @@ export class TransactionService {
    // console.log("in borrower service.."+"http://localhost:8080/ecr/cart/company/2");
     console.log("company id : "+companyId);
 
-    return this.http.get('http://localhost:8080/ecr/adapter/cart/lender/trans/'+companyId)
+    return this.http.get(sessionStorage.getItem("IP")+':8080/ecr/adapter/cart/lender/trans/'+companyId)
               .map((response: Response) => response.json());
   }
 
@@ -23,7 +23,7 @@ export class TransactionService {
     //console.log("in borrower service.."+"http://localhost:8080/ecr/adapter/cart/company");
     console.log("company id : "+companyId);
 
-    return this.http.get('http://localhost:8080/ecr/adapter/cart/borrower/trans/'+companyId)
+    return this.http.get(sessionStorage.getItem("IP")+':8080/ecr/adapter/cart/borrower/trans/'+companyId)
               .map((response: Response) => response.json());
   
  }
@@ -33,7 +33,7 @@ export class TransactionService {
     //console.log("in borrower service.."+"http://localhost:8080/ecr/cart/company/"+companyId);
     console.log("company id : "+companyId);
 
-    return this.http.get('http://localhost:8080/ecr/adapter/cart/lender/trans/'+companyId)
+    return this.http.get(sessionStorage.getItem("IP")+':8080/ecr/adapter/cart/lender/trans/'+companyId)
               .map((response: Response) => response.json());
   
  }

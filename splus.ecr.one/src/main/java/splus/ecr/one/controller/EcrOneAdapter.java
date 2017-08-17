@@ -46,8 +46,9 @@ public class EcrOneAdapter {
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
 				
-				transactionRow.put("code", container.getId().toString());
-				transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+				transactionRow.put("code", String.valueOf(container.getId()));
+				transactionRow.put("pickUpDate", String.valueOf(cart.getPickUpDate()));
+				
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());
 				transactionRow.put("ETA", cart.getNote());
@@ -111,11 +112,11 @@ public class EcrOneAdapter {
 							
 							Map<String,String> transactionRow=new HashMap<String,String>();
 
-							transactionRow.put("code", container.getId().toString());
-							transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+							transactionRow.put("code", String.valueOf(container.getId()));
+							transactionRow.put("pickUpDate",  String.valueOf(cart.getPickUpDate()));
 							transactionRow.put("portSource", cart.getPortSource());
 							transactionRow.put("portDestination", cart.getPortDestination());
-							transactionRow.put("ETA", cart.getReleaseDate().toString());
+							transactionRow.put("ETA",  String.valueOf(cart.getReleaseDate()));
 							transactionRow.put("companyName", companyName);
 							transactionRow.put("containerCode", container.getCode());
 							transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
@@ -251,8 +252,8 @@ public class EcrOneAdapter {
 				
 				if("B".equals(container.getStatus())) {
 					
-				transactionRow.put("code", container.getId().toString());
-				transactionRow.put("pickUpDate", cart.getPickUpDate().toString());
+				transactionRow.put("code",  String.valueOf(container.getId()));
+				transactionRow.put("pickUpDate",  String.valueOf(cart.getPickUpDate()));
 				transactionRow.put("portSource", cart.getPortSource());
 				transactionRow.put("portDestination", cart.getPortDestination());
 				transactionRow.put("ETA", cart.getNote());

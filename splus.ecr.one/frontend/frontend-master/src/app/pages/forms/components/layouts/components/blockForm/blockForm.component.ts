@@ -24,7 +24,7 @@ private ports = [];
     this.data = search.dataTransfer;
     this.destinations = search.bookedData;
     console.log("data:"+this.data);
-    http.get("http://localhost:8080/ecr/ports")
+    http.get(sessionStorage.getItem("IP")+":8080/ecr/ports")
         .flatMap((data) => data.json())
         .subscribe((data) => {
           this.ports.push(data);
