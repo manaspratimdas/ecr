@@ -235,6 +235,12 @@ settings1 = {
             }
             });
       }
+        //  this.msg = true
+        //    setTimeout(function() {
+          
+        //    this.msg = false;
+        //    }.bind(this), 2000); 
+      
         }
      
         onConfirm(event:Event): void{
@@ -273,12 +279,6 @@ settings1 = {
                 console.log("Data saved..!");
           });
 
-           this.msg = true
-           setTimeout(function() {
-          
-           this.msg = false;
-           }.bind(this), 2000); 
-          
         }
             
     onSubmit(){
@@ -327,6 +327,12 @@ settings1 = {
            this.requestQuantity = (String)(Object.keys(this.bookedData).length);
            window.location.href = sessionStorage.getItem("IP")+":4200/#/pages/cart";
           });
+
+           this.msg = true
+           setTimeout(function() {
+          
+           this.msg = false;
+           }.bind(this), 2000); 
     }
 
    hasId(data, id) {

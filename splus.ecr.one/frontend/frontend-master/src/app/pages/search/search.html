@@ -1,7 +1,7 @@
 <div class="widgets">
   <form (ngSubmit)="onSearch()">
   <ba-card cardTitle="" baCardClass="with-scroll">
-   
+   <p *ngIf="msg" class="autoHideAlert">Container Added in cart successfully..!</p> <br><br>
   <div class="row">
     <div class="col-sm-3">
       <div class="form-group">
@@ -49,6 +49,7 @@
   <div class="row">
     <div class="col-md-12">
     <ba-card cardTitle="Search Result" baCardClass="with-scroll" class="smart-table-container">
+      
       <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table><br>
       <div class="" align="right">
       <button id="myBtn" style="width:15%" onclick="onSubmit()" class="btn btn-primary" disabled>Add to Cart</button>
