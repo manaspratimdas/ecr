@@ -53,6 +53,7 @@ export class Inventory {
       },
       code: {
         title: 'Container No.',
+         editable: false,
         type: 'number'
       },
       containerType: {
