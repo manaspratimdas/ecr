@@ -118,7 +118,11 @@ export class MyAction {
       this.source.load(data);
      });
       
+          this.cmsg = true
+           setTimeout(function() {
           
+           this.cmsg = false;
+           }.bind(this), 2000); 
   }
   
   onReject() {
@@ -129,7 +133,11 @@ export class MyAction {
      data => {
       this.source.load(data);
      });
-           
+           this.rjmsg = true
+           setTimeout(function() {
+          
+           this.rjmsg = false;
+           }.bind(this), 2000); 
   }
   getSettings(lenderBorrower){
     return  {
