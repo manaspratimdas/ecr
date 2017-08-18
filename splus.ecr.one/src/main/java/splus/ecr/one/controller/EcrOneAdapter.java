@@ -42,7 +42,7 @@ public class EcrOneAdapter {
 					
 			List<Container> containers=cart.getContainers();
 			
-			
+			int count=1;
 			for(Container container:containers){
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
@@ -56,7 +56,7 @@ public class EcrOneAdapter {
 				transactionRow.put("containerCode", container.getCode());
 				transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
 				transactionRow.put("companyName", container.getCompany().getName());
-				
+				transactionRow.put("SrNo", String.valueOf(count++));
 				transaction.add(transactionRow);
 				
 			}
@@ -250,7 +250,7 @@ public class EcrOneAdapter {
 					
 			List<Container> containers=cart.getContainers();
 			
-			
+			int count=1;
 			for(Container container:containers){
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
@@ -265,6 +265,7 @@ public class EcrOneAdapter {
 				transactionRow.put("containerCode", container.getCode());
 				transactionRow.put("sizeType", container.getContainerType().getType()+container.getContainerType().getSize());
 				transactionRow.put("companyName", container.getCompany().getName());
+				transactionRow.put("SrNo", String.valueOf(count++));
 				
 				transaction.add(transactionRow);
 				}

@@ -148,7 +148,7 @@ export class MyAction {
     
      actions: true,
     columns: {
-       code: {
+       SrNo: {
         title: 'Sr.No',
         filter: false,
         type: 'string'
