@@ -111,11 +111,12 @@ public class EcrContainerController {
 		carts= ecrCartService.getAllCarts();
 		List<Container> containersofCompany= new ArrayList<Container>();
 		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		int count=1;
 		for(Cart cart: carts){
 			System.out.println("all carts : "+cart.getId());
 			List<Container> containers =  cart.getContainers();
 			String companyName = cart.getCompany().getName();
-			int count=1;
+			
 			for(Container container : containers){
 				
 				if("R".equals(container.getStatus())){
@@ -187,11 +188,12 @@ public class EcrContainerController {
 		carts= ecrCartService.getAllCarts();
 		List<Container> containersofCompany= new ArrayList<Container>();
 		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		int count=1;
 		for(Cart cart: carts){
 			System.out.println("all carts : "+cart.getId());
 			List<Container> containers =  cart.getContainers();
 			String companyName = cart.getCompany().getName();
-			int count=1;
+			
 			for(Container container : containers){
 				
 				if("R".equals(container.getStatus())){

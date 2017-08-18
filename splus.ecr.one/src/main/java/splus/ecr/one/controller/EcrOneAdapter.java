@@ -37,12 +37,13 @@ public class EcrOneAdapter {
 		
 		
 		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		int count=1;
 		for(Cart cart:carts){
 			
 					
 			List<Container> containers=cart.getContainers();
 			
-			int count=1;
+			
 			for(Container container:containers){
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
@@ -96,13 +97,13 @@ public class EcrOneAdapter {
 			return new ResponseEntity("No carts found", HttpStatus.NOT_FOUND);
 		}
 		else{
-				
+			int count=1;
 				for(Cart cart: carts){
 					System.out.println("all carts : "+cart.getId());
 					List<Container> containers =  cart.getContainers();
 					String companyName = cart.getCompany().getName();
 					System.out.println("company name for cart : "+companyName);
-					int count=1;
+					
 					for(Container container : containers){
 						
 						Long companyIdvalue = container.getCompany().getId();
@@ -171,12 +172,12 @@ public class EcrOneAdapter {
 			return new ResponseEntity("No carts found", HttpStatus.NOT_FOUND);
 		}
 		else{
-				
+			int count=1;
 				for(Cart cart: carts){
 					System.out.println("all carts : "+cart.getId());
 					List<Container> containers =  cart.getContainers();
 					String companyName = cart.getCompany().getName();
-					int count=1;
+					
 					for(Container container : containers){
 						
 						if("R".equals(container.getStatus())){
@@ -245,12 +246,13 @@ public class EcrOneAdapter {
 		
 		
 		List<Map<String,String>> transaction=new ArrayList<Map<String,String>>();
+		int count=1;
 		for(Cart cart:carts){
 			
 					
 			List<Container> containers=cart.getContainers();
 			
-			int count=1;
+			
 			for(Container container:containers){
 				
 				Map<String,String> transactionRow=new HashMap<String,String>();
