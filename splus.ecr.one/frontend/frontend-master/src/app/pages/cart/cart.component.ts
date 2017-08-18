@@ -1,5 +1,7 @@
 import { Component,ChangeDetectorRef,OnInit, Input, EventEmitter, Output,Injectable } from '@angular/core';
 import { FormGroup, AbstractControl,FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Pipe, PipeTransform } from '@angular/core';
+import * as _ from 'lodash'; 
 
 import { SearchService } from '../search/search.service';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
@@ -12,7 +14,22 @@ import 'rxjs/Rx';
   styleUrls: ['./cart.scss'],
   providers: [SearchService]
 })
-export class Cart {
+@Pipe({
+    name: 'removeduplicates',
+    pure: false
+})
+export class Cart implements PipeTransform{
+
+     transform(value: any, args?: any): any {
+
+    // Remove the duplicate elements
+    let uniqueArray = value.filter(function (el, index, array) { 
+      return array.indexOf (el) === index;
+    });
+
+    return uniqueArray;
+  }
+
  srcPorts: string[] = [];
  destPorts:any[] = [];
  requisitionNumber:string;
@@ -26,17 +43,17 @@ export class Cart {
 
  settings1 = {
    hideSubHeader: true,
-    delete: {
-      deleteButtonContent: '<i class="ion-trash-a"></i>',
-      confirmDelete: true
-    },
-    actions:{
-      position : 'right',
-      add:false,
-      edit:false,
-      delete:true,
-      editable:false   
-    }, 
+    // delete: {
+    //   deleteButtonContent: '<i class="ion-trash-a"></i>',
+    //   confirmDelete: true
+    // },
+     actions:false,
+    //   position : 'right',
+    //   add:false,
+    //   edit:false,
+    //  // delete:true,
+    //   editable:false   
+    // }, 
 
     columns: {
 
@@ -133,7 +150,9 @@ if(sessionStorage.getItem("add2Cart")!= null){
     this.localData = data;
 
   for (var i = 0,j=0; i< Object.keys(data).length; i++,j++) {
+    
       this.srcPorts[i] = JSON.parse(JSON.stringify(data[i])).port;
+      
     }
 
     if(data != null && data != ''){
