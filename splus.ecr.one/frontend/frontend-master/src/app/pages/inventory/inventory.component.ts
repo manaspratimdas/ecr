@@ -58,6 +58,7 @@ export class Inventory {
       containerType: {
         title: 'Size/Type',
         type: 'string',
+        editable: false,
         editor:{
         type:'list',
         config:{
@@ -105,6 +106,7 @@ export class Inventory {
       port: {
         title: 'Port',
         type: 'string',
+        editable: false,
         editor: {
           type: 'list',
         config: {
@@ -117,6 +119,7 @@ export class Inventory {
       // dep
       lastUpdateDate : {
         title: 'Last Update Date',
+           editable: false,
        valuePrepareFunction: (lastUpdateDate) => { 
        
         var userDate = new Date(lastUpdateDate);
