@@ -1,12 +1,14 @@
 package splus.ecr.one.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 
 import splus.ecr.one.model.CommunicationObject;
 import splus.ecr.one.model.Container;
 import splus.ecr.one.model.ContainerMapData;
+import splus.ecr.one.model.Region;
 
 public interface EcrContainerService {
 
@@ -31,4 +33,8 @@ public interface EcrContainerService {
 	public List<ContainerMapData> getContainersByCountry(String id);
 
 	List<Container> getAvailableContainers(String type, String country, String port, String company);
+	
+	public Map<String, Long> getContainersByRegion(String id);
+
+	public Map<String, List<Float>> getContainersByPort(String companyId);
 }

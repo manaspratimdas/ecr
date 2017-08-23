@@ -11,10 +11,11 @@ import * as Chart from 'chart.js';
 
 // TODO: move chart.js to it's own component
 export class TrafficChart {
-
+  totalContainersCount;
   public doughnutData: Array<Object>;
 
   constructor(private trafficChartService:TrafficChartService) {
+    this.totalContainersCount = trafficChartService.getTotalContainersCount();
     this.doughnutData = trafficChartService.getData();
   }
 

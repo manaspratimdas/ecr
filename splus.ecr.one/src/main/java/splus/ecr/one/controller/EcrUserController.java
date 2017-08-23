@@ -2,6 +2,7 @@ package splus.ecr.one.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import splus.ecr.one.model.ContainerMapData;
+import splus.ecr.one.model.Region;
 import splus.ecr.one.model.User;
 import splus.ecr.one.service.EcrContainerService;
 import splus.ecr.one.service.EcrSecurityService;
@@ -163,12 +165,19 @@ public class EcrUserController {
 
 		JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
 		Map<String, Object> resultMap =  ecrUserService.login(jsonObject.get("email").getAsString(), jsonObject.get("pass").getAsString());
-		List<ContainerMapData> containerMapDatas = ecrContainerService.getContainersByCountry(String.valueOf(resultMap.get("companyId")));
-		resultMap.put("containersInCountries", containerMapDatas);
+		List<ContainerMapData> containerMapCountriesDatas = ecrContainerService.getContainersByCountry(String.valueOf(resultMap.get("companyId")));
+		resultMap.put("containersInCountries", containerMapCountriesDatas);
+		Map<String, Long> containerMapRegionDatas = ecrContainerService.getContainersByRegion(String.valueOf(resultMap.get("companyId")));
+		resultMap.put("containersInRegion", containerMapRegionDatas);
+		Map<String, List<Float>> containerMapPortDatas = ecrContainerService.getContainersByPort(String.valueOf(resultMap.get("companyId")));
+		resultMap.put("containersInPort", containerMapPortDatas);
+		Map<String, Float> totalContainers = new HashMap<String, Float>();
+		totalContainers.put("totalContainers", containerMapPortDatas.get("totalContainers").get(0));
+		containerMapPortDatas.remove("totalContainers");
+		resultMap.put("totalContainers", totalContainers);
+		
 		Gson gson = new Gson(); 
 		json = gson.toJson(resultMap);
 		return new ResponseEntity(json, HttpStatus.OK);
 	}
-
-
 }

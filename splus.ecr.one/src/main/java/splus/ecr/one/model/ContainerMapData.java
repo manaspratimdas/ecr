@@ -9,6 +9,8 @@ public class ContainerMapData implements Serializable{
 	String color;
 	String customData;
 	String groupId;
+	Region region;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -39,7 +41,10 @@ public class ContainerMapData implements Serializable{
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
-	
-	
-
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
+	}
 }
