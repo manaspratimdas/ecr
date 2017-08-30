@@ -8,27 +8,25 @@ import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { Http ,RequestOptions, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
+
+@Pipe({
+    name: 'uniqFilter',
+    pure: false
+})
+@Injectable()
+export class UniquePipe implements PipeTransform {
+    transform(items: any[], args: any[]): any {
+        return _.uniqBy(items, args);
+    }
+}
 @Component({
-  selector: 'cart',
+  selector: 'cart, UniquePipe',
   templateUrl: './cart.html',
   styleUrls: ['./cart.scss'],
   providers: [SearchService]
 })
-@Pipe({
-    name: 'removeduplicates',
-    pure: false
-})
-export class Cart implements PipeTransform{
 
-     transform(value: any, args?: any): any {
-
-    // Remove the duplicate elements
-    let uniqueArray = value.filter(function (el, index, array) { 
-      return array.indexOf (el) === index;
-    });
-
-    return uniqueArray;
-  }
+export class Cart {
 
  srcPorts: string[] = [];
  destPorts:any[] = [];
@@ -40,6 +38,12 @@ export class Cart implements PipeTransform{
  note:string;
  companyId:string;
  msg:boolean = false;
+ today:any = new Date().toISOString().split('T')[0];;
+
+ngAfterViewInit(){
+    document.getElementById('pickupDate').setAttribute('min', this.today);
+  }
+
 
  settings1 = {
    hideSubHeader: true,
@@ -217,7 +221,8 @@ if(sessionStorage.getItem("add2Cart")!= null){
           
            this.localData = data;
 
-           this.pickupDate = "mm/dd/yyyy";
+          (< HTMLSelectElement>document.getElementById("pickupDate")).value = "mm/dd/yyyy";
+        (< HTMLSelectElement>document.getElementById("note")).value = '';
            console.log("updated date : "+ this.pickupDate);
            
            this.requisitionNumber = "0";

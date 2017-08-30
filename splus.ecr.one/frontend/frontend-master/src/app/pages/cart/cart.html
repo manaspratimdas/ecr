@@ -19,7 +19,7 @@
      <div class="form-group">
       <label for="pickupDate">Pickup Date</label>
       <!-- <input type="text" class="form-control" id="pickupDate"  (change)=  "onPickupDateChange($event)" placeholder="Pickup Date"> -->
-      <input type="date"  class="form-control" id="pickupDate"  (change)="onPickupDateChange($event)"/>
+      <input type="date"  class="form-control" id="pickupDate" #ref (change)="onPickupDateChange($event)"/>
     </div> 
     </div>
 </div>
@@ -30,7 +30,7 @@
 
       <select class="form-control" id="source"  (change)="onSourceChange($event)">
 		  	<option value="-1" >--Select--</option>
-		  	<option *ngFor="let port of srcPorts"  [value]="port.isoPortCode">{{port.isoPortCode}}</option>
+		  	<option *ngFor="let port of srcPorts | uniqFilter: 'isoPortCode'"  [value]="port.isoPortCode">{{port.isoPortCode}}</option>
 		</select>
        <!-- <input type="text" class="form-control" id="source"  (change)=  "onSourceChange($event)" placeholder="Source">  -->
        <!-- <select class="form-control" id="source" (change)="onSourceChange($event)">
