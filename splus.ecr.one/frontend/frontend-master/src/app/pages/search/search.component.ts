@@ -316,9 +316,12 @@ settings1 = {
            for(index = 0; index<Object.keys(this.bookedData).length; index++){
               newJson.push(this.bookedData[index]);
            }
-             sessionStorage.setItem("add2Cart",JSON.stringify(newJson));
+             var finalData = this.sortContainersByCompany(newJson);
+             sessionStorage.setItem("add2Cart",JSON.stringify(finalData));
           }else{
-            sessionStorage.setItem("add2Cart",JSON.stringify(this.bookedData));
+            var finalData = this.sortContainersByCompany(this.bookedData);
+            console.log("finalData : " + JSON.stringify(finalData));
+            sessionStorage.setItem("add2Cart",JSON.stringify(finalData));
           }
           
            this.sourcePorts.push(this.srcPorts);
@@ -379,6 +382,51 @@ settings1 = {
   onCompanyChange(event:Event): void {
     this.selectedCompany = (<HTMLSelectElement>event.srcElement).value; 
     console.log(this.selectedCompany);
+  }
+
+  sortContainersByCompany(data){
+    console.log(JSON.stringify(data));
+    //return this.seperateByCompany(orderByArray(data, "company"));
+    return orderByArray(data, "company");
+
+    function orderByArray(values: any[], orderType: any) { 
+    return values.sort((a, b) => {
+      if (a[orderType].id < b[orderType].id) {
+        return -1;
+      }
+
+      if (a[orderType].id > b[orderType].id) {
+        return 1;
+      }
+
+      return 0
+    });
+}
+
+  }
+
+  seperateByCompany(data){
+    var seperatedData = [];
+    seperatedData.push(data[0]);
+    
+    if(Object.keys(data).length>0){
+    for(var index = 1, index1=0; index<Object.keys(data).length; index++){
+        if(seperatedData[index1].company.id == data[index].company.id){
+           seperatedData.push(data[index]);
+
+        }else{
+          seperatedData.push({"id":"","code":"","company":{"id":"","name":"","address":{"id":"","addressLineOne":"","streetName":"","city":"","country":{"id":"","name":"","":"IN","isoLocalName":"","region":{"id":"","name":"","regionCode":""}},"zip":""}},"port":{"id":"","isoPortName":"","isoPortCode":"","country":{"id":"","name":"","isoCountryCode":"","isoLocalName":"","region":{"id":"","name":"","regionCode":""}},"longitude":"","latitude":""},"depot":{"id":"","depotName":"","depotCode":"","port":{"id":"","isoPortName":"","isoPortCode":"","country":{"id":"","name":"","isoCountryCode":"","isoLocalName":"","region":{"id":"","name":"","regionCode":""}},"longitude":"","latitude":""}},"containerType":{"id":"","size":"","type":"","description":""},"containerCondition":"","status":"","updatedDate":"","lastUpdateDate":null,"recordStatus":""});
+          index1++;
+          seperatedData.push(data[index]);
+        }
+        console.log("index " + index + "index1 : " + index1);
+        console.log("seperatedData : " + seperatedData );
+        console.log("data " + seperatedData );
+        index1++;
+        
+    }
+  }
+  return seperatedData;
   }
   
 }
