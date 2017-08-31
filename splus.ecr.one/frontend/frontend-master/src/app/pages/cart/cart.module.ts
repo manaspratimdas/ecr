@@ -9,7 +9,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { Cart } from './cart.component';
+import { Cart,UniquePipe } from './cart.component';
 import { CartService } from './cart.service';
 import { SearchService } from '../search/search.service'
 //import { Layouts } from '../../pages/forms/components/layouts';
@@ -32,13 +32,13 @@ import { routing } from './cart.routing';
   ],
   declarations: [
   //  Layouts,
-    Cart
+    Cart,UniquePipe
  //   BlockForm,
     // HorizontalForm,
     // BasicForm,
     // WithoutLabelsForm
   ], providers: [
-    CartService,SearchService
+    CartService,SearchService, UniquePipe 
   ]
 })
 export class CartModule {
