@@ -25,7 +25,7 @@ export class TrafficChartService {
      console.log("Regionnnnnn : " + constainersJson1)
      var keys = Object.keys(constainersJson1);
      console.log("Keyssss" +Object.keys(constainersJson1));
-
+     this.containers = [];
      for(var i = 0; i<keys.length;i++){
       console.log(keys[i]);
       console.log(constainersJson1[keys[i]][0]);
@@ -117,27 +117,32 @@ export class TrafficChartService {
      var colorCount = 0;
      //this.totalContainers = JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))["totalContainers"]["totalContainers"];
      console.log("totalContainersddd " +JSON.parse(sessionStorage.getItem("http://localhost:8080/ecr/user/login"))["totalContainers"]["totalContainers"]);
+     this.containers = [];
      for(var i = 0; i<keys.length;i++){
-
+        if(i>0){
+        if(i%colorSize-1==0 || colorCount>=colorSize){
+          colorCount = colorSize-2 != nextCountStart? nextCountStart++:nextCountStart = 0;
+          console.log("Inside color count = " + colorCount + "  " + nextCountStart);
+        }
+      }
+      var nextCountStart = 1
       console.log(keys[i]);
       console.log(constainersJson[keys[i]][0]);
       console.log(constainersJson[keys[i]][1]);
-       console.log(this.colors[colorCount]);
+       console.log("color " +colorCount +" " +  this.colors[colorCount]);
+
         this.containers.push({
           value: constainersJson[keys[i]][0],
-          color: this.colors[colorCount],
-          highlight: colorHelper.shade(this.colors[colorCount], 15),
+          color: this.colors[colorCount<colorSize?colorCount:0],
+          highlight: colorHelper.shade(this.colors[colorCount<colorSize?colorCount:0], 15),
           label: keys[i],
           percentage: constainersJson[keys[i]][1],
           order: 1,
+          
         });
-        if(i>0){
-        if(i%colorSize-1==0){
-          colorCount = 0;
-        }else{
-          colorCount = colorCount+1;
-        }
-      }
+        colorCount++;
+        console.log("color count = " + colorCount + "  " + nextCountStart + " " + i);
+       
      }
    return this.containers;
   }
