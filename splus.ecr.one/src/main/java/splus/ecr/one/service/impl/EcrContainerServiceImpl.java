@@ -169,7 +169,18 @@ public class EcrContainerServiceImpl implements EcrContainerService{
 		}
 		Map<Country, Long> containerGroupByCountry = new HashMap<Country, Long>();
 		for(Long countryId : countryPortMap.keySet()){
-			long containerSize = ecrContainerRepository.findAll(countryPortMap.get(countryId)).size();
+			System.out.println(countryPortMap.get(countryId));
+			long containerSize = 0;
+			for(Long portId : countryPortMap.get(countryId)){
+				List<Container> containers = ecrContainerRepository.findByPortId(portId);
+				for(Container container : containers){
+					if(Long.valueOf(id).equals(container.getCompany().getId())){
+						containerSize++;
+					}
+				}
+				
+			}
+			//containerSize = ecrContainerRepository.findAll(countryPortMap.get(countryId)).size();
 			Country country = ecrCountryRepository.findOne(countryId);
 			containerGroupByCountry.put(country, containerSize);
 		}

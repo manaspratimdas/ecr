@@ -21,6 +21,8 @@ public interface EcrContainerRepository extends JpaRepository<Container, Long>, 
 	List<Container> findByCompanyId(Long companyId);
 	
 	void delete(Container container);
+	
+	List<Container> findByPortId(Long portId);
 
 	//public CommunicationObject getContainersByCountry(String id);
 }
